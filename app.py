@@ -96,7 +96,19 @@ st.markdown(f"""
 h1, h2, h3, h4 {{
     color: #1A5C3A !important;
 }}
-/* Metric cards */
+/* Equal height metric cards */
+[data-testid="stHorizontalBlock"] {{
+    align-items: stretch !important;
+}}
+[data-testid="stColumn"] {{
+    display: flex !important;
+    flex-direction: column !important;
+}}
+[data-testid="stColumn"] > div {{
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}}
 div[data-testid="metric-container"],
 [data-testid="stMetric"] {{
     background-color: {CARD_BG} !important;
@@ -104,11 +116,9 @@ div[data-testid="metric-container"],
     padding: 14px 18px !important;
     border-left: 4px solid #8DC63F !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-    min-height: 110px !important;
-}}
-/* Make all columns in a row stretch to same height */
-[data-testid="stHorizontalBlock"] > div {{
-    align-self: stretch !important;
+    flex: 1 !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
 }}
 div[data-testid="metric-container"] label,
 div[data-testid="metric-container"] div,
