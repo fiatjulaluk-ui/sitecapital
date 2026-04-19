@@ -96,7 +96,7 @@ st.markdown(f"""
 h1, h2, h3, h4 {{
     color: #1A5C3A !important;
 }}
-/* Metric cards */
+/* Metric cards — equal height via min-height covering label+value+delta */
 div[data-testid="metric-container"],
 [data-testid="stMetric"] {{
     background-color: {CARD_BG} !important;
@@ -104,10 +104,8 @@ div[data-testid="metric-container"],
     padding: 14px 18px !important;
     border-left: 4px solid #8DC63F !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-}}
-/* Cards without a delta get extra bottom padding to match height of cards with delta */
-div[data-testid="metric-container"]:not(:has([data-testid="stMetricDelta"])) {{
-    padding-bottom: 36px !important;
+    min-height: 108px !important;
+    box-sizing: border-box !important;
 }}
 div[data-testid="metric-container"] label,
 div[data-testid="metric-container"] div,
