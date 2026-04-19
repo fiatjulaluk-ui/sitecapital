@@ -96,19 +96,7 @@ st.markdown(f"""
 h1, h2, h3, h4 {{
     color: #1A5C3A !important;
 }}
-/* Equal height metric cards */
-[data-testid="stHorizontalBlock"] {{
-    align-items: stretch !important;
-}}
-[data-testid="stColumn"] {{
-    display: flex !important;
-    flex-direction: column !important;
-}}
-[data-testid="stColumn"] > div {{
-    flex: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}}
+/* Metric cards */
 div[data-testid="metric-container"],
 [data-testid="stMetric"] {{
     background-color: {CARD_BG} !important;
@@ -116,9 +104,10 @@ div[data-testid="metric-container"],
     padding: 14px 18px !important;
     border-left: 4px solid #8DC63F !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-    flex: 1 !important;
-    height: 100% !important;
-    box-sizing: border-box !important;
+}}
+/* Cards without a delta get extra bottom padding to match height of cards with delta */
+div[data-testid="metric-container"]:not(:has([data-testid="stMetricDelta"])) {{
+    padding-bottom: 36px !important;
 }}
 div[data-testid="metric-container"] label,
 div[data-testid="metric-container"] div,
@@ -829,11 +818,12 @@ elif page == "Vendor Risk":
         .groupby(["vendor","status"])["amount"].sum().unstack(fill_value=0).reset_index()
     )
     amt_cols = [c for c in status_df.columns if c != "vendor"]
-    st.dataframe(
-        status_df.set_index("vendor"),
-        column_config={c: st.column_config.NumberColumn(c.title(), format="$%,.0f") for c in amt_cols},
-        use_container_width=True,
+    status_styled = (
+        status_df.set_index("vendor").style
+        .format({c: "${:,.0f}" for c in amt_cols})
+        .set_properties(subset=amt_cols, **{"text-align": "right"})
     )
+    st.dataframe(status_styled, use_container_width=True)
 
     flagged = exp_f[exp_f["comment"].notna() & (exp_f["comment"] != "")].copy()
     if not flagged.empty:
@@ -1139,16 +1129,18 @@ elif page == "SAP Transformation":
         exc_display["project_id"] = exc_display["project_id"].astype(str)
         exc_display.columns = ["Ledger ID","Project ID","GL Account","Legacy GL",
                                 "S/4HANA Amount","Legacy Amount","Variance","Migration Status","Vendor"]
+        _amt_exc = ["S/4HANA Amount", "Legacy Amount", "Variance"]
+        exc_styled = (
+            exc_display.set_index("Ledger ID").style
+            .format({c: "${:,.0f}" for c in _amt_exc})
+            .set_properties(subset=_amt_exc, **{"text-align": "right"})
+        )
         st.dataframe(
-            exc_display,
+            exc_styled,
             column_config={
-                "Ledger ID":      st.column_config.TextColumn("Ledger ID",       width="small"),
-                "Project ID":     st.column_config.TextColumn("Project ID",      width="small"),
-                "GL Account":     st.column_config.TextColumn("GL Account",      width="small"),
-                "Legacy GL":      st.column_config.TextColumn("Legacy GL",       width="small"),
-                "S/4HANA Amount": st.column_config.NumberColumn("S/4HANA Amount",width="small", format="$%,.0f"),
-                "Legacy Amount":  st.column_config.NumberColumn("Legacy Amount", width="small", format="$%,.0f"),
-                "Variance":       st.column_config.NumberColumn("Variance",      width="small", format="$%,.0f"),
+                "Project ID":      st.column_config.TextColumn("Project ID",      width="small"),
+                "GL Account":      st.column_config.TextColumn("GL Account",      width="small"),
+                "Legacy GL":       st.column_config.TextColumn("Legacy GL",       width="small"),
                 "Migration Status":st.column_config.TextColumn("Migration Status",width="small"),
             },
             use_container_width=True,
