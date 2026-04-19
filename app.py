@@ -4,6 +4,8 @@ Enterprise-grade CFO dashboard — UX-focused, psychologically framed.
 """
 
 import random
+import subprocess
+import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -14,6 +16,11 @@ import streamlit as st
 
 DATA_DIR = Path("data")
 random.seed(99)
+
+# Auto-generate data if missing (Streamlit Cloud cold start)
+if not (DATA_DIR / "projects.csv").exists():
+    DATA_DIR.mkdir(exist_ok=True)
+    subprocess.run([sys.executable, "generate_csv.py"], check=True)
 
 # ── Design tokens ─────────────────────────────────────────────────────────────
 BLUE      = "#1A5C3A"   # forest green — primary
@@ -134,8 +141,7 @@ def load_csv(name, uploaded=None):
     path = DATA_DIR / name
     if path.exists():
         return pd.read_csv(path)
-    st.error(f"Missing {path}. Run `python generate_csv.py` first.")
-    st.stop()
+    raise FileNotFoundError(f"Missing {path}. Run `python generate_csv.py` first.")
 
 def page_header(title, subtitle=""):
     st.markdown(f"## {title}")
@@ -229,9 +235,13 @@ with st.sidebar:
         ba_up  = st.file_uploader("bank_accounts.csv",                type="csv", key="ba")
         sc_up  = st.file_uploader("statutory_compliance.csv",         type="csv", key="sc")
 
-projects, expenses, ledger, forecasts, audit, facilities, weekly_cf, bank_accts, statutory = load_all(
-    p_up, e_up, l_up, f_up, a_up, fac_up, wcf_up, ba_up, sc_up
-)
+try:
+    projects, expenses, ledger, forecasts, audit, facilities, weekly_cf, bank_accts, statutory = load_all(
+        p_up, e_up, l_up, f_up, a_up, fac_up, wcf_up, ba_up, sc_up
+    )
+except FileNotFoundError as e:
+    st.error(str(e))
+    st.stop()
 
 with st.sidebar:
     st.divider()
