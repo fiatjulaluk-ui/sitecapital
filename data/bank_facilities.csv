@@ -1,0 +1,6 @@
+facility_id,facility_name,bank,facility_type,limit_aud,drawn_aud,covenant_min_cash_aud,covenant_max_gearing_pct,maturity_date,next_review_date
+1,Revolving Credit Facility,ANZ,RCF,250000000,187500000,25000000,55.0,2027-06-30,2026-09-30
+2,Bank Guarantee Line — Projects,NAB,BG Line,180000000,142000000,15000000,60.0,2027-03-31,2026-06-30
+3,Working Capital Overdraft,Westpac,Overdraft,30000000,18200000,8000000,50.0,2026-12-31,2026-06-30
+4,Performance Bond Facility,CBA,Bonding,120000000,89400000,10000000,65.0,2027-09-30,2026-09-30
+5,Project Finance — Metro Works,ANZ,Project Finance,95000000,72300000,20000000,70.0,2026-11-30,2026-07-31
