@@ -8,6 +8,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
+import matplotlib.dates as mdates
 import pandas as pd
 import streamlit as st
 
@@ -710,7 +711,7 @@ elif page == "Cash & Covenant":
                     marker="o", ms=3.5, lw=1.8, label=grp["account_name"].iloc[0].split(" ")[0] + " " + grp["account_name"].iloc[0].split(" ")[1])
         style_ax(ax, ylabel="AUD (M)", yticker=millions_fmt())
         ax.legend(fontsize=7.5, ncol=2, loc="upper left")
-        ax.xaxis.set_major_formatter(plt.matplotlib.dates.DateFormatter("%d %b"))
+        ax.xaxis.set_major_formatter(mdates.DateFormatter("%d %b"))
         plt.xticks(rotation=20, ha="right", fontsize=7.5)
         plt.tight_layout(pad=1.2)
         st.pyplot(fig, use_container_width=True)
