@@ -104,10 +104,11 @@ div[data-testid="metric-container"],
     padding: 14px 18px !important;
     border-left: 4px solid #8DC63F !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-    min-height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    min-height: 110px !important;
+}}
+/* Make all columns in a row stretch to same height */
+[data-testid="stHorizontalBlock"] > div {{
+    align-self: stretch !important;
 }}
 div[data-testid="metric-container"] label,
 div[data-testid="metric-container"] div,
