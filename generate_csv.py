@@ -362,15 +362,35 @@ def gen_expenses_and_ledger():
     expense_rows.append((exp_id+3, 4, "CC-MEL-04", "2026-08-20", "Professional Services", 540_000.00, "SAP-5004", "GL-6400", "AECOM Australia Pty Ltd", "Approved",  "Additional scope for geotechnical re-assessment — approved by PMO. PO amendment pending.",  "Manual Entry",  "G11",  54000.00, "PO-2026-6203",  498_000.00, "CTR-CC-MEL-04-01", "Over PO"))
     ledger_rows.append( (led_id+3, 4, "CC-MEL-04", "2026-08-22", "GL-6400",          498_000.00,  "INV",      "[VARIANCE] Professional Fees — Melbourne Metro",          "AECOM Australia Pty Ltd", "G11",  49800.00))
 
-    # ── Progress claim revenue entries (G1 output tax) ────────────────────────
+    # ── Progress claim revenue entries — cost-driven (AASB 15 POC basis) ─────
+    # Sum approved/paid AP costs per project from already-generated expense rows.
+    # Revenue = POC × Contract Value, where POC = costs_to_date / EAC.
+    # Ledger entries split across two recognition dates to simulate monthly billing.
+    _ap_costs = {}
+    for _row in expense_rows:
+        if _row[9] in ("Approved", "Paid"):   # index 9 = status
+            _pid = _row[1]                     # index 1 = project_id
+            _ap_costs[_pid] = _ap_costs.get(_pid, 0) + float(_row[5])  # index 5 = amount
+
     rev_id = led_id + 10
     for proj in PROJECTS:
         rpid, rname, rclient, rstart, rend, rbudget = proj[0], proj[1], proj[2], proj[3], proj[4], proj[5]
-        rcc = proj[6]
-        for claim_pct in [random.uniform(0.08, 0.14), random.uniform(0.06, 0.11)]:
-            claim_amt = round(rbudget * claim_pct, 0)
-            claim_dt  = random_date(rstart, rend)
-            gst_c     = round(claim_amt * 0.10, 2)
+        rcc            = proj[6]
+        contract_value = proj[10]
+        eac            = proj[11]
+        costs_to_date  = _ap_costs.get(rpid, 0)
+        if costs_to_date == 0:
+            continue
+        poc            = min(costs_to_date / eac, 1.0)
+        revenue_earned = poc * contract_value
+        # Split total earned revenue across two ledger postings
+        split1 = random.uniform(0.42, 0.55)
+        for split_pct in [split1, 1.0 - split1]:
+            claim_amt = round(revenue_earned * split_pct, 0)
+            if claim_amt <= 0:
+                continue
+            claim_dt = random_date(rstart, min(rend, "2026-04-18"))
+            gst_c    = round(claim_amt * 0.10, 2)
             ledger_rows.append((
                 rev_id, rpid, rcc, claim_dt, "GL-4100", claim_amt, "RV",
                 f"Progress Claim — {rname}", rclient, "G1", gst_c,
@@ -514,9 +534,9 @@ def gen_weekly_cashflow():
         else:
             # Forecast weeks: wider variation, slight additional stress visible,
             # but floor prevents covenant breach in the base-case scenario.
-            inflow  = round(random.uniform(13_000_000, 22_000_000), 0)
-            outflow = round(random.uniform(14_000_000, 24_000_000), 0)
-            floor   = 27_000_000
+            inflow  = round(random.uniform(14_000_000, 22_000_000), 0)
+            outflow = round(random.uniform(14_000_000, 21_000_000), 0)
+            floor   = 28_000_000
         net       = inflow - outflow
         base_cash = max(base_cash + net, floor)
         rows.append((0, "CC-GRP", week_start, round(inflow, 0), round(outflow, 0), round(net, 0), round(base_cash, 0), "Forecast" if is_forecast else "Actual"))
@@ -833,47 +853,82 @@ def gen_accruals():
 
 def gen_ar_invoices():
     """
-    Accounts Receivable — progress claims raised against the client contract.
-    Two claims per project (one paid, one outstanding), sized at ~9-10% of
-    contract_value per claim with 5% retention withheld per contract terms.
-    DSO: Government = 30 days, Private = 45 days.
+    Cost-driven progress claims (AASB 15 compliant).
+    Claim amounts = POC × Contract Value, where POC = approved/paid costs / EAC.
+    Eliminates the overbilling artefact from manually-sized claims disconnected
+    from actual site costs. Generates claims for all projects with sufficient
+    cost history (≥4 weeks elapsed since project start).
     """
-    rows = [
-        # ── Collins Arch — Stage 2 Fit-Out (contract $195M, Private, 45-day DSO) ──
-        # Claim 1: Feb progress claim — PAID
-        (
-            1, 1, "CC-MEL-01", "GL-4100", "PC-001", "Progress Claim", "2026-02-28",
-            "Progress Claim #1 — Collins Arch Stage 2 Fit-Out (February)",
-            18_525_000.00, 926_250.00, 17_598_750.00,
-            1_759_875.00, 19_358_625.00,
-            "2026-04-14", "2026-04-10", 19_358_625.00, 0.00, "Paid",
-        ),
-        # Claim 2: April progress claim — ISSUED (outstanding)
-        (
-            2, 1, "CC-MEL-01", "GL-4100", "PC-002", "Progress Claim", "2026-04-15",
-            "Progress Claim #2 — Collins Arch Stage 2 Fit-Out (April)",
-            19_500_000.00, 975_000.00, 18_525_000.00,
-            1_852_500.00, 20_377_500.00,
-            "2026-05-30", "", 0.00, 20_377_500.00, "Issued",
-        ),
-        # ── Victorian Heart Hospital Ext. (contract $325M, Government, 30-day DSO) ──
-        # Claim 1: March progress claim — PAID
-        (
-            3, 2, "CC-MEL-02", "GL-4100", "PC-001", "Progress Claim", "2026-03-31",
-            "Progress Claim #1 — Victorian Heart Hospital Ext. (March)",
-            31_200_000.00, 1_560_000.00, 29_640_000.00,
-            2_964_000.00, 32_604_000.00,
-            "2026-04-30", "2026-04-28", 32_604_000.00, 0.00, "Paid",
-        ),
-        # Claim 2: April progress claim — ISSUED (outstanding)
-        (
-            4, 2, "CC-MEL-02", "GL-4100", "PC-002", "Progress Claim", "2026-04-30",
-            "Progress Claim #2 — Victorian Heart Hospital Ext. (April)",
-            32_500_000.00, 1_625_000.00, 30_875_000.00,
-            3_087_500.00, 33_962_500.00,
-            "2026-05-30", "", 0.00, 33_962_500.00, "Issued",
-        ),
-    ]
+    import csv as _csv
+    from datetime import date as _date
+
+    TODAY = _date(2026, 4, 18)
+
+    # Read approved/paid AP costs per project from generated expenses
+    source = OUTPUT_DIR / "site_expenses.csv"
+    proj_costs = {}
+    if source.exists():
+        with open(source, encoding="utf-8") as f:
+            for row in _csv.DictReader(f):
+                if row["status"] in ("Approved", "Paid"):
+                    pid = int(row["project_id"])
+                    proj_costs[pid] = proj_costs.get(pid, 0) + float(row["amount"])
+
+    rows  = []
+    ar_id = 1
+
+    for proj in PROJECTS:
+        pid, name, client, start, end, budget, cc, sector, state, location, \
+            contract_value, eac, client_type, dso_days, retention_rate, pc_date = proj
+
+        start_dt      = datetime.fromisoformat(start)
+        weeks_elapsed = max((TODAY - start_dt.date()).days // 7, 0)
+
+        # Need at least 4 weeks of site activity for a first claim
+        n_claims = min(weeks_elapsed // 4, 2)
+        if n_claims == 0:
+            continue
+
+        costs_to_date  = proj_costs.get(pid, 0)
+        if costs_to_date == 0:
+            continue
+
+        poc            = min(costs_to_date / eac, 1.0)
+        revenue_earned = poc * contract_value
+
+        # Split revenue across claims with ±5% timing variance
+        split1 = random.uniform(0.42, 0.52)
+        splits = [split1, 1.0 - split1] if n_claims == 2 else [random.uniform(0.85, 0.95)]
+
+        for i, split_pct in enumerate(splits):
+            claim_gross = round(revenue_earned * split_pct * random.uniform(0.98, 1.02), 0)
+            if claim_gross <= 0:
+                continue
+
+            # Claim date: ~4 weeks after start per claim
+            claim_date = (start_dt + timedelta(weeks=4 * (i + 1))).date().isoformat()
+            due_date   = (datetime.fromisoformat(claim_date) + timedelta(days=dso_days)).date().isoformat()
+
+            ret   = round(claim_gross * retention_rate, 0)
+            net   = claim_gross - ret
+            gst   = round(net * 0.10, 2)
+            total = net + gst
+
+            is_paid = _date.fromisoformat(due_date) <= TODAY
+
+            rows.append((
+                ar_id, pid, cc, "GL-4100",
+                f"PC-{i+1:03d}", "Progress Claim", claim_date,
+                f"Progress Claim #{i+1} — {name} (PC-{i+1:03d})",
+                claim_gross, ret, net, gst, total,
+                due_date,
+                due_date if is_paid else "",
+                total if is_paid else 0.0,
+                0.0 if is_paid else total,
+                "Paid" if is_paid else "Issued",
+            ))
+            ar_id += 1
+
     headers = [
         "ar_id", "project_id", "sap_cost_center", "gl_account",
         "claim_number", "claim_type", "claim_date",
