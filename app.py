@@ -76,12 +76,14 @@ st.markdown(f"""
 [data-testid="stSidebar"] .stRadio label {{
     color: #FFFFFF !important;
 }}
-/* File uploader labels inside sidebar */
-[data-testid="stSidebar"] [data-testid="stFileUploader"] label,
-[data-testid="stSidebar"] [data-testid="stFileUploader"] small,
-[data-testid="stSidebar"] [data-testid="stFileUploader"] span,
-[data-testid="stSidebar"] [data-testid="stFileUploader"] p {{
+/* File uploader: label white, dropzone interior dark (white card bg) */
+[data-testid="stSidebar"] [data-testid="stFileUploader"] label {{
     color: #FFFFFF !important;
+}}
+[data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"],
+[data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] *,
+[data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] button {{
+    color: #222222 !important;
 }}
 [data-testid="stSidebar"] hr {{
     border-color: rgba(255,255,255,0.2) !important;
