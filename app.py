@@ -96,19 +96,7 @@ st.markdown(f"""
 h1, h2, h3, h4 {{
     color: #1A5C3A !important;
 }}
-/* Metric cards — stretch all cards in a row to equal height */
-[data-testid="stHorizontalBlock"] {{
-    align-items: stretch !important;
-}}
-[data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {{
-    display: flex !important;
-    flex-direction: column !important;
-}}
-[data-testid="stHorizontalBlock"] > [data-testid="stColumn"] > div {{
-    flex: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}}
+/* Metric cards — fixed height equalises all cards regardless of delta */
 div[data-testid="metric-container"],
 [data-testid="stMetric"] {{
     background-color: {CARD_BG} !important;
@@ -116,8 +104,9 @@ div[data-testid="metric-container"],
     padding: 14px 18px !important;
     border-left: 4px solid #8DC63F !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-    flex: 1 !important;
+    height: 116px !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
 }}
 div[data-testid="metric-container"] label,
 div[data-testid="metric-container"] div,
