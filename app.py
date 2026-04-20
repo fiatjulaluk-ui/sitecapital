@@ -629,7 +629,11 @@ def build_exec_summary(context="pulse"):
             s.append(f"All facilities within covenant compliance. {fmt_m(gap)} above the minimum cash covenant floor of {fmt_m(min_cov)}.")
         if avg_net < 0:
             weeks = max(gap / abs(avg_net), 0)
-            s.append(f"Average weekly net cash: {fmt_m(avg_net)} (outflow). Covenant floor reached in ~**{weeks:.0f} weeks** at current rate.")
+            # Only flag imminent breach: headroom covers fewer than 4 weeks of avg burn
+            if gap < abs(avg_net) * 4:
+                s.append(f"Average weekly net cash: {fmt_m(avg_net)} (outflow). Covenant floor reached in ~**{weeks:.0f} weeks** at current rate.")
+            else:
+                s.append(f"Weekly net cash: {fmt_m(avg_net)}/week (outflow). Covenant floor projected in ~{weeks:.0f} weeks — no near-term breach risk.")
         else:
             s.append(f"Weekly cash flow is **net positive** at {fmt_m(avg_net)}/week — no near-term breach risk.")
 
@@ -703,14 +707,24 @@ def simulate_spend_scenarios(fcast, wcf, fac, scenarios=(0.0, 0.05, 0.10, 0.20))
         return None
     start_cash = actual.iloc[-1]["closing_balance"]
     covenant   = fac["covenant_min_cash_aud"].max()
-    results    = []
+
+    # Aggregate to portfolio-level monthly net (sum across all projects per date),
+    # then cap to next 12 periods so cumulative outflows don't compound unrealistically.
+    agg = (fcast.copy()
+           .sort_values("forecast_date")
+           .groupby("forecast_date", as_index=False)
+           .agg(expected_cash_in=("expected_cash_in", "sum"),
+                expected_cash_out=("expected_cash_out", "sum"))
+           .head(12))
+
+    results = []
     for scn in scenarios:
-        df = fcast.copy().sort_values("forecast_date")
+        df = agg.copy()
         df["adj_out"] = df["expected_cash_out"] * (1 + scn)
         df["net"]     = df["expected_cash_in"] - df["adj_out"]
         cash, balances = start_cash, []
         for _, row in df.iterrows():
-            cash += row["net"]
+            cash = max(cash + row["net"], covenant)
             balances.append(cash)
         df["balance"] = balances
         breach = next((i + 1 for i, v in enumerate(balances) if v <= covenant), None)
@@ -1269,7 +1283,8 @@ elif page == "Cash Flow & Covenant":
     for _ in range(sims):
         path = [cash]
         for _ in range(weeks):
-            path.append(path[-1] + avg_net * random.uniform(0.7, 1.3))
+            next_val = max(path[-1] + avg_net * random.uniform(0.7, 1.3), min_cov)
+            path.append(next_val)
         matrix.append(path)
 
     sim_df = pd.DataFrame(matrix).T
