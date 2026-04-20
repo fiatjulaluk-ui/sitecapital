@@ -853,81 +853,66 @@ def gen_accruals():
 
 def gen_ar_invoices():
     """
-    Cost-driven progress claims (AASB 15 compliant).
-    Claim amounts = POC × Contract Value, where POC = approved/paid costs / EAC.
-    Eliminates the overbilling artefact from manually-sized claims disconnected
-    from actual site costs. Generates claims for all projects with sufficient
-    cost history (≥4 weeks elapsed since project start).
+    Progress claims for all 6 projects, sized at 8–12% of contract value per claim —
+    consistent with early-stage Tier 1 construction (mobilisation → initial ramp-up).
+    ±2% billing noise on each claim simulates PM over/under-claiming vs certified POC.
+    DSO: Government = 30 days, Private = 45 days. Retention per contract terms.
     """
-    import csv as _csv
-    from datetime import date as _date
+    def _claim(ar_id, pid, cc, claim_num, claim_date, gross, dso, retention_rate, description):
+        due_date = (datetime.fromisoformat(claim_date) + timedelta(days=dso)).date().isoformat()
+        # ±2% noise: PM claims slightly more or superintendent certifies slightly less
+        gross    = round(gross * random.uniform(0.98, 1.02), 0)
+        ret      = round(gross * retention_rate, 0)
+        net      = gross - ret
+        gst      = round(net * 0.10, 2)
+        total    = net + gst
+        is_paid  = due_date <= "2026-04-18"
+        return (
+            ar_id, pid, cc, "GL-4100", claim_num, "Progress Claim", claim_date,
+            description, gross, ret, net, gst, total, due_date,
+            due_date if is_paid else "",
+            total if is_paid else 0.0,
+            0.0 if is_paid else total,
+            "Paid" if is_paid else "Issued",
+        )
 
-    TODAY = _date(2026, 4, 18)
+    rows = [
+        # ── 1. Collins Arch — Stage 2 Fit-Out ($195M, Private, 45-day DSO, 5% ret) ──
+        _claim(1,  1, "CC-MEL-01", "PC-001", "2026-02-28", 18_525_000, 45, 0.05,
+               "Progress Claim #1 — Collins Arch Stage 2 Fit-Out (February)"),
+        _claim(2,  1, "CC-MEL-01", "PC-002", "2026-04-15", 19_500_000, 45, 0.05,
+               "Progress Claim #2 — Collins Arch Stage 2 Fit-Out (April)"),
 
-    # Read approved/paid AP costs per project from generated expenses
-    source = OUTPUT_DIR / "site_expenses.csv"
-    proj_costs = {}
-    if source.exists():
-        with open(source, encoding="utf-8") as f:
-            for row in _csv.DictReader(f):
-                if row["status"] in ("Approved", "Paid"):
-                    pid = int(row["project_id"])
-                    proj_costs[pid] = proj_costs.get(pid, 0) + float(row["amount"])
+        # ── 2. Victorian Heart Hospital Ext. ($325M, Government, 30-day DSO, 5% ret) ──
+        _claim(3,  2, "CC-MEL-02", "PC-001", "2026-03-31", 31_200_000, 30, 0.05,
+               "Progress Claim #1 — Victorian Heart Hospital Ext. (March)"),
+        _claim(4,  2, "CC-MEL-02", "PC-002", "2026-04-30", 29_900_000, 30, 0.05,
+               "Progress Claim #2 — Victorian Heart Hospital Ext. (April)"),
 
-    rows  = []
-    ar_id = 1
+        # ── 3. Southbank Precinct Tower C ($441M, Private, 45-day DSO, 5% ret) ──
+        _claim(5,  3, "CC-MEL-03", "PC-001", "2026-04-10", 39_690_000, 45, 0.05,
+               "Progress Claim #1 — Southbank Precinct Tower C (April)"),
+        _claim(6,  3, "CC-MEL-03", "PC-002", "2026-05-15", 35_280_000, 45, 0.05,
+               "Progress Claim #2 — Southbank Precinct Tower C (May)"),
 
-    for proj in PROJECTS:
-        pid, name, client, start, end, budget, cc, sector, state, location, \
-            contract_value, eac, client_type, dso_days, retention_rate, pc_date = proj
+        # ── 4. Melbourne Metro — Station Works ($590M, Government, 30-day DSO, 5% ret) ──
+        _claim(7,  4, "CC-MEL-04", "PC-001", "2026-03-15", 59_000_000, 30, 0.05,
+               "Progress Claim #1 — Melbourne Metro Station Works (March)"),
+        _claim(8,  4, "CC-MEL-04", "PC-002", "2026-04-15", 53_100_000, 30, 0.05,
+               "Progress Claim #2 — Melbourne Metro Station Works (April)"),
 
-        start_dt      = datetime.fromisoformat(start)
-        weeks_elapsed = max((TODAY - start_dt.date()).days // 7, 0)
+        # ── 5. Sydney Tech Hub — Pyrmont ($103M, Private, 45-day DSO, 5% ret) ──
+        _claim(9,  5, "CC-SYD-05", "PC-001", "2026-04-30",  9_270_000, 45, 0.05,
+               "Progress Claim #1 — Sydney Tech Hub Pyrmont (April)"),
+        _claim(10, 5, "CC-SYD-05", "PC-002", "2026-05-31",  8_240_000, 45, 0.05,
+               "Progress Claim #2 — Sydney Tech Hub Pyrmont (May)"),
 
-        # Need at least 4 weeks of site activity for a first claim
-        n_claims = min(weeks_elapsed // 4, 2)
-        if n_claims == 0:
-            continue
-
-        costs_to_date  = proj_costs.get(pid, 0)
-        if costs_to_date == 0:
-            continue
-
-        poc            = min(costs_to_date / eac, 1.0)
-        revenue_earned = poc * contract_value
-
-        # Split revenue across claims with ±5% timing variance
-        split1 = random.uniform(0.42, 0.52)
-        splits = [split1, 1.0 - split1] if n_claims == 2 else [random.uniform(0.85, 0.95)]
-
-        for i, split_pct in enumerate(splits):
-            claim_gross = round(revenue_earned * split_pct * random.uniform(0.98, 1.02), 0)
-            if claim_gross <= 0:
-                continue
-
-            # Claim date: ~4 weeks after start per claim
-            claim_date = (start_dt + timedelta(weeks=4 * (i + 1))).date().isoformat()
-            due_date   = (datetime.fromisoformat(claim_date) + timedelta(days=dso_days)).date().isoformat()
-
-            ret   = round(claim_gross * retention_rate, 0)
-            net   = claim_gross - ret
-            gst   = round(net * 0.10, 2)
-            total = net + gst
-
-            is_paid = _date.fromisoformat(due_date) <= TODAY
-
-            rows.append((
-                ar_id, pid, cc, "GL-4100",
-                f"PC-{i+1:03d}", "Progress Claim", claim_date,
-                f"Progress Claim #{i+1} — {name} (PC-{i+1:03d})",
-                claim_gross, ret, net, gst, total,
-                due_date,
-                due_date if is_paid else "",
-                total if is_paid else 0.0,
-                0.0 if is_paid else total,
-                "Paid" if is_paid else "Issued",
-            ))
-            ar_id += 1
+        # ── 6. Perth Data Centre — Stage 1 ($152M, Private, 45-day DSO, 10% ret) ──
+        _claim(11, 6, "CC-PER-06", "PC-001", "2026-03-31", 15_200_000, 45, 0.10,
+               "Progress Claim #1 — Perth Data Centre Stage 1 (March)"),
+        _claim(12, 6, "CC-PER-06", "PC-002", "2026-04-30", 13_680_000, 45, 0.10,
+               "Progress Claim #2 — Perth Data Centre Stage 1 (April)"),
+    ]
 
     headers = [
         "ar_id", "project_id", "sap_cost_center", "gl_account",
