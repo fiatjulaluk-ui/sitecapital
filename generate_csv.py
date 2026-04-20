@@ -366,10 +366,12 @@ def gen_expenses_and_ledger():
     # Sum approved/paid AP costs per project from already-generated expense rows.
     # Revenue = POC × Contract Value, where POC = costs_to_date / EAC.
     # Ledger entries split across two recognition dates to simulate monthly billing.
+    # Accrual basis: include Approved + Paid + Pending (work performed, invoice received).
+    # On Hold excluded — disputed, performance not confirmed.
     _ap_costs = {}
     for _row in expense_rows:
-        if _row[9] in ("Approved", "Paid"):   # index 9 = status
-            _pid = _row[1]                     # index 1 = project_id
+        if _row[9] in ("Approved", "Paid", "Pending"):   # index 9 = status
+            _pid = _row[1]                                # index 1 = project_id
             _ap_costs[_pid] = _ap_costs.get(_pid, 0) + float(_row[5])  # index 5 = amount
 
     rev_id = led_id + 10

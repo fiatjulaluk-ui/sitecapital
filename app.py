@@ -1874,9 +1874,10 @@ elif page == "Revenue & POC":
     proj_f = projects[projects["project_id"].isin(proj_ids)].copy()
     exp_f  = fe(expenses)
 
-    # AASB 15 §98: cost-to-cost only uses costs that reflect contract performance.
-    # Uninstalled materials (Pending/On Hold) are excluded until incorporated.
-    ap_eligible = exp_f[exp_f["status"].isin(["Approved", "Paid"])]
+    # AASB 15 §98: cost-to-cost uses costs incurred for work performed (accrual basis).
+    # Approved + Paid + Pending all represent work performed — invoice received or certified.
+    # On Hold excluded: disputed invoices where performance is not yet confirmed.
+    ap_eligible = exp_f[exp_f["status"].isin(["Approved", "Paid", "Pending"])]
     ap_by_proj = ap_eligible.groupby("project_id")["amount"].sum().reset_index(name="ap_costs")
 
     # Accruals: Posted only, and exclude any that have already reversed (reversal_date ≤ today).
@@ -2284,8 +2285,9 @@ elif page == "WIP Report":
     proj_f    = projects[projects["project_id"].isin(proj_ids)].copy()
     exp_f     = fe(expenses)
 
-    # Invoiced AP costs + accruals → actual costs → POC → revenue earned (all filtered by proj_ids)
-    _wip_ap_elig = exp_f[exp_f["status"].isin(["Approved", "Paid"])]
+    # Accrual basis: Approved + Paid + Pending all represent work performed.
+    # On Hold excluded — disputed, performance not confirmed.
+    _wip_ap_elig = exp_f[exp_f["status"].isin(["Approved", "Paid", "Pending"])]
     ap_by_proj  = _wip_ap_elig.groupby("project_id")["amount"].sum().reset_index(name="ap_costs")
     _wip_today  = pd.Timestamp.today().normalize()
     _wip_acc    = accruals[accruals["status"].eq("Posted") & accruals["project_id"].isin(proj_ids)].copy()
@@ -2293,9 +2295,11 @@ elif page == "WIP Report":
         _wip_acc["_rev_dt"] = pd.to_datetime(_wip_acc["reversal_date"], errors="coerce")
         _wip_acc = _wip_acc[_wip_acc["_rev_dt"].isna() | (_wip_acc["_rev_dt"] > _wip_today)]
     acc_posted  = _wip_acc.groupby("project_id")["amount"].sum().reset_index(name="accrual_costs")
+    # Billings = gross claim_amount (AASB 15: revenue is gross value of work performed).
+    # Retention is a payment timing difference — not a reduction in earned value.
     billings_df = (
         ar_inv[ar_inv["project_id"].isin(proj_ids)]
-        .groupby("project_id")["net_claim"].sum().reset_index(name="billings_to_date")
+        .groupby("project_id")["claim_amount"].sum().reset_index(name="billings_to_date")
     )
 
     wip_df = proj_f.merge(ap_by_proj, on="project_id", how="left")
@@ -2317,7 +2321,7 @@ elif page == "WIP Report":
 
     c1, c2, c3, c4, c5 = st.columns(5)
     c1.metric("Revenue Earned (POC)",   fmt_m(total_earned),   delta="Earned via % completion")
-    c2.metric("Billings to Date",       fmt_m(total_billings), delta="Net claims raised (ex-retention)")
+    c2.metric("Billings to Date",       fmt_m(total_billings), delta="Gross claims raised")
     c3.metric("Net WIP",                fmt_m(total_wip),
               delta="Underbilled asset" if total_wip >= 0 else "Overbilled liability",
               delta_color="normal" if total_wip >= 0 else "inverse")
@@ -2325,10 +2329,11 @@ elif page == "WIP Report":
     c5.metric("Overbilled Projects",    str(overbilled_n),     delta="Liability (bill > earn)", delta_color="inverse" if overbilled_n > 0 else "normal")
 
     st.info(
-        "**WIP = Revenue Earned (POC × Contract Value) − Billings to Date (net progress claims raised)**  \n"
-        "**Underbilled (positive WIP)** → revenue recognised exceeds invoices raised — current asset on balance sheet.  \n"
-        "**Overbilled (negative WIP)** → invoices raised exceed revenue earned — current liability on balance sheet.  \n"
-        "Per AASB 15 / IFRS 15 revenue recognition using input method (cost-to-cost)."
+        "**WIP = Revenue Earned (POC × Contract Value) − Billings to Date (gross progress claims)**  \n"
+        "Billings use gross claim_amount — retention is a payment timing difference, not a revenue reduction (AASB 15).  \n"
+        "**Underbilled (positive WIP)** → revenue recognised exceeds invoices raised — Contract Asset on balance sheet.  \n"
+        "**Overbilled (negative WIP)** → invoices raised exceed revenue earned — Contract Liability on balance sheet.  \n"
+        "Retention withheld is tracked separately as a non-current receivable (GL-1210) until Practical Completion."
     )
 
     st.divider()
