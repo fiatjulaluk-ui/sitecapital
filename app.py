@@ -3,6 +3,7 @@ SiteCapital — Construction Treasury Intelligence Platform
 Enterprise-grade CFO dashboard — UX-focused, psychologically framed.
 """
 
+import datetime
 import random
 import subprocess
 import sys
@@ -361,8 +362,10 @@ with st.sidebar:
     selected = st.selectbox("Filter Project", pnames)
 
     all_dates = pd.concat([expenses["booking_date"], ledger["posting_date"]])
-    mn, mx = all_dates.min().date(), all_dates.max().date()
-    dr     = st.date_input("Date Range", value=(mn, mx), min_value=mn, max_value=mx)
+    mn, mx    = all_dates.min().date(), all_dates.max().date()
+    _today    = datetime.date.today()
+    _default_to = min(mx, _today)   # cap default at today, not 2027
+    dr     = st.date_input("Date Range", value=(mn, _default_to), min_value=mn, max_value=mx)
     d_from = pd.Timestamp(dr[0] if isinstance(dr, (list,tuple)) and len(dr)==2 else mn)
     d_to   = pd.Timestamp(dr[1] if isinstance(dr, (list,tuple)) and len(dr)==2 else mx)
     st.caption("Treasury Operations · Confidential · Spend figures ex-GST · GST captured via ATO tax codes")
@@ -682,13 +685,14 @@ def generate_alerts(exp, fcast, fac, wcf):
 
 def show_alerts(alerts):
     if not alerts:
-        st.success("No active alerts — treasury position stable.")
+        st.markdown("<div style='padding:8px 14px;border-radius:6px;background:#EAF3DE;border:0.5px solid #97C459;font-size:13px;color:#27500A;margin-bottom:12px;'>Treasury position stable — no active alerts.</div>", unsafe_allow_html=True)
         return
-    for level, msg in alerts:
-        if level == "CRITICAL":
-            st.error(f"🚨 {msg}")
-        else:
-            st.warning(f"⚠ {msg}")
+    crits = [m for l,m in alerts if l=="CRITICAL"]
+    warns = [m for l,m in alerts if l=="WARNING"]
+    if crits:
+        st.markdown(f"<div style='padding:8px 14px;border-radius:6px;background:#FCEBEB;border:0.5px solid #F09595;font-size:13px;color:#A32D2D;margin-bottom:6px;'>&#9679; {'  ·  '.join(crits)}</div>", unsafe_allow_html=True)
+    if warns:
+        st.markdown(f"<div style='padding:8px 14px;border-radius:6px;background:#FAEEDA;border:0.5px solid #EF9F27;font-size:13px;color:#854F0B;margin-bottom:6px;'>&#9651; {'  ·  '.join(warns)}</div>", unsafe_allow_html=True)
 
 
 # ── Scenario simulation engine ────────────────────────────────────────────────
@@ -779,20 +783,30 @@ if page == "Daily Cash Position":
             _col_names.append("Cost Centre")
         _col_names += ["Opening","Cash In","Cash Out","Closing"]
         disp_b.columns = _col_names
-        _amt_b = ["Opening","Cash In","Cash Out","Closing"]
-        st.dataframe(style_dollars(disp_b.set_index("Account"), _amt_b), use_container_width=True)
+        for _c in ["Opening","Cash In","Cash Out","Closing"]:
+            if _c in disp_b.columns:
+                disp_b[_c] = disp_b[_c].apply(lambda v: fmt_m(v) if isinstance(v,(int,float)) else v)
+        st.dataframe(disp_b.set_index("Account"), use_container_width=True)
     else:
         st.info("No daily account data for today.")
 
     st.divider()
     st.markdown("#### 7-Week Cash Balance Trend")
-    trend_df = actual_cf.tail(7)
-    if not trend_df.empty:
+    # Use raw weekly_cf directly — never filtered by sidebar date range.
+    _wcf_sorted = weekly_cf.sort_values("week_start").reset_index(drop=True)
+    _trend_act  = _wcf_sorted[_wcf_sorted["type"] == "Actual"].tail(4).reset_index(drop=True)
+    _trend_fcst = _wcf_sorted[_wcf_sorted["type"] == "Forecast"].head(3).reset_index(drop=True)
+    if not _trend_act.empty:
         fig, ax = plt.subplots(figsize=(10, 3.5))
-        ax.fill_between(trend_df["week_start"], trend_df["closing_balance"] / 1e6,
-                        alpha=0.15, color=BLUE)
-        ax.plot(trend_df["week_start"], trend_df["closing_balance"] / 1e6,
-                color=BLUE, lw=2.2, marker="o", ms=5, label="Closing Balance")
+        ax.fill_between(_trend_act["week_start"], _trend_act["closing_balance"] / 1e6,
+                        alpha=0.12, color=BLUE)
+        ax.plot(_trend_act["week_start"], _trend_act["closing_balance"] / 1e6,
+                color=BLUE, lw=2.2, marker="o", ms=5, label="Actual")
+        if not _trend_fcst.empty:
+            # Bridge: last actual → first forecast for visual continuity
+            _bridge = pd.concat([_trend_act.tail(1), _trend_fcst]).reset_index(drop=True)
+            ax.plot(_bridge["week_start"], _bridge["closing_balance"] / 1e6,
+                    color=BLUE, lw=1.8, marker="o", ms=4, linestyle="--", alpha=0.85, label="Forecast")
         ax.axhline(min_cov / 1e6, color=RED, lw=1.3, linestyle="--",
                    label=f"Covenant Floor {fmt_m(min_cov)}")
         style_ax(ax, ylabel="AUD (M)", yticker=millions_fmt())
