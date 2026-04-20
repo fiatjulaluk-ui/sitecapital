@@ -1,0 +1,42 @@
+gl_account,account_name,account_type,account_group,normal_balance,tax_code,bas_field,cost_center_required,active,standard_ref,notes
+GL-1100,Cash & Bank Accounts,Asset,Balance Sheet,Debit,N/A,N/A,No,Yes,AASB 107,"Group operating, project drawdown, trust, and payroll accounts"
+GL-1200,Trade Receivables (AR),Asset,Balance Sheet,Debit,G1,1A,Yes,Yes,AASB 9,Progress claims raised and outstanding — per FBL5N customer line items
+GL-1210,Retention Receivable,Asset,Balance Sheet,Debit,G1,1A,Yes,Yes,AASB 15,Retention withheld by client — released on Practical Completion
+GL-1300,Contract Asset — Underbilled WIP,Asset,Balance Sheet,Debit,N/A,N/A,Yes,Yes,AASB 15 §105,Revenue earned (POC × contract) exceeds billings to date — current asset
+GL-1400,Prepayments & Accrued Revenue,Asset,Balance Sheet,Debit,G11,1B,Yes,Yes,AASB 138,Advance payments to suppliers and accrued income not yet invoiced
+GL-1500,Raw Materials Inventory,Asset,Balance Sheet,Debit,G11,1B,Yes,Yes,AASB 102,Materials on site — recognised as cost when consumed in construction
+GL-1600,Plant & Equipment (net of depreciation),Asset,Balance Sheet,Debit,G11,1B,No,Yes,AASB 116,Owned plant and equipment at cost less accumulated depreciation
+GL-1700,Bank Guarantee Deposits,Asset,Balance Sheet,Debit,N/A,N/A,No,Yes,AASB 9,Cash collateral held as security for performance bonds
+GL-2100,Trade Payables (AP),Liability,Balance Sheet,Credit,G11,1B,Yes,Yes,AASB 9,Approved subcontractor and supplier invoices awaiting payment
+GL-2200,Retention Payable (Subcontractors),Liability,Balance Sheet,Credit,G11,1B,Yes,Yes,AASB 15,5% retention withheld from subcontractor payments — SOP Act 2002 compliance
+GL-2300,Accrued Expenses,Liability,Balance Sheet,Credit,G11,1B,Yes,Yes,AASB 137,"Month-end accruals — work completed, invoice not yet received"
+GL-2310,Contract Liability — Overbilled WIP,Liability,Balance Sheet,Credit,N/A,N/A,Yes,Yes,AASB 15 §105,Billings to date exceed revenue earned (POC × contract) — current liability
+GL-2400,GST Payable / (Receivable) — ATO,Liability,Balance Sheet,Credit,N/A,N/A,No,Yes,TAA 1953,Net BAS position: GST collected (1A) less input credits (1B). Debit = refund due
+GL-2500,PAYG Withholding Payable,Liability,Balance Sheet,Credit,N/A,N/A,No,Yes,ITAA 1997,Employee PAYG withheld — remitted via IAS monthly
+GL-2600,Payroll Tax Payable,Liability,Balance Sheet,Credit,N/A,N/A,No,Yes,State PTAs,"Multi-state payroll tax liability — VIC 4.85%+surcharge, NSW 5.45%, WA 5.50%"
+GL-2700,Superannuation SG Payable,Liability,Balance Sheet,Credit,N/A,N/A,No,Yes,SGAA 1992,12.0% SG contributions — remitted quarterly via SuperStream
+GL-2800,Performance Bonds & Bank Guarantees,Liability,Balance Sheet,Credit,N/A,N/A,No,Yes,AASB 137,Contingent liabilities — ANZ/NAB BG lines; disclosed but not recognised until called
+GL-2900,Intercompany Payables,Liability,Balance Sheet,Credit,N/A,N/A,Yes,Yes,AASB 124,Recharges from Lendlease Corporate shared services — require WBS allocation
+GL-3100,Issued Capital,Equity,Balance Sheet,Credit,N/A,N/A,No,Yes,Corporations Act,Ordinary shares on issue
+GL-3200,Retained Earnings,Equity,Balance Sheet,Credit,N/A,N/A,No,Yes,AASB 101,Accumulated profits less dividends paid
+GL-4100,Progress Claim Revenue,Revenue,Income Statement,Credit,G1,1A,Yes,Yes,AASB 15,Revenue recognised on % completion basis — POC × contract value per project
+GL-4200,Variation Revenue,Revenue,Income Statement,Credit,G1,1A,Yes,Yes,AASB 15,Approved Variation Orders (VOs) — separate from original contract sum
+GL-4300,Provisional Sum Revenue,Revenue,Income Statement,Credit,G1,1A,Yes,Yes,AASB 15,PS items confirmed and instructed by superintendent
+GL-4400,Retention Released Revenue,Revenue,Income Statement,Credit,G1,1A,Yes,Yes,AASB 15,Retention released on Practical Completion or DLP expiry
+GL-4900,Other Revenue,Revenue,Income Statement,Credit,G1,1A,Yes,Yes,AASB 15,"Miscellaneous project income — dayworks, hire-back of plant, etc."
+GL-5001,Direct Labour — Own Workforce,Expense,Income Statement,Debit,G11,1B,Yes,Yes,AASB 102,"Directly employed site labour — wages, allowances, super included via payroll"
+GL-5002,Subcontract Management Fee,Expense,Income Statement,Debit,G11,1B,Yes,Yes,AASB 102,Head contractor site supervision cost allocated to project
+GL-6100,Subcontract Labour & Services,Expense,Income Statement,Debit,G11,1B,Yes,Yes,AASB 102,"External subcontractors — trade accounts, Security of Payment Act applies"
+GL-6200,Raw Materials & Consumables,Expense,Income Statement,Debit,G11,1B,Yes,Yes,AASB 102,"Concrete, steel, formwork, consumables — trade account or site purchase"
+GL-6300,Equipment & Plant Hire,Expense,Income Statement,Debit,G11,1B,Yes,Yes,AASB 16,"Hired cranes, excavators, hoists — Coates/Kennards/Tutt Bryant"
+GL-6400,Professional & Consulting Fees,Expense,Income Statement,Debit,G11,1B,Yes,Yes,AASB 138,"Engineers, surveyors, architects, project managers — Concur or direct invoice"
+GL-6500,Regulatory Fees & Permit Costs,Expense,Income Statement,Debit,G12,N/A,Yes,Yes,TAA 1953,"Government charges — GST-free (G12). WorkSafe, EPA, building permits, council fees"
+GL-6600,Travel & Accommodation,Expense,Income Statement,Debit,G11,1B,Yes,Yes,AASB 102,"Site travel, flights, accommodation — Concur expense policy applies"
+GL-6700,Site Overhead & Preliminaries,Expense,Income Statement,Debit,G11,1B,Yes,Yes,AASB 102,"Site sheds, fencing, security, waste disposal, temporary services"
+GL-6800,Insurance & Bonds,Expense,Income Statement,Debit,G12,N/A,Yes,Yes,AASB 137,"Project-specific insurance, PI, public liability — GST-free for input tax"
+GL-7100,Head Office Salaries & Oncosts,Expense,Income Statement,Debit,N/A,N/A,No,Yes,AASB 119,Corporate and shared services staff — not directly allocable to projects
+GL-7200,IT & Systems,Expense,Income Statement,Debit,G11,1B,No,Yes,AASB 138,"SAP licensing, Procore, Concur, O365 — shared services recharge"
+GL-7300,Legal & Compliance,Expense,Income Statement,Debit,G11,1B,No,Yes,AASB 137,"Contract disputes, regulatory compliance, employment matters"
+GL-7400,Finance Costs — Interest & Fees,Expense,Income Statement,Debit,G12,N/A,No,Yes,AASB 9,"RCF interest, bank guarantee fees, facility arrangement costs — financial instrument"
+GL-8100,Income Tax Expense,Expense,Income Statement,Debit,N/A,N/A,No,Yes,AASB 112,Current tax — 30% corporate rate on taxable income
+GL-8200,Deferred Tax Asset / (Liability),Asset,Balance Sheet,Debit,N/A,N/A,No,Yes,AASB 112,"Temporary differences — construction contract timing, accelerated depreciation"

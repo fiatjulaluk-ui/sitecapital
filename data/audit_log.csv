@@ -1,30 +1,34 @@
 audit_id,event_date,project_id,module,issue_type,status,notes
-1,2026-01-10,1,AP,Intercompany Recharge,Open,Shared services recharge from Lendlease Corporate not matched to project WBS. Finance to clarify allocation.
-2,2026-05-17,1,Banking & Treasury,Unapproved Variation,Under Review,Scope variation raised on site without approved Variation Order (VO). Contract admin notified.
-3,2026-09-23,1,Procurement,Budget Overrun Warning,Open,Committed spend exceeds 90% of approved project budget. CFO and Project Director sign-off required.
-4,2026-09-27,1,Project Accounting,Retention Release,Under Review,Practical completion milestone reached. Subcontractor retention release pending QS sign-off.
-5,2026-10-29,1,Procurement,Reconciliation Gap,Open,Site expense amount does not reconcile with SAP S/4HANA ledger posting. Treasury review required.
-6,2027-06-30,2,Banking & Treasury,Duplicate Payment Risk,Under Review,Duplicate invoice detected across two SAP cost centres. AP automation hold applied.
-7,2027-01-22,2,AP,Late Payment Penalty,Resolved,Subcontractor late payment fee applied under the Security of Payment Act 2002 (VIC). Settled in full.
-8,2027-06-12,2,AP,Budget Overrun Warning,Open,Committed spend exceeds 90% of approved project budget. CFO and Project Director sign-off required.
-9,2026-12-02,2,Concur Expense,Unapproved Variation,Under Review,Scope variation raised on site without approved Variation Order (VO). Contract admin notified.
-10,2026-05-01,2,AP,Intercompany Recharge,Open,Shared services recharge from Lendlease Corporate not matched to project WBS. Finance to clarify allocation.
-11,2026-10-07,3,Project Accounting,Missing Supporting Docs,Open,Tax invoice or delivery docket not attached in Concur. Document deadline: 5 business days.
-12,2027-07-17,3,SAP S/4HANA,Budget Overrun Warning,Open,Committed spend exceeds 90% of approved project budget. CFO and Project Director sign-off required.
-13,2027-07-10,3,AP,Tax Compliance,Resolved,GST coding error on cross-state delivery corrected. BAS adjustment lodged with ATO.
-14,2027-06-01,3,Procurement,Retention Release,Under Review,Practical completion milestone reached. Subcontractor retention release pending QS sign-off.
-15,2027-06-16,3,SAP S/4HANA,Duplicate Payment Risk,Under Review,Duplicate invoice detected across two SAP cost centres. AP automation hold applied.
-16,2026-01-23,4,Payroll,Tax Compliance,Resolved,GST coding error on cross-state delivery corrected. BAS adjustment lodged with ATO.
-17,2026-07-06,4,Procurement,Reconciliation Gap,Open,Site expense amount does not reconcile with SAP S/4HANA ledger posting. Treasury review required.
-18,2026-03-08,4,Procurement,Policy Exception,Under Review,Invoice submitted outside approved vendor panel. Procurement compliance review in progress.
-19,2027-01-14,5,Banking & Treasury,Duplicate Payment Risk,Under Review,Duplicate invoice detected across two SAP cost centres. AP automation hold applied.
-20,2026-09-23,5,Project Accounting,Bank Guarantee Expiry,Open,Performance bank guarantee expiring within 30 days. Treasury to arrange renewal with ANZ.
-21,2026-11-11,5,Concur Expense,Missing Supporting Docs,Open,Tax invoice or delivery docket not attached in Concur. Document deadline: 5 business days.
-22,2026-09-25,6,Concur Expense,Unapproved Variation,Under Review,Scope variation raised on site without approved Variation Order (VO). Contract admin notified.
-23,2026-03-02,6,Procurement,Missing Supporting Docs,Open,Tax invoice or delivery docket not attached in Concur. Document deadline: 5 business days.
-24,2026-05-28,6,Concur Expense,Retention Release,Under Review,Practical completion milestone reached. Subcontractor retention release pending QS sign-off.
-25,2026-07-10,3,SAP S/4HANA,Missing Supporting Docs,Open,Three subcontractor invoices not uploaded to Concur. Defect liability period commenced.
-26,2026-08-21,4,Project Accounting,Budget Overrun Warning,Open,Committed spend at 94% of $560M approved budget. CFO and Board notification required.
-27,2026-05-15,6,AP,Duplicate Payment Risk,Under Review,Duplicate invoice SAP-INV-0078 for Coates Hire flagged by AP automation. On hold pending review.
-28,2026-06-03,2,Banking & Treasury,Bank Guarantee Expiry,Open,ANZ performance bond BG-2024-1132 expiring 2026-07-15. Treasury renewal in progress.
-29,2026-09-12,1,Procurement,Unapproved Variation,Under Review,VO-0044 Hickory Group — $895K variation not yet approved via formal change control process.
+1,2026-01-17,1,Banking & Treasury,Bank Guarantee Expiry,Open,Performance bank guarantee expiring within 30 days. Treasury to arrange renewal with ANZ.
+2,2026-10-09,1,SAP S/4HANA,Duplicate Payment Risk,Under Review,Duplicate invoice detected across two SAP cost centres. AP automation hold applied.
+3,2026-11-26,1,Payroll,Missing Supporting Docs,Open,Tax invoice or delivery docket not attached in Concur. Document deadline: 5 business days.
+4,2026-01-09,1,SAP S/4HANA,Reconciliation Gap,Open,Site expense amount does not reconcile with SAP S/4HANA ledger posting. Treasury review required.
+5,2026-01-05,1,Payroll,Retention Release,Under Review,Practical completion milestone reached. Subcontractor retention release pending QS sign-off.
+6,2026-10-04,2,Concur Expense,Unapproved Variation,Under Review,Scope variation raised on site without approved Variation Order (VO). Contract admin notified.
+7,2027-06-21,2,AP,Tax Compliance,Resolved,GST coding error on cross-state delivery corrected. BAS adjustment lodged with ATO.
+8,2026-06-28,2,Procurement,Policy Exception,Under Review,Invoice submitted outside approved vendor panel. Procurement compliance review in progress.
+9,2026-11-16,2,AP,Duplicate Payment Risk,Under Review,Duplicate invoice detected across two SAP cost centres. AP automation hold applied.
+10,2026-03-19,2,Banking & Treasury,Retention Release,Under Review,Practical completion milestone reached. Subcontractor retention release pending QS sign-off.
+11,2026-06-15,3,Project Accounting,Unapproved Variation,Under Review,Scope variation raised on site without approved Variation Order (VO). Contract admin notified.
+12,2026-07-24,3,Procurement,Budget Overrun Warning,Open,Committed spend exceeds 90% of approved project budget. CFO and Project Director sign-off required.
+13,2027-04-17,3,AP,Late Payment Penalty,Resolved,Subcontractor late payment fee applied under the Security of Payment Act 2002 (VIC). Settled in full.
+14,2026-05-12,3,Concur Expense,Policy Exception,Under Review,Invoice submitted outside approved vendor panel. Procurement compliance review in progress.
+15,2026-07-21,3,Banking & Treasury,Tax Compliance,Resolved,GST coding error on cross-state delivery corrected. BAS adjustment lodged with ATO.
+16,2026-06-23,4,Concur Expense,Tax Compliance,Resolved,GST coding error on cross-state delivery corrected. BAS adjustment lodged with ATO.
+17,2026-05-31,4,Banking & Treasury,Budget Overrun Warning,Open,Committed spend exceeds 90% of approved project budget. CFO and Project Director sign-off required.
+18,2026-02-19,4,Banking & Treasury,Unapproved Variation,Under Review,Scope variation raised on site without approved Variation Order (VO). Contract admin notified.
+19,2026-03-22,4,Payroll,Retention Release,Under Review,Practical completion milestone reached. Subcontractor retention release pending QS sign-off.
+20,2026-12-01,5,SAP S/4HANA,Policy Exception,Under Review,Invoice submitted outside approved vendor panel. Procurement compliance review in progress.
+21,2026-11-01,5,AP,Missing Supporting Docs,Open,Tax invoice or delivery docket not attached in Concur. Document deadline: 5 business days.
+22,2027-01-06,5,SAP S/4HANA,Intercompany Recharge,Open,Shared services recharge from Lendlease Corporate not matched to project WBS. Finance to clarify allocation.
+23,2026-07-22,5,Concur Expense,Retention Release,Under Review,Practical completion milestone reached. Subcontractor retention release pending QS sign-off.
+24,2026-09-11,5,Concur Expense,Duplicate Payment Risk,Under Review,Duplicate invoice detected across two SAP cost centres. AP automation hold applied.
+25,2026-03-08,6,Banking & Treasury,Policy Exception,Under Review,Invoice submitted outside approved vendor panel. Procurement compliance review in progress.
+26,2026-08-02,6,Banking & Treasury,Intercompany Recharge,Open,Shared services recharge from Lendlease Corporate not matched to project WBS. Finance to clarify allocation.
+27,2026-04-03,6,Procurement,Missing Supporting Docs,Open,Tax invoice or delivery docket not attached in Concur. Document deadline: 5 business days.
+28,2026-06-23,6,SAP S/4HANA,Tax Compliance,Resolved,GST coding error on cross-state delivery corrected. BAS adjustment lodged with ATO.
+29,2026-07-10,3,SAP S/4HANA,Missing Supporting Docs,Open,Three subcontractor invoices not uploaded to Concur. Defect liability period commenced.
+30,2026-08-21,4,Project Accounting,Budget Overrun Warning,Open,Committed spend at 94% of $560M approved budget. CFO and Board notification required.
+31,2026-05-15,6,AP,Duplicate Payment Risk,Under Review,Duplicate invoice SAP-INV-0078 for Coates Hire flagged by AP automation. On hold pending review.
+32,2026-06-03,2,Banking & Treasury,Bank Guarantee Expiry,Open,ANZ performance bond BG-2024-1132 expiring 2026-07-15. Treasury renewal in progress.
+33,2026-09-12,1,Procurement,Unapproved Variation,Under Review,VO-0044 Hickory Group — $895K variation not yet approved via formal change control process.

@@ -1,211 +1,225 @@
-ledger_id,project_id,posting_date,gl_account,amount,doc_type,description,vendor
-1,1,2026-03-02,GL-6100,242558.41,INV,[VARIANCE] Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Hickory Group
-2,1,2026-10-12,GL-6200,384617.52,INV,Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Boral Construction Materials
-3,1,2026-06-29,GL-6300,29155.39,INV,Equipment & Plant Hire — Collins Arch — Stage 2 Fit-Out,Tutt Bryant Equipment
-4,1,2026-02-17,GL-6300,50392.82,INV,Equipment & Plant Hire — Collins Arch — Stage 2 Fit-Out,Adaptalift Hyster
-5,1,2026-05-07,GL-6100,684247.93,INV,[VARIANCE] Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Kane Constructions
-6,1,2026-05-16,GL-6100,286189.3,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Watpac Civil & Mining
-7,1,2026-06-18,GL-6300,12938.85,INV,[VARIANCE] Equipment & Plant Hire — Collins Arch — Stage 2 Fit-Out,Coates Hire Operations
-8,1,2026-10-11,GL-6200,212888.8,INV,Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Hanson Construction Materials
-9,1,2026-03-25,GL-6200,370514.12,INV,Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Holcim Australia Pty Ltd
-10,1,2026-01-16,GL-6600,2422.85,INV,Travel & Accommodation — Collins Arch — Stage 2 Fit-Out,Mantra on Little Bourke
-11,1,2026-05-20,GL-6200,318598.28,INV,Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Rebar Direct Pty Ltd
-12,1,2026-10-13,GL-6400,162668.17,INV,Professional & Consulting Fees — Collins Arch — Stage 2 Fit-Out,Jacobs Engineering Group
-13,1,2026-06-12,GL-6100,814135.62,INV,[VARIANCE] Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Hacer Group
-14,1,2026-09-10,GL-6600,770.77,INV,Travel & Accommodation — Collins Arch — Stage 2 Fit-Out,Mantra on Little Bourke
-15,1,2026-08-02,GL-6500,45578.04,INV,Regulatory Fees & Permit Costs — Collins Arch — Stage 2 Fit-Out,NSW Planning Department
-16,1,2026-11-03,GL-6100,953263.76,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Hacer Group
-17,1,2026-10-12,GL-6100,933126.79,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Kane Constructions
-18,1,2026-07-11,GL-6400,139082.92,INV,Professional & Consulting Fees — Collins Arch — Stage 2 Fit-Out,Jacobs Engineering Group
-19,1,2026-03-05,GL-6100,1086841.53,INV,[VARIANCE] Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Buxton Construction
-20,1,2026-10-10,GL-6200,121347.36,INV,[VARIANCE] Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Sika Australia
-21,1,2026-07-27,GL-6400,11920.8,INV,Professional & Consulting Fees — Collins Arch — Stage 2 Fit-Out,AECOM Australia Pty Ltd
-22,1,2026-04-17,GL-6600,1263.37,INV,[VARIANCE] Travel & Accommodation — Collins Arch — Stage 2 Fit-Out,Mantra on Little Bourke
-23,1,2026-02-04,GL-6200,142365.03,INV,Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Sika Australia
-24,1,2026-11-21,GL-6200,291420.95,INV,Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Saint-Gobain Placo
-25,1,2026-12-15,GL-6200,214325.58,INV,[VARIANCE] Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,CSR Building Products
-26,1,2026-03-16,GL-6600,4008.33,INV,Travel & Accommodation — Collins Arch — Stage 2 Fit-Out,Crown Towers Melbourne
-27,1,2026-12-11,GL-6400,276577.8,INV,[VARIANCE] Professional & Consulting Fees — Collins Arch — Stage 2 Fit-Out,Stantec Consulting
-28,1,2026-06-04,GL-6100,442078.13,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Watpac Civil & Mining
-29,1,2026-05-29,GL-6200,204402.45,INV,[VARIANCE] Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Boral Construction Materials
-30,1,2026-03-24,GL-6200,103725.24,INV,Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Boral Construction Materials
-31,1,2026-05-16,GL-6100,250550.44,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,John Holland Group
-32,1,2026-04-09,GL-6100,732437.38,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Kane Constructions
-33,1,2026-07-23,GL-6400,37856.15,INV,Professional & Consulting Fees — Collins Arch — Stage 2 Fit-Out,Stantec Consulting
-34,1,2026-02-13,GL-6100,611259.54,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Kane Constructions
-35,1,2026-04-11,GL-6100,1645903.57,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,John Holland Group
-36,1,2026-07-25,GL-6300,31849.99,INV,[VARIANCE] Equipment & Plant Hire — Collins Arch — Stage 2 Fit-Out,Sherrin Rentals
-37,1,2026-08-16,GL-6300,40986.45,INV,Equipment & Plant Hire — Collins Arch — Stage 2 Fit-Out,All Cranes Hire & Sales
-38,1,2026-06-25,GL-6300,82290.2,INV,Equipment & Plant Hire — Collins Arch — Stage 2 Fit-Out,Tutt Bryant Equipment
-39,2,2026-12-17,GL-6200,421378.51,INV,Raw Materials & Consumables — Victorian Heart Hospital Ext.,Hanson Construction Materials
-40,2,2026-07-31,GL-6200,261729.69,INV,Raw Materials & Consumables — Victorian Heart Hospital Ext.,Adbri Masonry
-41,2,2026-03-23,GL-6300,33830.03,INV,Equipment & Plant Hire — Victorian Heart Hospital Ext.,Kennards Hire
-42,2,2026-02-12,GL-6100,191922.63,INV,[VARIANCE] Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Buxton Construction
-43,2,2027-05-21,GL-6200,107803.3,INV,Raw Materials & Consumables — Victorian Heart Hospital Ext.,Sika Australia
-44,2,2027-05-08,GL-6200,287377.85,INV,Raw Materials & Consumables — Victorian Heart Hospital Ext.,Sika Australia
-45,2,2027-05-02,GL-6300,44021.96,INV,Equipment & Plant Hire — Victorian Heart Hospital Ext.,Adaptalift Hyster
-46,2,2026-09-14,GL-6100,338202.29,INV,[VARIANCE] Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Kane Constructions
-47,2,2027-03-03,GL-6500,4340.23,INV,Regulatory Fees & Permit Costs — Victorian Heart Hospital Ext.,WorkSafe Victoria
-48,2,2027-06-20,GL-6200,511514.91,INV,Raw Materials & Consumables — Victorian Heart Hospital Ext.,Sika Australia
-49,2,2026-03-03,GL-6300,173951.53,INV,Equipment & Plant Hire — Victorian Heart Hospital Ext.,Sherrin Rentals
-50,2,2026-09-10,GL-6400,64739.66,INV,Professional & Consulting Fees — Victorian Heart Hospital Ext.,WSP Australia
-51,2,2026-04-03,GL-6100,1290764.84,INV,[VARIANCE] Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Watpac Civil & Mining
-52,2,2027-06-08,GL-6100,581927.34,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,John Holland Group
-53,2,2026-07-25,GL-6100,1641708.81,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Cockram Constructions
-54,2,2026-10-14,GL-6100,1186261.6,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Kane Constructions
-55,2,2026-04-18,GL-6300,38443.13,INV,[VARIANCE] Equipment & Plant Hire — Victorian Heart Hospital Ext.,Tutt Bryant Equipment
-56,2,2026-11-10,GL-6300,47355.48,INV,Equipment & Plant Hire — Victorian Heart Hospital Ext.,Sherrin Rentals
-57,2,2027-05-14,GL-6100,316257.22,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Kane Constructions
-58,2,2026-10-28,GL-6400,57650.36,INV,Professional & Consulting Fees — Victorian Heart Hospital Ext.,WSP Australia
-59,2,2026-10-08,GL-6500,5825.38,INV,[VARIANCE] Regulatory Fees & Permit Costs — Victorian Heart Hospital Ext.,Vic Department of Transport
-60,2,2027-01-27,GL-6100,1080444.76,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Cockram Constructions
-61,2,2026-08-16,GL-6100,749231.11,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Watpac Civil & Mining
-62,2,2027-02-08,GL-6200,65220.3,INV,Raw Materials & Consumables — Victorian Heart Hospital Ext.,Holcim Australia Pty Ltd
-63,2,2026-05-23,GL-6100,497751.24,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Probuild Constructions
-64,2,2027-06-23,GL-6100,85664.86,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Kapitol Group
-65,2,2026-09-25,GL-6100,1322056.57,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Kane Constructions
-66,2,2026-05-21,GL-6100,1507400.43,INV,[VARIANCE] Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Cockram Constructions
-67,2,2027-06-05,GL-6100,386164.72,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,John Holland Group
-68,2,2026-08-27,GL-6300,84152.88,INV,Equipment & Plant Hire — Victorian Heart Hospital Ext.,Tutt Bryant Equipment
-69,2,2026-11-29,GL-6100,1277150.81,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Hickory Group
-70,2,2027-04-23,GL-6200,24592.66,INV,Raw Materials & Consumables — Victorian Heart Hospital Ext.,Rebar Direct Pty Ltd
-71,2,2026-11-10,GL-6200,148864.28,INV,Raw Materials & Consumables — Victorian Heart Hospital Ext.,Boral Construction Materials
-72,2,2026-05-08,GL-6100,1566136.81,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Cockram Constructions
-73,3,2027-09-28,GL-6300,71493.03,INV,Equipment & Plant Hire — Southbank Precinct Tower C,Tutt Bryant Equipment
-74,3,2027-08-23,GL-6200,22855.1,INV,[VARIANCE] Raw Materials & Consumables — Southbank Precinct Tower C,Sika Australia
-75,3,2026-11-14,GL-6200,519184.8,INV,[VARIANCE] Raw Materials & Consumables — Southbank Precinct Tower C,Rebar Direct Pty Ltd
-76,3,2027-01-06,GL-6200,81932.12,INV,Raw Materials & Consumables — Southbank Precinct Tower C,Holcim Australia Pty Ltd
-77,3,2026-07-31,GL-6100,760053.69,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Kane Constructions
-78,3,2027-07-27,GL-6100,385816.93,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,John Holland Group
-79,3,2026-11-10,GL-6100,1356534.78,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Hacer Group
-80,3,2026-08-15,GL-6300,102574.44,INV,Equipment & Plant Hire — Southbank Precinct Tower C,Sherrin Rentals
-81,3,2026-08-20,GL-6100,327908.5,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Kapitol Group
-82,3,2027-07-28,GL-6400,133623.18,INV,Professional & Consulting Fees — Southbank Precinct Tower C,Arup Pty Ltd
-83,3,2026-06-21,GL-6300,139511.72,INV,Equipment & Plant Hire — Southbank Precinct Tower C,Sherrin Rentals
-84,3,2027-05-06,GL-6100,231262.57,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Hacer Group
-85,3,2026-11-03,GL-6200,311874.68,INV,Raw Materials & Consumables — Southbank Precinct Tower C,Adbri Masonry
-86,3,2027-03-04,GL-6500,6960.1,INV,Regulatory Fees & Permit Costs — Southbank Precinct Tower C,NSW Planning Department
-87,3,2027-04-07,GL-6100,404270.09,INV,[VARIANCE] Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Buxton Construction
-88,3,2026-05-02,GL-6100,1717035.69,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Cockram Constructions
-89,3,2026-11-23,GL-6200,108906.47,INV,Raw Materials & Consumables — Southbank Precinct Tower C,CSR Building Products
-90,3,2027-03-22,GL-6200,14537.19,INV,[VARIANCE] Raw Materials & Consumables — Southbank Precinct Tower C,Hanson Construction Materials
-91,3,2026-08-28,GL-6400,137911.66,INV,Professional & Consulting Fees — Southbank Precinct Tower C,Arcadis Australia Pacific
-92,3,2026-11-01,GL-6400,51060.74,INV,Professional & Consulting Fees — Southbank Precinct Tower C,Turner & Townsend
-93,3,2026-12-04,GL-6100,697277.43,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Built Environs
-94,3,2026-05-19,GL-6100,1161885.69,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Built Environs
-95,3,2026-06-20,GL-6100,735431.23,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,John Holland Group
-96,3,2027-07-30,GL-6200,249139.04,INV,Raw Materials & Consumables — Southbank Precinct Tower C,BlueScope Distribution
-97,3,2027-03-25,GL-6200,84206.03,INV,Raw Materials & Consumables — Southbank Precinct Tower C,Adbri Masonry
-98,3,2026-04-05,GL-6500,11111.68,INV,[VARIANCE] Regulatory Fees & Permit Costs — Southbank Precinct Tower C,EPA Victoria
-99,3,2026-08-10,GL-6100,385247.28,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Kane Constructions
-100,3,2026-07-25,GL-6100,866463.74,INV,[VARIANCE] Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Probuild Constructions
-101,3,2027-06-17,GL-6300,12510.97,INV,Equipment & Plant Hire — Southbank Precinct Tower C,Adaptalift Hyster
-102,3,2026-04-16,GL-6100,360756.24,INV,[VARIANCE] Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Built Environs
-103,3,2026-07-20,GL-6100,373904.13,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Watpac Civil & Mining
-104,3,2026-07-11,GL-6200,72047.06,INV,Raw Materials & Consumables — Southbank Precinct Tower C,Rebar Direct Pty Ltd
-105,3,2027-04-25,GL-6200,419475.81,INV,Raw Materials & Consumables — Southbank Precinct Tower C,Adbri Masonry
-106,4,2026-08-26,GL-6500,1814.63,INV,[VARIANCE] Regulatory Fees & Permit Costs — Melbourne Metro — Station Works,Vic Department of Transport
-107,4,2026-08-21,GL-6100,1036269.36,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Watpac Civil & Mining
-108,4,2026-03-11,GL-6200,180531.19,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,Adbri Masonry
-109,4,2026-05-31,GL-6400,165668.62,INV,Professional & Consulting Fees — Melbourne Metro — Station Works,AECOM Australia Pty Ltd
-110,4,2026-01-31,GL-6400,119175.0,INV,Professional & Consulting Fees — Melbourne Metro — Station Works,Arup Pty Ltd
-111,4,2026-02-25,GL-6100,1258093.57,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Hacer Group
-112,4,2026-06-01,GL-6200,241955.05,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,James Hardie Building Products
-113,4,2026-08-04,GL-6200,16749.12,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,Sika Australia
-114,4,2026-04-16,GL-6100,1241205.33,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Watpac Civil & Mining
-115,4,2026-02-26,GL-6100,939395.29,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,John Holland Group
-116,4,2026-11-28,GL-6100,506098.16,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,John Holland Group
-117,4,2026-06-20,GL-6200,222174.32,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,James Hardie Building Products
-118,4,2026-03-30,GL-6200,170440.71,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,Adbri Masonry
-119,4,2026-11-10,GL-6100,337183.37,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Kapitol Group
-120,4,2026-08-29,GL-6400,24967.65,INV,Professional & Consulting Fees — Melbourne Metro — Station Works,Arcadis Australia Pacific
-121,4,2026-02-25,GL-6200,371112.51,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,Boral Construction Materials
-122,4,2026-04-19,GL-6200,416053.88,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,Boral Construction Materials
-123,4,2026-05-23,GL-6600,1892.51,INV,[VARIANCE] Travel & Accommodation — Melbourne Metro — Station Works,Crown Towers Melbourne
-124,4,2026-07-05,GL-6100,236594.26,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Hacer Group
-125,4,2026-11-12,GL-6600,1129.53,INV,Travel & Accommodation — Melbourne Metro — Station Works,Mantra on Little Bourke
-126,4,2026-07-05,GL-6100,759110.05,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Watpac Civil & Mining
-127,4,2026-06-23,GL-6100,191597.62,INV,[VARIANCE] Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Buxton Construction
-128,4,2026-10-10,GL-6100,849096.25,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Watpac Civil & Mining
-129,4,2026-08-28,GL-6100,359195.31,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Cockram Constructions
-130,4,2026-09-14,GL-6100,1490779.9,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Kane Constructions
-131,4,2026-04-07,GL-6300,71978.45,INV,[VARIANCE] Equipment & Plant Hire — Melbourne Metro — Station Works,Sherrin Rentals
-132,4,2026-03-21,GL-6200,300113.51,INV,[VARIANCE] Raw Materials & Consumables — Melbourne Metro — Station Works,Holcim Australia Pty Ltd
-133,4,2026-08-05,GL-6400,120481.12,INV,Professional & Consulting Fees — Melbourne Metro — Station Works,Arcadis Australia Pacific
-134,4,2026-03-25,GL-6500,49662.93,INV,Regulatory Fees & Permit Costs — Melbourne Metro — Station Works,NSW Planning Department
-135,4,2026-05-07,GL-6200,40949.8,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,Boral Construction Materials
-136,5,2027-02-20,GL-6100,756569.0,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Watpac Civil & Mining
-137,5,2026-10-05,GL-6100,122866.62,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Probuild Constructions
-138,5,2026-12-28,GL-6100,1571496.08,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Built Environs
-139,5,2026-08-14,GL-6100,239333.56,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,John Holland Group
-140,5,2027-03-25,GL-6100,1045629.01,INV,[VARIANCE] Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Built Environs
-141,5,2026-05-03,GL-6100,416576.21,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Kane Constructions
-142,5,2026-05-04,GL-6300,51384.07,INV,Equipment & Plant Hire — Sydney Tech Hub — Pyrmont,Kennards Hire
-143,5,2027-03-28,GL-6300,34635.1,INV,Equipment & Plant Hire — Sydney Tech Hub — Pyrmont,Sherrin Rentals
-144,5,2026-05-23,GL-6200,78574.64,INV,Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,BlueScope Distribution
-145,5,2026-10-05,GL-6200,251889.17,INV,[VARIANCE] Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,Rebar Direct Pty Ltd
-146,5,2027-02-14,GL-6200,110969.27,INV,Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,BlueScope Distribution
-147,5,2026-11-28,GL-6100,338687.53,INV,[VARIANCE] Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Cockram Constructions
-148,5,2026-07-14,GL-6200,45479.84,INV,Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,Adbri Masonry
-149,5,2026-12-20,GL-6200,274654.94,INV,Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,Saint-Gobain Placo
-150,5,2027-01-19,GL-6400,77169.91,INV,Professional & Consulting Fees — Sydney Tech Hub — Pyrmont,Arcadis Australia Pacific
-151,5,2026-07-21,GL-6200,54324.04,INV,Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,CSR Building Products
-152,5,2026-05-15,GL-6200,404008.32,INV,Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,Sika Australia
-153,5,2026-05-19,GL-6400,73566.45,INV,Professional & Consulting Fees — Sydney Tech Hub — Pyrmont,GHD Advisory
-154,5,2026-05-07,GL-6300,107332.81,INV,Equipment & Plant Hire — Sydney Tech Hub — Pyrmont,Kennards Hire
-155,5,2026-08-19,GL-6100,1192450.68,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Built Environs
-156,5,2026-07-08,GL-6100,1379945.6,INV,[VARIANCE] Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Probuild Constructions
-157,5,2027-01-30,GL-6100,191053.07,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Cockram Constructions
-158,5,2026-11-04,GL-6600,5324.68,INV,Travel & Accommodation — Sydney Tech Hub — Pyrmont,Corporate Travel Management (CTM)
-159,5,2027-04-20,GL-6100,1032482.25,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Probuild Constructions
-160,5,2026-06-23,GL-6100,639536.42,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Kapitol Group
-161,5,2026-07-17,GL-6500,17493.22,INV,Regulatory Fees & Permit Costs — Sydney Tech Hub — Pyrmont,DELWP Victoria
-162,5,2026-08-01,GL-6100,1878159.42,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Buxton Construction
-163,5,2027-04-15,GL-6200,448194.98,INV,Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,Holcim Australia Pty Ltd
-164,5,2027-01-14,GL-6100,625285.23,INV,[VARIANCE] Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Hickory Group
-165,5,2026-06-20,GL-6400,105227.61,INV,[VARIANCE] Professional & Consulting Fees — Sydney Tech Hub — Pyrmont,Arcadis Australia Pacific
-166,5,2026-06-22,GL-6200,102337.3,INV,Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,Rebar Direct Pty Ltd
-167,5,2027-04-07,GL-6200,317959.02,INV,Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,Sika Australia
-168,5,2027-03-14,GL-6200,164760.86,INV,[VARIANCE] Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,Boral Construction Materials
-169,5,2027-03-23,GL-6200,224269.72,INV,[VARIANCE] Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,Saint-Gobain Placo
-170,5,2026-12-06,GL-6200,303069.58,INV,Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,Adbri Masonry
-171,5,2026-07-10,GL-6100,701407.42,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Kapitol Group
-172,5,2026-08-14,GL-6300,45954.55,INV,Equipment & Plant Hire — Sydney Tech Hub — Pyrmont,All Cranes Hire & Sales
-173,5,2027-04-15,GL-6100,444250.98,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Kapitol Group
-174,5,2026-05-21,GL-6400,133063.42,INV,[VARIANCE] Professional & Consulting Fees — Sydney Tech Hub — Pyrmont,Stantec Consulting
-175,5,2027-04-26,GL-6500,8193.78,INV,Regulatory Fees & Permit Costs — Sydney Tech Hub — Pyrmont,NSW Planning Department
-176,6,2026-05-01,GL-6100,142571.57,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Hacer Group
-177,6,2026-07-17,GL-6200,181319.29,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,Adbri Masonry
-178,6,2026-03-12,GL-6500,20150.17,INV,Regulatory Fees & Permit Costs — Perth Data Centre — Stage 1,City of Melbourne Council
-179,6,2026-08-10,GL-6400,137988.44,INV,Professional & Consulting Fees — Perth Data Centre — Stage 1,AECOM Australia Pty Ltd
-180,6,2026-08-06,GL-6400,134926.89,INV,[VARIANCE] Professional & Consulting Fees — Perth Data Centre — Stage 1,Turner & Townsend
-181,6,2026-09-17,GL-6200,468031.81,INV,[VARIANCE] Raw Materials & Consumables — Perth Data Centre — Stage 1,Adbri Masonry
-182,6,2026-10-08,GL-6100,689791.82,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Kane Constructions
-183,6,2026-07-29,GL-6200,72626.3,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,Adbri Masonry
-184,6,2026-04-28,GL-6200,99370.92,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,Hanson Construction Materials
-185,6,2026-06-27,GL-6500,34406.0,INV,Regulatory Fees & Permit Costs — Perth Data Centre — Stage 1,WorkSafe Victoria
-186,6,2026-11-06,GL-6100,1420500.63,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Cockram Constructions
-187,6,2026-10-06,GL-6100,525240.61,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Cockram Constructions
-188,6,2026-02-20,GL-6200,149932.6,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,Hanson Construction Materials
-189,6,2026-07-18,GL-6600,2780.55,INV,Travel & Accommodation — Perth Data Centre — Stage 1,Crown Towers Melbourne
-190,6,2026-09-02,GL-6100,1995339.42,INV,[VARIANCE] Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Buxton Construction
-191,6,2026-06-14,GL-6100,266574.98,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Built Environs
-192,6,2026-08-13,GL-6200,111783.25,INV,[VARIANCE] Raw Materials & Consumables — Perth Data Centre — Stage 1,James Hardie Building Products
-193,6,2026-12-18,GL-6300,4601.1,INV,Equipment & Plant Hire — Perth Data Centre — Stage 1,Coates Hire Operations
-194,6,2026-03-22,GL-6200,168638.75,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,Adbri Masonry
-195,6,2026-11-14,GL-6200,258127.56,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,CSR Building Products
-196,6,2026-08-14,GL-6200,50712.87,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,James Hardie Building Products
-197,6,2026-06-23,GL-6100,987231.71,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Buxton Construction
-198,6,2026-06-24,GL-6200,59290.08,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,James Hardie Building Products
-199,6,2026-03-14,GL-6200,140161.17,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,Adbri Masonry
-200,6,2026-06-08,GL-6200,441274.69,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,CSR Building Products
-201,6,2026-07-13,GL-6300,65307.71,INV,Equipment & Plant Hire — Perth Data Centre — Stage 1,Sherrin Rentals
-202,6,2026-06-02,GL-6200,199140.69,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,Rebar Direct Pty Ltd
-203,6,2026-05-07,GL-6100,382692.7,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Cockram Constructions
-204,6,2026-10-27,GL-6500,12062.4,INV,Regulatory Fees & Permit Costs — Perth Data Centre — Stage 1,DELWP Victoria
-205,6,2026-11-17,GL-6100,1878543.24,INV,[VARIANCE] Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Built Environs
-206,6,2026-06-13,GL-6400,31127.61,INV,Professional & Consulting Fees — Perth Data Centre — Stage 1,Jacobs Engineering Group
-207,1,2026-04-16,GL-6100,832500.0,INV,[VARIANCE] Direct Labour & Subcontract — Collins Arch,Hickory Group
-208,2,2026-06-12,GL-6200,312000.0,INV,Raw Materials — Victorian Heart Hospital,Holcim Australia Pty Ltd
-209,3,2026-09-03,GL-6100,1250000.0,INV,Direct Labour — Southbank Precinct Tower C,John Holland Group
-210,4,2026-08-22,GL-6400,498000.0,INV,[VARIANCE] Professional Fees — Melbourne Metro,AECOM Australia Pty Ltd
+ledger_id,project_id,sap_cost_center,posting_date,gl_account,amount,doc_type,description,vendor,tax_code,gst_amount
+1,1,CC-MEL-01,2026-02-28,GL-6100,269795.47,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Hickory Group,G11,26979.55
+2,1,CC-MEL-01,2026-08-09,GL-6100,946413.09,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Kane Constructions,G11,94641.31
+3,1,CC-MEL-01,2026-02-25,GL-6100,846583.21,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Kane Constructions,G11,84658.32
+4,1,CC-MEL-01,2026-07-10,GL-6100,1379682.72,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Hickory Group,G11,137968.27
+5,1,CC-MEL-01,2026-07-19,GL-6100,689971.04,INV,[VARIANCE] Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Kapitol Group,G11,68997.1
+6,1,CC-MEL-01,2026-10-18,GL-6200,299561.72,INV,Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Hanson Construction Materials,G11,29956.17
+7,1,CC-MEL-01,2026-06-17,GL-6100,1308460.56,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Kane Constructions,G11,130846.06
+8,1,CC-MEL-01,2026-07-10,GL-6200,305018.86,INV,Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Saint-Gobain Placo,G11,30501.89
+9,1,CC-MEL-01,2026-11-12,GL-6200,194390.06,INV,[VARIANCE] Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,James Hardie Building Products,G11,19439.01
+10,1,CC-MEL-01,2026-08-30,GL-6100,193797.27,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Hacer Group,G11,19379.73
+11,1,CC-MEL-01,2026-03-31,GL-6100,264583.91,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Built Environs,G11,26458.39
+12,1,CC-MEL-01,2026-10-24,GL-6500,11708.23,INV,[VARIANCE] Regulatory Fees & Permit Costs — Collins Arch — Stage 2 Fit-Out,DELWP Victoria,G12,0.0
+13,1,CC-MEL-01,2026-04-29,GL-6100,1001492.55,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Built Environs,G11,100149.26
+14,1,CC-MEL-01,2026-07-03,GL-6500,13472.43,INV,Regulatory Fees & Permit Costs — Collins Arch — Stage 2 Fit-Out,EPA Victoria,G12,0.0
+15,1,CC-MEL-01,2026-05-11,GL-6100,287056.95,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,John Holland Group,G11,28705.7
+16,1,CC-MEL-01,2026-07-06,GL-6400,152399.58,INV,[VARIANCE] Professional & Consulting Fees — Collins Arch — Stage 2 Fit-Out,Jacobs Engineering Group,G11,15239.96
+17,1,CC-MEL-01,2026-04-13,GL-6100,317915.79,INV,[VARIANCE] Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Kane Constructions,G11,31791.58
+18,1,CC-MEL-01,2026-04-01,GL-6400,230802.21,INV,Professional & Consulting Fees — Collins Arch — Stage 2 Fit-Out,GHD Advisory,G11,23080.22
+19,1,CC-MEL-01,2026-10-22,GL-6500,39064.69,INV,Regulatory Fees & Permit Costs — Collins Arch — Stage 2 Fit-Out,EPA Victoria,G12,0.0
+20,1,CC-MEL-01,2026-10-09,GL-6100,333859.71,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,John Holland Group,G11,33385.97
+21,1,CC-MEL-01,2026-11-24,GL-6100,1103325.29,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Cockram Constructions,G11,110332.53
+22,1,CC-MEL-01,2026-06-16,GL-6100,663016.05,INV,[VARIANCE] Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Probuild Constructions,G11,66301.61
+23,1,CC-MEL-01,2026-07-19,GL-6100,1929869.28,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Hacer Group,G11,192986.93
+24,1,CC-MEL-01,2026-03-16,GL-6400,26264.47,INV,Professional & Consulting Fees — Collins Arch — Stage 2 Fit-Out,Stantec Consulting,G11,2626.45
+25,1,CC-MEL-01,2026-02-02,GL-6300,46067.39,INV,Equipment & Plant Hire — Collins Arch — Stage 2 Fit-Out,Tutt Bryant Equipment,G11,4606.74
+26,1,CC-MEL-01,2026-01-12,GL-6100,916569.74,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Kapitol Group,G11,91656.97
+27,1,CC-MEL-01,2026-01-29,GL-6200,337274.45,INV,Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Boral Construction Materials,G11,33727.44
+28,1,CC-MEL-01,2026-04-11,GL-6100,732437.38,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Kane Constructions,G11,73243.74
+29,1,CC-MEL-01,2026-09-04,GL-6100,191328.86,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Watpac Civil & Mining,G11,19132.89
+30,1,CC-MEL-01,2026-05-28,GL-6100,171673.29,INV,[VARIANCE] Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Hacer Group,G11,17167.33
+31,1,CC-MEL-01,2026-07-05,GL-6200,185892.85,INV,[VARIANCE] Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Hanson Construction Materials,G11,18589.28
+32,1,CC-MEL-01,2026-12-20,GL-6100,1938271.79,INV,Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Built Environs,G11,193827.18
+33,1,CC-MEL-01,2026-08-05,GL-6500,6639.24,INV,Regulatory Fees & Permit Costs — Collins Arch — Stage 2 Fit-Out,WorkSafe Victoria,G12,0.0
+34,1,CC-MEL-01,2026-06-06,GL-6200,17590.22,INV,[VARIANCE] Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,James Hardie Building Products,G11,1759.02
+35,1,CC-MEL-01,2026-11-20,GL-6100,295978.17,INV,[VARIANCE] Direct Labour & Subcontract Costs — Collins Arch — Stage 2 Fit-Out,Watpac Civil & Mining,G11,29597.82
+36,1,CC-MEL-01,2026-10-27,GL-6200,453625.06,INV,Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Holcim Australia Pty Ltd,G11,45362.51
+37,1,CC-MEL-01,2026-10-01,GL-6400,45658.05,INV,Professional & Consulting Fees — Collins Arch — Stage 2 Fit-Out,Arup Pty Ltd,G11,4565.81
+38,1,CC-MEL-01,2026-09-24,GL-6200,392579.27,INV,Raw Materials & Consumables — Collins Arch — Stage 2 Fit-Out,Rebar Direct Pty Ltd,G11,39257.93
+39,2,CC-MEL-02,2027-05-01,GL-6300,43526.31,INV,[VARIANCE] Equipment & Plant Hire — Victorian Heart Hospital Ext.,Adaptalift Hyster,G11,4352.63
+40,2,CC-MEL-02,2027-06-01,GL-6300,64112.42,INV,[VARIANCE] Equipment & Plant Hire — Victorian Heart Hospital Ext.,Coates Hire Operations,G11,6411.24
+41,2,CC-MEL-02,2027-03-14,GL-6100,270852.23,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,John Holland Group,G11,27085.22
+42,2,CC-MEL-02,2027-03-28,GL-6100,519188.38,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Buxton Construction,G11,51918.84
+43,2,CC-MEL-02,2026-03-29,GL-6100,337786.63,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Buxton Construction,G11,33778.66
+44,2,CC-MEL-02,2026-03-29,GL-6100,1467413.05,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Watpac Civil & Mining,G11,146741.31
+45,2,CC-MEL-02,2026-06-05,GL-6400,108676.41,INV,Professional & Consulting Fees — Victorian Heart Hospital Ext.,WSP Australia,G11,10867.64
+46,2,CC-MEL-02,2026-03-03,GL-6300,23728.14,INV,[VARIANCE] Equipment & Plant Hire — Victorian Heart Hospital Ext.,Kennards Hire,G11,2372.81
+47,2,CC-MEL-02,2026-06-07,GL-6100,1351723.93,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Hickory Group,G11,135172.39
+48,2,CC-MEL-02,2027-02-14,GL-6100,353143.94,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Buxton Construction,G11,35314.39
+49,2,CC-MEL-02,2026-11-08,GL-6300,33448.57,INV,Equipment & Plant Hire — Victorian Heart Hospital Ext.,Sherrin Rentals,G11,3344.86
+50,2,CC-MEL-02,2026-09-13,GL-6100,593201.49,INV,[VARIANCE] Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Kapitol Group,G11,59320.15
+51,2,CC-MEL-02,2027-06-07,GL-6100,1145836.4,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Buxton Construction,G11,114583.64
+52,2,CC-MEL-02,2027-01-24,GL-6100,1080444.76,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Cockram Constructions,G11,108044.48
+53,2,CC-MEL-02,2026-08-21,GL-6100,1577345.64,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Built Environs,G11,157734.56
+54,2,CC-MEL-02,2026-06-16,GL-6100,120953.19,INV,[VARIANCE] Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Hacer Group,G11,12095.32
+55,2,CC-MEL-02,2026-10-25,GL-6200,473237.87,INV,Raw Materials & Consumables — Victorian Heart Hospital Ext.,Rebar Direct Pty Ltd,G11,47323.79
+56,2,CC-MEL-02,2026-10-20,GL-6100,324195.07,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Cockram Constructions,G11,32419.51
+57,2,CC-MEL-02,2026-04-11,GL-6100,476762.45,INV,[VARIANCE] Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Cockram Constructions,G11,47676.25
+58,2,CC-MEL-02,2027-06-05,GL-6100,386164.72,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,John Holland Group,G11,38616.47
+59,2,CC-MEL-02,2026-08-25,GL-6300,145953.63,INV,[VARIANCE] Equipment & Plant Hire — Victorian Heart Hospital Ext.,All Cranes Hire & Sales,G11,14595.36
+60,2,CC-MEL-02,2027-03-23,GL-6500,8932.86,INV,Regulatory Fees & Permit Costs — Victorian Heart Hospital Ext.,EPA Victoria,G12,0.0
+61,2,CC-MEL-02,2026-02-26,GL-6200,431191.56,INV,Raw Materials & Consumables — Victorian Heart Hospital Ext.,Boral Construction Materials,G11,43119.16
+62,2,CC-MEL-02,2027-06-23,GL-6500,20287.79,INV,Regulatory Fees & Permit Costs — Victorian Heart Hospital Ext.,City of Melbourne Council,G12,0.0
+63,2,CC-MEL-02,2027-05-15,GL-6100,786663.01,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Buxton Construction,G11,78666.3
+64,2,CC-MEL-02,2027-07-02,GL-6200,46813.78,INV,Raw Materials & Consumables — Victorian Heart Hospital Ext.,Boral Construction Materials,G11,4681.38
+65,2,CC-MEL-02,2026-12-22,GL-6100,984101.19,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Cockram Constructions,G11,98410.12
+66,2,CC-MEL-02,2027-06-17,GL-6200,161077.9,INV,Raw Materials & Consumables — Victorian Heart Hospital Ext.,Hanson Construction Materials,G11,16107.79
+67,2,CC-MEL-02,2027-01-22,GL-6400,169449.99,INV,Professional & Consulting Fees — Victorian Heart Hospital Ext.,Stantec Consulting,G11,16945.0
+68,2,CC-MEL-02,2027-02-26,GL-6400,57363.53,INV,Professional & Consulting Fees — Victorian Heart Hospital Ext.,Turner & Townsend,G11,5736.35
+69,2,CC-MEL-02,2027-03-07,GL-6100,1700940.0,INV,Direct Labour & Subcontract Costs — Victorian Heart Hospital Ext.,Kapitol Group,G11,170094.0
+70,3,CC-MEL-03,2026-03-28,GL-6400,188262.38,INV,Professional & Consulting Fees — Southbank Precinct Tower C,Turner & Townsend,G11,18826.24
+71,3,CC-MEL-03,2027-04-08,GL-6200,531233.31,INV,[VARIANCE] Raw Materials & Consumables — Southbank Precinct Tower C,CSR Building Products,G11,53123.33
+72,3,CC-MEL-03,2026-06-21,GL-6600,1431.75,INV,Travel & Accommodation — Southbank Precinct Tower C,Crown Towers Melbourne,G11,143.18
+73,3,CC-MEL-03,2026-09-15,GL-6200,310740.71,INV,[VARIANCE] Raw Materials & Consumables — Southbank Precinct Tower C,Adbri Masonry,G11,31074.07
+74,3,CC-MEL-03,2027-01-04,GL-6200,287488.21,INV,Raw Materials & Consumables — Southbank Precinct Tower C,Boral Construction Materials,G11,28748.82
+75,3,CC-MEL-03,2027-07-18,GL-6200,193979.55,INV,Raw Materials & Consumables — Southbank Precinct Tower C,Hanson Construction Materials,G11,19397.95
+76,3,CC-MEL-03,2026-05-01,GL-6100,1717035.69,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Cockram Constructions,G11,171703.57
+77,3,CC-MEL-03,2026-08-02,GL-6100,1406298.25,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Kane Constructions,G11,140629.83
+78,3,CC-MEL-03,2026-10-03,GL-6100,639449.39,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Hickory Group,G11,63944.94
+79,3,CC-MEL-03,2026-07-09,GL-6600,2011.53,INV,Travel & Accommodation — Southbank Precinct Tower C,FCm Travel Solutions,G11,201.15
+80,3,CC-MEL-03,2027-06-21,GL-6100,532831.03,INV,[VARIANCE] Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Buxton Construction,G11,53283.1
+81,3,CC-MEL-03,2026-05-14,GL-6200,125755.7,INV,Raw Materials & Consumables — Southbank Precinct Tower C,Sika Australia,G11,12575.57
+82,3,CC-MEL-03,2026-07-31,GL-6600,5470.89,INV,Travel & Accommodation — Southbank Precinct Tower C,Crown Towers Melbourne,G11,547.09
+83,3,CC-MEL-03,2026-12-22,GL-6400,127229.82,INV,Professional & Consulting Fees — Southbank Precinct Tower C,GHD Advisory,G11,12722.98
+84,3,CC-MEL-03,2026-07-14,GL-6200,134973.35,INV,[VARIANCE] Raw Materials & Consumables — Southbank Precinct Tower C,CSR Building Products,G11,13497.34
+85,3,CC-MEL-03,2026-10-13,GL-6300,92022.37,INV,[VARIANCE] Equipment & Plant Hire — Southbank Precinct Tower C,Kennards Hire,G11,9202.24
+86,3,CC-MEL-03,2026-04-08,GL-6600,1505.48,INV,[VARIANCE] Travel & Accommodation — Southbank Precinct Tower C,Mantra on Little Bourke,G11,150.55
+87,3,CC-MEL-03,2027-08-23,GL-6100,954796.66,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Watpac Civil & Mining,G11,95479.67
+88,3,CC-MEL-03,2027-04-26,GL-6200,223814.95,INV,Raw Materials & Consumables — Southbank Precinct Tower C,Boral Construction Materials,G11,22381.5
+89,3,CC-MEL-03,2027-02-11,GL-6100,1013528.45,INV,[VARIANCE] Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Hickory Group,G11,101352.85
+90,3,CC-MEL-03,2027-05-11,GL-6300,85296.08,INV,Equipment & Plant Hire — Southbank Precinct Tower C,Kennards Hire,G11,8529.61
+91,3,CC-MEL-03,2026-06-12,GL-6100,1045472.98,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Probuild Constructions,G11,104547.3
+92,3,CC-MEL-03,2027-05-22,GL-6200,275761.02,INV,Raw Materials & Consumables — Southbank Precinct Tower C,Holcim Australia Pty Ltd,G11,27576.1
+93,3,CC-MEL-03,2027-10-05,GL-6200,168049.89,INV,Raw Materials & Consumables — Southbank Precinct Tower C,Adbri Masonry,G11,16804.99
+94,3,CC-MEL-03,2027-01-21,GL-6100,344082.69,INV,[VARIANCE] Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Hickory Group,G11,34408.27
+95,3,CC-MEL-03,2027-02-23,GL-6100,358066.34,INV,[VARIANCE] Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Built Environs,G11,35806.63
+96,3,CC-MEL-03,2027-06-11,GL-6300,29114.9,INV,Equipment & Plant Hire — Southbank Precinct Tower C,Tutt Bryant Equipment,G11,2911.49
+97,3,CC-MEL-03,2026-05-08,GL-6200,117772.1,INV,[VARIANCE] Raw Materials & Consumables — Southbank Precinct Tower C,Hanson Construction Materials,G11,11777.21
+98,3,CC-MEL-03,2027-03-08,GL-6100,550356.97,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Buxton Construction,G11,55035.7
+99,3,CC-MEL-03,2026-07-11,GL-6200,81154.72,INV,Raw Materials & Consumables — Southbank Precinct Tower C,James Hardie Building Products,G11,8115.47
+100,3,CC-MEL-03,2027-08-29,GL-6200,222874.57,INV,Raw Materials & Consumables — Southbank Precinct Tower C,Holcim Australia Pty Ltd,G11,22287.46
+101,3,CC-MEL-03,2026-08-09,GL-6200,189118.1,INV,[VARIANCE] Raw Materials & Consumables — Southbank Precinct Tower C,Adbri Masonry,G11,18911.81
+102,3,CC-MEL-03,2027-02-07,GL-6200,169639.36,INV,Raw Materials & Consumables — Southbank Precinct Tower C,Saint-Gobain Placo,G11,16963.94
+103,3,CC-MEL-03,2027-06-16,GL-6200,179130.12,INV,Raw Materials & Consumables — Southbank Precinct Tower C,CSR Building Products,G11,17913.01
+104,3,CC-MEL-03,2026-04-23,GL-6100,998614.51,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Cockram Constructions,G11,99861.45
+105,3,CC-MEL-03,2026-09-05,GL-6100,325477.95,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Hacer Group,G11,32547.8
+106,3,CC-MEL-03,2027-02-20,GL-6100,236594.26,INV,Direct Labour & Subcontract Costs — Southbank Precinct Tower C,Hacer Group,G11,23659.43
+107,4,CC-MEL-04,2026-08-03,GL-6200,154389.41,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,BlueScope Distribution,G11,15438.94
+108,4,CC-MEL-04,2026-03-02,GL-6300,59777.79,INV,Equipment & Plant Hire — Melbourne Metro — Station Works,All Cranes Hire & Sales,G11,5977.78
+109,4,CC-MEL-04,2026-03-09,GL-6100,580913.63,INV,[VARIANCE] Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Probuild Constructions,G11,58091.36
+110,4,CC-MEL-04,2026-08-30,GL-6100,359195.31,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Cockram Constructions,G11,35919.53
+111,4,CC-MEL-04,2026-04-25,GL-6200,472762.19,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,Hanson Construction Materials,G11,47276.22
+112,4,CC-MEL-04,2026-05-25,GL-6600,1875.57,INV,Travel & Accommodation — Melbourne Metro — Station Works,Marriott Hotels Australia,G11,187.56
+113,4,CC-MEL-04,2026-04-01,GL-6100,1675346.18,INV,[VARIANCE] Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Probuild Constructions,G11,167534.62
+114,4,CC-MEL-04,2026-03-07,GL-6100,172579.81,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Watpac Civil & Mining,G11,17257.98
+115,4,CC-MEL-04,2026-02-25,GL-6300,7180.85,INV,[VARIANCE] Equipment & Plant Hire — Melbourne Metro — Station Works,Sherrin Rentals,G11,718.09
+116,4,CC-MEL-04,2026-09-08,GL-6100,1521988.01,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Kane Constructions,G11,152198.8
+117,4,CC-MEL-04,2026-08-18,GL-6100,447466.34,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,John Holland Group,G11,44746.63
+118,4,CC-MEL-04,2026-08-04,GL-6200,54023.68,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,James Hardie Building Products,G11,5402.37
+119,4,CC-MEL-04,2026-07-17,GL-6300,23750.09,INV,Equipment & Plant Hire — Melbourne Metro — Station Works,All Cranes Hire & Sales,G11,2375.01
+120,4,CC-MEL-04,2026-02-03,GL-6400,183071.56,INV,Professional & Consulting Fees — Melbourne Metro — Station Works,GHD Advisory,G11,18307.16
+121,4,CC-MEL-04,2026-07-17,GL-6200,82656.75,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,Boral Construction Materials,G11,8265.68
+122,4,CC-MEL-04,2026-10-09,GL-6100,1026257.06,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Probuild Constructions,G11,102625.71
+123,4,CC-MEL-04,2026-08-23,GL-6100,879452.34,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Hickory Group,G11,87945.23
+124,4,CC-MEL-04,2026-07-22,GL-6200,291836.46,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,Boral Construction Materials,G11,29183.65
+125,4,CC-MEL-04,2026-07-19,GL-6100,1182924.28,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Watpac Civil & Mining,G11,118292.43
+126,4,CC-MEL-04,2026-06-04,GL-6200,71148.73,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,Sika Australia,G11,7114.87
+127,4,CC-MEL-04,2026-09-21,GL-6300,59291.15,INV,Equipment & Plant Hire — Melbourne Metro — Station Works,Kennards Hire,G11,5929.12
+128,4,CC-MEL-04,2026-06-19,GL-6200,171647.8,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,Holcim Australia Pty Ltd,G11,17164.78
+129,4,CC-MEL-04,2026-10-23,GL-6400,20552.3,INV,Professional & Consulting Fees — Melbourne Metro — Station Works,Jacobs Engineering Group,G11,2055.23
+130,4,CC-MEL-04,2026-11-05,GL-6300,21965.44,INV,[VARIANCE] Equipment & Plant Hire — Melbourne Metro — Station Works,Adaptalift Hyster,G11,2196.54
+131,4,CC-MEL-04,2026-10-02,GL-6200,62108.25,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,BlueScope Distribution,G11,6210.83
+132,4,CC-MEL-04,2026-10-27,GL-6500,41131.29,INV,[VARIANCE] Regulatory Fees & Permit Costs — Melbourne Metro — Station Works,Vic Department of Transport,G12,0.0
+133,4,CC-MEL-04,2026-10-30,GL-6100,1000417.17,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Cockram Constructions,G11,100041.72
+134,4,CC-MEL-04,2026-06-13,GL-6200,186014.34,INV,[VARIANCE] Raw Materials & Consumables — Melbourne Metro — Station Works,Boral Construction Materials,G11,18601.43
+135,4,CC-MEL-04,2026-06-24,GL-6200,292423.37,INV,Raw Materials & Consumables — Melbourne Metro — Station Works,Rebar Direct Pty Ltd,G11,29242.34
+136,4,CC-MEL-04,2026-03-27,GL-6100,639536.42,INV,Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Kapitol Group,G11,63953.64
+137,4,CC-MEL-04,2026-10-06,GL-6300,56679.51,INV,Equipment & Plant Hire — Melbourne Metro — Station Works,Kennards Hire,G11,5667.95
+138,4,CC-MEL-04,2026-11-17,GL-6100,517408.82,INV,[VARIANCE] Direct Labour & Subcontract Costs — Melbourne Metro — Station Works,Hacer Group,G11,51740.88
+139,4,CC-MEL-04,2026-10-29,GL-6300,14179.89,INV,Equipment & Plant Hire — Melbourne Metro — Station Works,Tutt Bryant Equipment,G11,1417.99
+140,5,CC-SYD-05,2026-09-28,GL-6200,147921.22,INV,[VARIANCE] Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,BlueScope Distribution,G11,14792.12
+141,5,CC-SYD-05,2026-06-20,GL-6400,188303.92,INV,Professional & Consulting Fees — Sydney Tech Hub — Pyrmont,Turner & Townsend,G11,18830.39
+142,5,CC-SYD-05,2026-04-21,GL-6400,85365.57,INV,Professional & Consulting Fees — Sydney Tech Hub — Pyrmont,Turner & Townsend,G11,8536.56
+143,5,CC-SYD-05,2027-02-02,GL-6100,1212764.49,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Kapitol Group,G11,121276.45
+144,5,CC-SYD-05,2026-06-07,GL-6100,1560614.15,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Kane Constructions,G11,156061.42
+145,5,CC-SYD-05,2027-01-24,GL-6400,137511.92,INV,Professional & Consulting Fees — Sydney Tech Hub — Pyrmont,AECOM Australia Pty Ltd,G11,13751.19
+146,5,CC-SYD-05,2026-08-23,GL-6300,134540.83,INV,Equipment & Plant Hire — Sydney Tech Hub — Pyrmont,All Cranes Hire & Sales,G11,13454.08
+147,5,CC-SYD-05,2027-04-14,GL-6100,444250.98,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Kapitol Group,G11,44425.1
+148,5,CC-SYD-05,2026-10-04,GL-6100,358852.04,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,John Holland Group,G11,35885.2
+149,5,CC-SYD-05,2026-08-12,GL-6100,778446.88,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Watpac Civil & Mining,G11,77844.69
+150,5,CC-SYD-05,2026-06-29,GL-6300,58644.51,INV,Equipment & Plant Hire — Sydney Tech Hub — Pyrmont,Kennards Hire,G11,5864.45
+151,5,CC-SYD-05,2027-04-22,GL-6100,575581.93,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Watpac Civil & Mining,G11,57558.19
+152,5,CC-SYD-05,2027-04-30,GL-6600,945.12,INV,Travel & Accommodation — Sydney Tech Hub — Pyrmont,Corporate Travel Management (CTM),G11,94.51
+153,5,CC-SYD-05,2026-06-18,GL-6100,1748740.67,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Built Environs,G11,174874.07
+154,5,CC-SYD-05,2027-05-02,GL-6100,865127.86,INV,[VARIANCE] Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Hacer Group,G11,86512.79
+155,5,CC-SYD-05,2026-08-23,GL-6600,1854.39,INV,[VARIANCE] Travel & Accommodation — Sydney Tech Hub — Pyrmont,Corporate Travel Management (CTM),G11,185.44
+156,5,CC-SYD-05,2027-03-27,GL-6100,258759.39,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Watpac Civil & Mining,G11,25875.94
+157,5,CC-SYD-05,2027-02-13,GL-6100,943938.18,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Probuild Constructions,G11,94393.82
+158,5,CC-SYD-05,2026-10-14,GL-6300,54915.98,INV,Equipment & Plant Hire — Sydney Tech Hub — Pyrmont,Coates Hire Operations,G11,5491.6
+159,5,CC-SYD-05,2027-04-11,GL-6100,1023526.87,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Built Environs,G11,102352.69
+160,5,CC-SYD-05,2027-04-16,GL-6200,416393.85,INV,Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,Sika Australia,G11,41639.39
+161,5,CC-SYD-05,2026-12-10,GL-6200,30284.09,INV,Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,Boral Construction Materials,G11,3028.41
+162,5,CC-SYD-05,2026-10-20,GL-6600,7503.71,INV,[VARIANCE] Travel & Accommodation — Sydney Tech Hub — Pyrmont,Corporate Travel Management (CTM),G11,750.37
+163,5,CC-SYD-05,2026-09-10,GL-6200,439990.69,INV,Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,Adbri Masonry,G11,43999.07
+164,5,CC-SYD-05,2027-02-16,GL-6100,1120078.67,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Watpac Civil & Mining,G11,112007.87
+165,5,CC-SYD-05,2026-11-22,GL-6300,8885.58,INV,Equipment & Plant Hire — Sydney Tech Hub — Pyrmont,Coates Hire Operations,G11,888.56
+166,5,CC-SYD-05,2026-09-21,GL-6400,221542.87,INV,[VARIANCE] Professional & Consulting Fees — Sydney Tech Hub — Pyrmont,Arcadis Australia Pacific,G11,22154.29
+167,5,CC-SYD-05,2026-05-05,GL-6500,22801.26,INV,Regulatory Fees & Permit Costs — Sydney Tech Hub — Pyrmont,NSW Planning Department,G12,0.0
+168,5,CC-SYD-05,2026-09-12,GL-6100,1648572.48,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Built Environs,G11,164857.25
+169,5,CC-SYD-05,2026-11-27,GL-6100,256780.6,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Kane Constructions,G11,25678.06
+170,5,CC-SYD-05,2027-04-13,GL-6100,1255754.5,INV,[VARIANCE] Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Watpac Civil & Mining,G11,125575.45
+171,5,CC-SYD-05,2027-04-07,GL-6100,1003357.88,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Kapitol Group,G11,100335.79
+172,5,CC-SYD-05,2027-04-16,GL-6100,1091575.9,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Built Environs,G11,109157.59
+173,5,CC-SYD-05,2027-04-14,GL-6100,757968.5,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Hickory Group,G11,75796.85
+174,5,CC-SYD-05,2026-12-16,GL-6100,948406.18,INV,Direct Labour & Subcontract Costs — Sydney Tech Hub — Pyrmont,Kapitol Group,G11,94840.62
+175,5,CC-SYD-05,2026-05-17,GL-6600,5545.09,INV,[VARIANCE] Travel & Accommodation — Sydney Tech Hub — Pyrmont,Crown Towers Melbourne,G11,554.51
+176,5,CC-SYD-05,2027-02-17,GL-6200,225379.52,INV,Raw Materials & Consumables — Sydney Tech Hub — Pyrmont,CSR Building Products,G11,22537.95
+177,6,CC-PER-06,2026-09-26,GL-6600,3227.66,INV,Travel & Accommodation — Perth Data Centre — Stage 1,Crown Towers Melbourne,G11,322.77
+178,6,CC-PER-06,2026-08-27,GL-6200,54857.26,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,CSR Building Products,G11,5485.73
+179,6,CC-PER-06,2026-10-20,GL-6300,18074.25,INV,Equipment & Plant Hire — Perth Data Centre — Stage 1,Coates Hire Operations,G11,1807.43
+180,6,CC-PER-06,2026-12-09,GL-6500,43692.1,INV,[VARIANCE] Regulatory Fees & Permit Costs — Perth Data Centre — Stage 1,Vic Department of Transport,G12,0.0
+181,6,CC-PER-06,2026-09-13,GL-6100,1529725.39,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Kane Constructions,G11,152972.54
+182,6,CC-PER-06,2026-03-31,GL-6100,1503838.87,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Probuild Constructions,G11,150383.89
+183,6,CC-PER-06,2026-07-07,GL-6600,1176.49,INV,Travel & Accommodation — Perth Data Centre — Stage 1,Corporate Travel Management (CTM),G11,117.65
+184,6,CC-PER-06,2026-03-28,GL-6100,146242.92,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Cockram Constructions,G11,14624.29
+185,6,CC-PER-06,2026-04-10,GL-6100,1182344.67,INV,[VARIANCE] Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Hickory Group,G11,118234.47
+186,6,CC-PER-06,2026-09-17,GL-6200,23448.92,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,CSR Building Products,G11,2344.89
+187,6,CC-PER-06,2026-05-15,GL-6100,280122.91,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Hickory Group,G11,28012.29
+188,6,CC-PER-06,2026-07-25,GL-6200,18336.11,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,Saint-Gobain Placo,G11,1833.61
+189,6,CC-PER-06,2026-06-04,GL-6600,1165.99,INV,Travel & Accommodation — Perth Data Centre — Stage 1,Marriott Hotels Australia,G11,116.6
+190,6,CC-PER-06,2026-09-10,GL-6300,84622.91,INV,[VARIANCE] Equipment & Plant Hire — Perth Data Centre — Stage 1,Tutt Bryant Equipment,G11,8462.29
+191,6,CC-PER-06,2026-09-17,GL-6200,79160.58,INV,[VARIANCE] Raw Materials & Consumables — Perth Data Centre — Stage 1,Hanson Construction Materials,G11,7916.06
+192,6,CC-PER-06,2026-09-24,GL-6200,478088.92,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,Sika Australia,G11,47808.89
+193,6,CC-PER-06,2026-03-14,GL-6300,24341.56,INV,[VARIANCE] Equipment & Plant Hire — Perth Data Centre — Stage 1,All Cranes Hire & Sales,G11,2434.16
+194,6,CC-PER-06,2026-06-12,GL-6200,370087.19,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,Sika Australia,G11,37008.72
+195,6,CC-PER-06,2026-04-30,GL-6100,322947.11,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Buxton Construction,G11,32294.71
+196,6,CC-PER-06,2026-03-01,GL-6100,1203249.27,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Hickory Group,G11,120324.93
+197,6,CC-PER-06,2026-09-13,GL-6100,588471.54,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Built Environs,G11,58847.15
+198,6,CC-PER-06,2026-03-21,GL-6100,1345191.44,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Kane Constructions,G11,134519.14
+199,6,CC-PER-06,2026-12-16,GL-6200,336169.92,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,CSR Building Products,G11,33616.99
+200,6,CC-PER-06,2026-04-20,GL-6100,327218.15,INV,Direct Labour & Subcontract Costs — Perth Data Centre — Stage 1,Probuild Constructions,G11,32721.82
+201,6,CC-PER-06,2026-05-02,GL-6200,304406.15,INV,[VARIANCE] Raw Materials & Consumables — Perth Data Centre — Stage 1,BlueScope Distribution,G11,30440.62
+202,6,CC-PER-06,2026-10-03,GL-6200,162245.94,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,Rebar Direct Pty Ltd,G11,16224.59
+203,6,CC-PER-06,2026-11-29,GL-6300,100118.67,INV,Equipment & Plant Hire — Perth Data Centre — Stage 1,Adaptalift Hyster,G11,10011.87
+204,6,CC-PER-06,2026-04-12,GL-6300,65953.28,INV,Equipment & Plant Hire — Perth Data Centre — Stage 1,Sherrin Rentals,G11,6595.33
+205,6,CC-PER-06,2026-12-16,GL-6200,118720.32,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,Holcim Australia Pty Ltd,G11,11872.03
+206,6,CC-PER-06,2026-08-06,GL-6200,109735.33,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,Sika Australia,G11,10973.53
+207,6,CC-PER-06,2026-04-27,GL-6600,6003.18,INV,Travel & Accommodation — Perth Data Centre — Stage 1,Corporate Travel Management (CTM),G11,600.32
+208,6,CC-PER-06,2026-03-29,GL-6200,167708.66,INV,Raw Materials & Consumables — Perth Data Centre — Stage 1,Hanson Construction Materials,G11,16770.87
+209,1,CC-MEL-01,2026-04-16,GL-6100,832500.0,INV,[VARIANCE] Direct Labour & Subcontract — Collins Arch,Hickory Group,G11,83250.0
+210,2,CC-MEL-02,2026-06-12,GL-6200,312000.0,INV,Raw Materials — Victorian Heart Hospital,Holcim Australia Pty Ltd,G11,31200.0
+211,3,CC-MEL-03,2026-09-03,GL-6100,1250000.0,INV,Direct Labour — Southbank Precinct Tower C,John Holland Group,G11,125000.0
+212,4,CC-MEL-04,2026-08-22,GL-6400,498000.0,INV,[VARIANCE] Professional Fees — Melbourne Metro,AECOM Australia Pty Ltd,G11,49800.0
+219,1,CC-MEL-01,2026-02-21,GL-4100,20217294.0,RV,Progress Claim — Collins Arch — Stage 2 Fit-Out,Lendlease Construction (Pty) Ltd,G1,2021729.4
+220,1,CC-MEL-01,2026-08-27,GL-4100,16483089.0,RV,Progress Claim — Collins Arch — Stage 2 Fit-Out,Lendlease Construction (Pty) Ltd,G1,1648308.9
+221,2,CC-MEL-02,2026-04-08,GL-4100,36608034.0,RV,Progress Claim — Victorian Heart Hospital Ext.,Lendlease Construction (Pty) Ltd,G1,3660803.4
+222,2,CC-MEL-02,2027-03-17,GL-4100,29407979.0,RV,Progress Claim — Victorian Heart Hospital Ext.,Lendlease Construction (Pty) Ltd,G1,2940797.9
+223,3,CC-MEL-03,2026-10-12,GL-4100,39089314.0,RV,Progress Claim — Southbank Precinct Tower C,Lendlease Construction (Pty) Ltd,G1,3908931.4
+224,3,CC-MEL-03,2027-07-29,GL-4100,34222505.0,RV,Progress Claim — Southbank Precinct Tower C,Lendlease Construction (Pty) Ltd,G1,3422250.5
+225,4,CC-MEL-04,2026-07-03,GL-4100,53822838.0,RV,Progress Claim — Melbourne Metro — Station Works,Lendlease Construction (Pty) Ltd,G1,5382283.8
+226,4,CC-MEL-04,2026-10-19,GL-4100,56793621.0,RV,Progress Claim — Melbourne Metro — Station Works,Lendlease Construction (Pty) Ltd,G1,5679362.1
+227,5,CC-SYD-05,2026-12-11,GL-4100,11238250.0,RV,Progress Claim — Sydney Tech Hub — Pyrmont,Lendlease Construction (Pty) Ltd,G1,1123825.0
+228,5,CC-SYD-05,2026-09-29,GL-4100,8654096.0,RV,Progress Claim — Sydney Tech Hub — Pyrmont,Lendlease Construction (Pty) Ltd,G1,865409.6
+229,6,CC-PER-06,2026-03-11,GL-4100,19379146.0,RV,Progress Claim — Perth Data Centre — Stage 1,Lendlease Construction (Pty) Ltd,G1,1937914.6
+230,6,CC-PER-06,2026-04-07,GL-4100,14226342.0,RV,Progress Claim — Perth Data Centre — Stage 1,Lendlease Construction (Pty) Ltd,G1,1422634.2

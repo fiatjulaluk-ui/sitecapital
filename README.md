@@ -1,4 +1,4 @@
-# SiteCapital Construction Treasury Intelligence Platform
+# SiteCapital — Construction Treasury Intelligence Platform
 
 An enterprise-grade treasury dashboard built in Python and Streamlit, simulating the finance operations of a Tier 1 Australian construction company (Lendlease / Multiplex scale). Designed to demonstrate the full scope of a Construction Treasury Accountant role — from daily reconciliation to CFO-level liquidity risk reporting.
 

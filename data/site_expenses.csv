@@ -1,211 +1,213 @@
-expense_id,project_id,booking_date,expense_type,amount,sap_cost_code,vendor,status,comment,source_system
-1,1,2026-02-26,Subcontractor,269795.47,SAP-5001,Hickory Group,Paid,,Concur Export
-2,1,2026-10-11,Materials,384617.52,SAP-5002,Boral Construction Materials,Pending,,Concur Export
-3,1,2026-06-26,Plant Hire,29155.39,SAP-5003,Tutt Bryant Equipment,Approved,,Concur Export
-4,1,2026-02-14,Plant Hire,50392.82,SAP-5003,Adaptalift Hyster,Pending,,Concur Export
-5,1,2026-05-04,Subcontractor,698116.78,SAP-5001,Kane Constructions,Paid,,Concur Export
-6,1,2026-05-10,Subcontractor,286189.3,SAP-5001,Watpac Civil & Mining,Approved,,Manual Entry
-7,1,2026-06-15,Plant Hire,12626.2,SAP-5003,Coates Hire Operations,Pending,Awaiting delivery confirmation from site supervisor,Site System
-8,1,2026-10-07,Materials,212888.8,SAP-5002,Hanson Construction Materials,Approved,,Site System
-9,1,2026-03-24,Materials,370514.12,SAP-5002,Holcim Australia Pty Ltd,Paid,,Concur Export
-10,1,2026-01-10,Travel & Accommodation,2422.85,SAP-5006,Mantra on Little Bourke,Paid,Awaiting delivery confirmation from site supervisor,Concur Export
-11,1,2026-05-19,Materials,318598.28,SAP-5002,Rebar Direct Pty Ltd,On Hold,,Concur Export
-12,1,2026-10-08,Professional Services,162668.17,SAP-5004,Jacobs Engineering Group,On Hold,,Site System
-13,1,2026-06-11,Subcontractor,797658.36,SAP-5001,Hacer Group,Approved,,Concur Export
-14,1,2026-09-05,Travel & Accommodation,770.77,SAP-5006,Mantra on Little Bourke,On Hold,,Concur Export
-15,1,2026-07-28,Permits & Compliance,45578.04,SAP-5005,NSW Planning Department,On Hold,,Concur Export
-16,1,2026-11-02,Subcontractor,953263.76,SAP-5001,Hacer Group,Approved,Retention clause applies — partial payment released,Concur Export
-17,1,2026-10-08,Subcontractor,933126.79,SAP-5001,Kane Constructions,Approved,,Concur Export
-18,1,2026-07-05,Professional Services,139082.92,SAP-5004,Jacobs Engineering Group,Pending,,Concur Export
-19,1,2026-03-01,Subcontractor,1072454.87,SAP-5001,Buxton Construction,Approved,,Concur Export
-20,1,2026-10-08,Materials,118904.03,SAP-5002,Sika Australia,Paid,,Site System
-21,1,2026-07-23,Professional Services,11920.8,SAP-5004,AECOM Australia Pty Ltd,Approved,,Concur Export
-22,1,2026-04-12,Travel & Accommodation,1306.19,SAP-5006,Mantra on Little Bourke,Approved,,Concur Export
-23,1,2026-02-03,Materials,142365.03,SAP-5002,Sika Australia,On Hold,Vendor invoice pending project manager approval,Concur Export
-24,1,2026-11-18,Materials,291420.95,SAP-5002,Saint-Gobain Placo,Approved,,Concur Export
-25,1,2026-12-14,Materials,201706.92,SAP-5002,CSR Building Products,Paid,,Site System
-26,1,2026-03-13,Travel & Accommodation,4008.33,SAP-5006,Crown Towers Melbourne,Paid,,Site System
-27,1,2026-12-05,Professional Services,242140.7,SAP-5004,Stantec Consulting,Pending,,Concur Export
-28,1,2026-05-29,Subcontractor,442078.13,SAP-5001,Watpac Civil & Mining,Pending,,Concur Export
-29,1,2026-05-26,Materials,202987.83,SAP-5002,Boral Construction Materials,Approved,,Concur Export
-30,1,2026-03-22,Materials,103725.24,SAP-5002,Boral Construction Materials,Pending,,Concur Export
-31,1,2026-05-12,Subcontractor,250550.44,SAP-5001,John Holland Group,Paid,,Concur Export
-32,1,2026-04-05,Subcontractor,732437.38,SAP-5001,Kane Constructions,Paid,Retention clause applies — partial payment released,Site System
-33,1,2026-07-19,Professional Services,37856.15,SAP-5004,Stantec Consulting,Paid,,Concur Export
-34,1,2026-02-09,Subcontractor,611259.54,SAP-5001,Kane Constructions,On Hold,,Concur Export
-35,1,2026-04-06,Subcontractor,1645903.57,SAP-5001,John Holland Group,Pending,,Concur Export
-36,1,2026-07-21,Plant Hire,27529.79,SAP-5003,Sherrin Rentals,Paid,,Concur Export
-37,1,2026-08-13,Plant Hire,40986.45,SAP-5003,All Cranes Hire & Sales,Approved,,Concur Export
-38,1,2026-06-21,Plant Hire,82290.2,SAP-5003,Tutt Bryant Equipment,Pending,,Concur Export
-39,2,2026-12-11,Materials,421378.51,SAP-5002,Hanson Construction Materials,Approved,,Concur Export
-40,2,2026-07-26,Materials,261729.69,SAP-5002,Adbri Masonry,Paid,,Concur Export
-41,2,2026-03-22,Plant Hire,33830.03,SAP-5003,Kennards Hire,Approved,,Site System
-42,2,2026-02-08,Subcontractor,171470.63,SAP-5001,Buxton Construction,Paid,,Site System
-43,2,2027-05-16,Materials,107803.3,SAP-5002,Sika Australia,Approved,,Concur Export
-44,2,2027-05-05,Materials,287377.85,SAP-5002,Sika Australia,Paid,,Concur Export
-45,2,2027-04-29,Plant Hire,44021.96,SAP-5003,Adaptalift Hyster,Approved,,Concur Export
-46,2,2026-09-10,Subcontractor,299772.57,SAP-5001,Kane Constructions,Approved,,Concur Export
-47,2,2027-02-27,Permits & Compliance,4340.23,SAP-5005,WorkSafe Victoria,Pending,,Concur Export
-48,2,2027-06-17,Materials,511514.91,SAP-5002,Sika Australia,Approved,,Concur Export
-49,2,2026-03-02,Plant Hire,173951.53,SAP-5003,Sherrin Rentals,Paid,,Concur Export
-50,2,2026-09-07,Professional Services,64739.66,SAP-5004,WSP Australia,Pending,,Site System
-51,2,2026-03-28,Subcontractor,1467413.05,SAP-5001,Watpac Civil & Mining,On Hold,,Concur Export
-52,2,2027-06-02,Subcontractor,581927.34,SAP-5001,John Holland Group,Paid,,Concur Export
-53,2,2026-07-20,Subcontractor,1641708.81,SAP-5001,Cockram Constructions,On Hold,Possible cost allocation mismatch — verify WBS element,Site System
-54,2,2026-10-09,Subcontractor,1186261.6,SAP-5001,Kane Constructions,Approved,,Site System
-55,2,2026-04-14,Plant Hire,32918.03,SAP-5003,Tutt Bryant Equipment,Pending,,Site System
-56,2,2026-11-06,Plant Hire,47355.48,SAP-5003,Sherrin Rentals,Pending,,Concur Export
-57,2,2027-05-10,Subcontractor,316257.22,SAP-5001,Kane Constructions,Approved,,Concur Export
-58,2,2026-10-25,Professional Services,57650.36,SAP-5004,WSP Australia,Approved,,Concur Export
-59,2,2026-10-07,Permits & Compliance,6205.83,SAP-5005,Vic Department of Transport,Paid,,Concur Export
-60,2,2027-01-21,Subcontractor,1080444.76,SAP-5001,Cockram Constructions,Pending,,Concur Export
-61,2,2026-08-11,Subcontractor,749231.11,SAP-5001,Watpac Civil & Mining,Approved,,Concur Export
-62,2,2027-02-07,Materials,65220.3,SAP-5002,Holcim Australia Pty Ltd,Approved,Awaiting delivery confirmation from site supervisor,Concur Export
-63,2,2026-05-19,Subcontractor,497751.24,SAP-5001,Probuild Constructions,Paid,,Concur Export
-64,2,2027-06-21,Subcontractor,85664.86,SAP-5001,Kapitol Group,Approved,,Concur Export
-65,2,2026-09-22,Subcontractor,1322056.57,SAP-5001,Kane Constructions,Paid,,Site System
-66,2,2026-05-15,Subcontractor,1596216.8,SAP-5001,Cockram Constructions,On Hold,,Concur Export
-67,2,2027-05-30,Subcontractor,386164.72,SAP-5001,John Holland Group,Approved,,Concur Export
-68,2,2026-08-24,Plant Hire,84152.88,SAP-5003,Tutt Bryant Equipment,Pending,,Concur Export
-69,2,2026-11-25,Subcontractor,1277150.81,SAP-5001,Hickory Group,Pending,,Concur Export
-70,2,2027-04-21,Materials,24592.66,SAP-5002,Rebar Direct Pty Ltd,Paid,,Concur Export
-71,2,2026-11-05,Materials,148864.28,SAP-5002,Boral Construction Materials,Pending,,Concur Export
-72,2,2026-05-07,Subcontractor,1566136.81,SAP-5001,Cockram Constructions,Pending,,Concur Export
-73,3,2027-09-24,Plant Hire,71493.03,SAP-5003,Tutt Bryant Equipment,Approved,High variance to approved payment schedule,Concur Export
-74,3,2027-08-22,Materials,21970.61,SAP-5002,Sika Australia,Approved,,Concur Export
-75,3,2026-11-10,Materials,440883.94,SAP-5002,Rebar Direct Pty Ltd,Paid,,Concur Export
-76,3,2027-01-02,Materials,81932.12,SAP-5002,Holcim Australia Pty Ltd,Pending,,Site System
-77,3,2026-07-27,Subcontractor,760053.69,SAP-5001,Kane Constructions,Paid,,Site System
-78,3,2027-07-24,Subcontractor,385816.93,SAP-5001,John Holland Group,Paid,,Concur Export
-79,3,2026-11-09,Subcontractor,1356534.78,SAP-5001,Hacer Group,Pending,,Concur Export
-80,3,2026-08-12,Plant Hire,102574.44,SAP-5003,Sherrin Rentals,Pending,Awaiting delivery confirmation from site supervisor,Manual Entry
-81,3,2026-08-15,Subcontractor,327908.5,SAP-5001,Kapitol Group,Approved,,Concur Export
-82,3,2027-07-22,Professional Services,133623.18,SAP-5004,Arup Pty Ltd,Paid,Possible cost allocation mismatch — verify WBS element,Concur Export
-83,3,2026-06-20,Plant Hire,139511.72,SAP-5003,Sherrin Rentals,Pending,,Site System
-84,3,2027-05-05,Subcontractor,231262.57,SAP-5001,Hacer Group,Pending,,Concur Export
-85,3,2026-11-02,Materials,311874.68,SAP-5002,Adbri Masonry,Pending,,Concur Export
-86,3,2027-02-26,Permits & Compliance,6960.1,SAP-5005,NSW Planning Department,On Hold,,Manual Entry
-87,3,2027-04-04,Subcontractor,358614.31,SAP-5001,Buxton Construction,Pending,,Manual Entry
-88,3,2026-04-29,Subcontractor,1717035.69,SAP-5001,Cockram Constructions,Paid,,Site System
-89,3,2026-11-21,Materials,108906.47,SAP-5002,CSR Building Products,Paid,,Concur Export
-90,3,2027-03-18,Materials,15957.93,SAP-5002,Hanson Construction Materials,Paid,High variance to approved payment schedule,Concur Export
-91,3,2026-08-25,Professional Services,137911.66,SAP-5004,Arcadis Australia Pacific,Approved,,Concur Export
-92,3,2026-10-27,Professional Services,51060.74,SAP-5004,Turner & Townsend,Paid,,Manual Entry
-93,3,2026-12-03,Subcontractor,697277.43,SAP-5001,Built Environs,Pending,,Manual Entry
-94,3,2026-05-13,Subcontractor,1161885.69,SAP-5001,Built Environs,Paid,,Concur Export
-95,3,2026-06-17,Subcontractor,735431.23,SAP-5001,John Holland Group,Approved,,Concur Export
-96,3,2027-07-24,Materials,249139.04,SAP-5002,BlueScope Distribution,Pending,,Concur Export
-97,3,2027-03-21,Materials,84206.03,SAP-5002,Adbri Masonry,Pending,,Concur Export
-98,3,2026-03-31,Permits & Compliance,9857.39,SAP-5005,EPA Victoria,Approved,,Manual Entry
-99,3,2026-08-08,Subcontractor,385247.28,SAP-5001,Kane Constructions,Paid,,Concur Export
-100,3,2026-07-22,Subcontractor,909898.73,SAP-5001,Probuild Constructions,Approved,,Concur Export
-101,3,2027-06-12,Plant Hire,12510.97,SAP-5003,Adaptalift Hyster,Paid,,Concur Export
-102,3,2026-04-10,Subcontractor,330712.83,SAP-5001,Built Environs,Approved,,Concur Export
-103,3,2026-07-17,Subcontractor,373904.13,SAP-5001,Watpac Civil & Mining,Approved,,Concur Export
-104,3,2026-07-05,Materials,72047.06,SAP-5002,Rebar Direct Pty Ltd,Paid,,Concur Export
-105,3,2027-04-22,Materials,419475.81,SAP-5002,Adbri Masonry,Pending,Mismatch between SAP cost code and VO reference,Concur Export
-106,4,2026-08-21,Permits & Compliance,1555.55,SAP-5005,Vic Department of Transport,Approved,,Site System
-107,4,2026-08-16,Subcontractor,1036269.36,SAP-5001,Watpac Civil & Mining,Paid,,Manual Entry
-108,4,2026-03-08,Materials,180531.19,SAP-5002,Adbri Masonry,Approved,,Concur Export
-109,4,2026-05-28,Professional Services,165668.62,SAP-5004,AECOM Australia Pty Ltd,Approved,,Concur Export
-110,4,2026-01-27,Professional Services,119175.0,SAP-5004,Arup Pty Ltd,Approved,,Concur Export
-111,4,2026-02-24,Subcontractor,1258093.57,SAP-5001,Hacer Group,Paid,,Concur Export
-112,4,2026-05-31,Materials,241955.05,SAP-5002,James Hardie Building Products,Approved,,Concur Export
-113,4,2026-08-02,Materials,16749.12,SAP-5002,Sika Australia,On Hold,Vendor invoice pending project manager approval,Concur Export
-114,4,2026-04-11,Subcontractor,1241205.33,SAP-5001,Watpac Civil & Mining,Approved,,Concur Export
-115,4,2026-02-20,Subcontractor,939395.29,SAP-5001,John Holland Group,Paid,,Concur Export
-116,4,2026-11-24,Subcontractor,506098.16,SAP-5001,John Holland Group,Pending,,Concur Export
-117,4,2026-06-19,Materials,222174.32,SAP-5002,James Hardie Building Products,Paid,,Concur Export
-118,4,2026-03-28,Materials,170440.71,SAP-5002,Adbri Masonry,Approved,Vendor invoice pending project manager approval,Concur Export
-119,4,2026-11-04,Subcontractor,337183.37,SAP-5001,Kapitol Group,Pending,,Concur Export
-120,4,2026-08-26,Professional Services,24967.65,SAP-5004,Arcadis Australia Pacific,Paid,,Concur Export
-121,4,2026-02-20,Materials,371112.51,SAP-5002,Boral Construction Materials,Paid,,Concur Export
-122,4,2026-04-18,Materials,416053.88,SAP-5002,Boral Construction Materials,Approved,,Concur Export
-123,4,2026-05-18,Travel & Accommodation,1920.19,SAP-5006,Crown Towers Melbourne,Paid,,Concur Export
-124,4,2026-07-02,Subcontractor,236594.26,SAP-5001,Hacer Group,Approved,Retention clause applies — partial payment released,Concur Export
-125,4,2026-11-06,Travel & Accommodation,1129.53,SAP-5006,Mantra on Little Bourke,Paid,,Concur Export
-126,4,2026-06-29,Subcontractor,759110.05,SAP-5001,Watpac Civil & Mining,Paid,,Site System
-127,4,2026-06-19,Subcontractor,162371.86,SAP-5001,Buxton Construction,Approved,,Manual Entry
-128,4,2026-10-08,Subcontractor,849096.25,SAP-5001,Watpac Civil & Mining,Approved,,Concur Export
-129,4,2026-08-24,Subcontractor,359195.31,SAP-5001,Cockram Constructions,Approved,,Concur Export
-130,4,2026-09-09,Subcontractor,1490779.9,SAP-5001,Kane Constructions,Paid,,Concur Export
-131,4,2026-04-04,Plant Hire,70637.53,SAP-5003,Sherrin Rentals,Paid,,Concur Export
-132,4,2026-03-16,Materials,298437.34,SAP-5002,Holcim Australia Pty Ltd,Approved,,Concur Export
-133,4,2026-08-02,Professional Services,120481.12,SAP-5004,Arcadis Australia Pacific,Pending,,Manual Entry
-134,4,2026-03-23,Permits & Compliance,49662.93,SAP-5005,NSW Planning Department,Approved,,Concur Export
-135,4,2026-05-02,Materials,40949.8,SAP-5002,Boral Construction Materials,Paid,,Concur Export
-136,5,2027-02-19,Subcontractor,756569.0,SAP-5001,Watpac Civil & Mining,Pending,Mismatch between SAP cost code and VO reference,Concur Export
-137,5,2026-10-04,Subcontractor,122866.62,SAP-5001,Probuild Constructions,Approved,,Concur Export
-138,5,2026-12-22,Subcontractor,1571496.08,SAP-5001,Built Environs,Pending,,Concur Export
-139,5,2026-08-08,Subcontractor,239333.56,SAP-5001,John Holland Group,Paid,,Concur Export
-140,5,2027-03-23,Subcontractor,941483.07,SAP-5001,Built Environs,Pending,,Concur Export
-141,5,2026-04-28,Subcontractor,416576.21,SAP-5001,Kane Constructions,Approved,,Concur Export
-142,5,2026-05-01,Plant Hire,51384.07,SAP-5003,Kennards Hire,Paid,,Concur Export
-143,5,2027-03-27,Plant Hire,34635.1,SAP-5003,Sherrin Rentals,Pending,,Concur Export
-144,5,2026-05-17,Materials,78574.64,SAP-5002,BlueScope Distribution,Approved,,Concur Export
-145,5,2026-10-04,Materials,235933.27,SAP-5002,Rebar Direct Pty Ltd,Pending,,Concur Export
-146,5,2027-02-12,Materials,110969.27,SAP-5002,BlueScope Distribution,Paid,,Concur Export
-147,5,2026-11-23,Subcontractor,344280.54,SAP-5001,Cockram Constructions,On Hold,,Concur Export
-148,5,2026-07-11,Materials,45479.84,SAP-5002,Adbri Masonry,Pending,,Concur Export
-149,5,2026-12-14,Materials,274654.94,SAP-5002,Saint-Gobain Placo,Approved,Possible cost allocation mismatch — verify WBS element,Concur Export
-150,5,2027-01-13,Professional Services,77169.91,SAP-5004,Arcadis Australia Pacific,Pending,,Site System
-151,5,2026-07-18,Materials,54324.04,SAP-5002,CSR Building Products,Paid,,Concur Export
-152,5,2026-05-10,Materials,404008.32,SAP-5002,Sika Australia,Approved,,Concur Export
-153,5,2026-05-14,Professional Services,73566.45,SAP-5004,GHD Advisory,Pending,,Concur Export
-154,5,2026-05-05,Plant Hire,107332.81,SAP-5003,Kennards Hire,Paid,,Concur Export
-155,5,2026-08-13,Subcontractor,1192450.68,SAP-5001,Built Environs,Approved,,Concur Export
-156,5,2026-07-03,Subcontractor,1212848.79,SAP-5001,Probuild Constructions,Paid,,Concur Export
-157,5,2027-01-24,Subcontractor,191053.07,SAP-5001,Cockram Constructions,Pending,,Concur Export
-158,5,2026-10-31,Travel & Accommodation,5324.68,SAP-5006,Corporate Travel Management (CTM),Approved,Possible cost allocation mismatch — verify WBS element,Concur Export
-159,5,2027-04-17,Subcontractor,1032482.25,SAP-5001,Probuild Constructions,On Hold,,Concur Export
-160,5,2026-06-18,Subcontractor,639536.42,SAP-5001,Kapitol Group,Approved,,Concur Export
-161,5,2026-07-13,Permits & Compliance,17493.22,SAP-5005,DELWP Victoria,Paid,,Concur Export
-162,5,2026-07-26,Subcontractor,1878159.42,SAP-5001,Buxton Construction,Pending,High variance to approved payment schedule,Concur Export
-163,5,2027-04-14,Materials,448194.98,SAP-5002,Holcim Australia Pty Ltd,Approved,,Concur Export
-164,5,2027-01-13,Subcontractor,694783.55,SAP-5001,Hickory Group,Approved,,Concur Export
-165,5,2026-06-19,Professional Services,96431.74,SAP-5004,Arcadis Australia Pacific,Approved,,Concur Export
-166,5,2026-06-17,Materials,102337.3,SAP-5002,Rebar Direct Pty Ltd,Approved,,Concur Export
-167,5,2027-04-04,Materials,317959.02,SAP-5002,Sika Australia,Pending,,Concur Export
-168,5,2027-03-08,Materials,161698.43,SAP-5002,Boral Construction Materials,Paid,,Concur Export
-169,5,2027-03-21,Materials,231864.52,SAP-5002,Saint-Gobain Placo,Approved,,Concur Export
-170,5,2026-12-04,Materials,303069.58,SAP-5002,Adbri Masonry,Paid,,Concur Export
-171,5,2026-07-04,Subcontractor,701407.42,SAP-5001,Kapitol Group,Pending,,Concur Export
-172,5,2026-08-11,Plant Hire,45954.55,SAP-5003,All Cranes Hire & Sales,Approved,,Manual Entry
-173,5,2027-04-11,Subcontractor,444250.98,SAP-5001,Kapitol Group,Approved,Retention clause applies — partial payment released,Concur Export
-174,5,2026-05-17,Professional Services,118103.8,SAP-5004,Stantec Consulting,Approved,,Concur Export
-175,5,2027-04-21,Permits & Compliance,8193.78,SAP-5005,NSW Planning Department,Pending,,Concur Export
-176,6,2026-04-27,Subcontractor,142571.57,SAP-5001,Hacer Group,Approved,,Site System
-177,6,2026-07-12,Materials,181319.29,SAP-5002,Adbri Masonry,Paid,,Concur Export
-178,6,2026-03-06,Permits & Compliance,20150.17,SAP-5005,City of Melbourne Council,On Hold,,Concur Export
-179,6,2026-08-06,Professional Services,137988.44,SAP-5004,AECOM Australia Pty Ltd,Approved,,Concur Export
-180,6,2026-08-04,Professional Services,138456.88,SAP-5004,Turner & Townsend,Approved,,Concur Export
-181,6,2026-09-11,Materials,398554.78,SAP-5002,Adbri Masonry,Paid,,Concur Export
-182,6,2026-10-02,Subcontractor,689791.82,SAP-5001,Kane Constructions,Paid,,Concur Export
-183,6,2026-07-23,Materials,72626.3,SAP-5002,Adbri Masonry,Approved,,Site System
-184,6,2026-04-25,Materials,99370.92,SAP-5002,Hanson Construction Materials,Pending,,Manual Entry
-185,6,2026-06-22,Permits & Compliance,34406.0,SAP-5005,WorkSafe Victoria,Paid,,Site System
-186,6,2026-11-01,Subcontractor,1420500.63,SAP-5001,Cockram Constructions,Approved,,Concur Export
-187,6,2026-10-02,Subcontractor,525240.61,SAP-5001,Cockram Constructions,Paid,,Concur Export
-188,6,2026-02-17,Materials,149932.6,SAP-5002,Hanson Construction Materials,Paid,,Concur Export
-189,6,2026-07-12,Travel & Accommodation,2780.55,SAP-5006,Crown Towers Melbourne,Pending,,Concur Export
-190,6,2026-08-28,Subcontractor,1755396.33,SAP-5001,Buxton Construction,Approved,,Concur Export
-191,6,2026-06-10,Subcontractor,266574.98,SAP-5001,Built Environs,Paid,,Manual Entry
-192,6,2026-08-12,Materials,104017.19,SAP-5002,James Hardie Building Products,Approved,,Site System
-193,6,2026-12-17,Plant Hire,4601.1,SAP-5003,Coates Hire Operations,Approved,,Concur Export
-194,6,2026-03-16,Materials,168638.75,SAP-5002,Adbri Masonry,Approved,,Concur Export
-195,6,2026-11-09,Materials,258127.56,SAP-5002,CSR Building Products,Approved,,Concur Export
-196,6,2026-08-11,Materials,50712.87,SAP-5002,James Hardie Building Products,On Hold,,Site System
-197,6,2026-06-19,Subcontractor,987231.71,SAP-5001,Buxton Construction,Paid,,Concur Export
-198,6,2026-06-20,Materials,59290.08,SAP-5002,James Hardie Building Products,Approved,,Concur Export
-199,6,2026-03-08,Materials,140161.17,SAP-5002,Adbri Masonry,Paid,,Concur Export
-200,6,2026-06-04,Materials,441274.69,SAP-5002,CSR Building Products,Paid,,Concur Export
-201,6,2026-07-10,Plant Hire,65307.71,SAP-5003,Sherrin Rentals,Approved,,Concur Export
-202,6,2026-05-31,Materials,199140.69,SAP-5002,Rebar Direct Pty Ltd,Approved,,Concur Export
-203,6,2026-05-05,Subcontractor,382692.7,SAP-5001,Cockram Constructions,Approved,,Concur Export
-204,6,2026-10-25,Permits & Compliance,12062.4,SAP-5005,DELWP Victoria,Pending,,Concur Export
-205,6,2026-11-11,Subcontractor,2154344.62,SAP-5001,Built Environs,Approved,,Manual Entry
-206,6,2026-06-07,Professional Services,31127.61,SAP-5004,Jacobs Engineering Group,Pending,,Concur Export
-207,1,2026-04-14,Subcontractor,895000.0,SAP-5001,Hickory Group,Pending,Mismatch to SAP budget code — VO-0044 not yet approved,Concur Export
-208,2,2026-06-09,Materials,312000.0,SAP-5002,Holcim Australia Pty Ltd,On Hold,Delivery docket mismatch — site rejected 40 palettes,Site System
-209,3,2026-09-01,Subcontractor,1250000.0,SAP-5001,John Holland Group,Approved,Accelerated milestone payment — Practical Completion Stage 3,Concur Export
-210,4,2026-08-20,Professional Services,540000.0,SAP-5004,AECOM Australia Pty Ltd,Approved,Additional scope for geotechnical re-assessment — approved by PMO,Manual Entry
+expense_id,project_id,sap_cost_center,booking_date,expense_type,amount,sap_cost_code,gl_account,vendor,status,comment,source_system,tax_code,gst_amount,po_reference,po_value,contract_ref,po_status
+1,1,CC-MEL-01,2026-02-26,Subcontractor,269795.47,SAP-5001,GL-6100,Hickory Group,Paid,,Trade Account,G11,26979.55,PO-2026-1020,271805.26,CTR-CC-MEL-01-01,Matched
+2,1,CC-MEL-01,2026-08-07,Subcontractor,946413.09,SAP-5001,GL-6100,Kane Constructions,Approved,,Trade Account,G11,94641.31,,0.0,,No PO
+3,1,CC-MEL-01,2026-02-21,Subcontractor,846583.21,SAP-5001,GL-6100,Kane Constructions,Approved,,Trade Account,G11,84658.32,PO-2026-1046,855779.31,CTR-CC-MEL-01-01,Matched
+4,1,CC-MEL-01,2026-07-09,Subcontractor,1379682.72,SAP-5001,GL-6100,Hickory Group,Pending,,Trade Account,G11,137968.27,PO-2026-1059,1479498.61,CTR-CC-MEL-01-01,Matched
+5,1,CC-MEL-01,2026-07-13,Subcontractor,629518.79,SAP-5001,GL-6100,Kapitol Group,Approved,,Trade Account,G11,62951.88,PO-2026-1072,640756.1,CTR-CC-MEL-01-01,Matched
+6,1,CC-MEL-01,2026-10-17,Materials,299561.72,SAP-5002,GL-6200,Hanson Construction Materials,Approved,,Site System,G11,29956.17,,0.0,,No PO
+7,1,CC-MEL-01,2026-06-15,Subcontractor,1308460.56,SAP-5001,GL-6100,Kane Constructions,Approved,,Trade Account,G11,130846.06,PO-2026-1098,1355196.02,CTR-CC-MEL-01-01,Matched
+8,1,CC-MEL-01,2026-07-09,Materials,305018.86,SAP-5002,GL-6200,Saint-Gobain Placo,Approved,,Trade Account,G11,30501.89,,0.0,,No PO
+9,1,CC-MEL-01,2026-11-06,Materials,169879.15,SAP-5002,GL-6200,James Hardie Building Products,On Hold,,Manual Entry,G11,16987.92,PO-2026-1124,170366.75,CTR-CC-MEL-01-01,Matched
+10,1,CC-MEL-01,2026-08-25,Subcontractor,193797.27,SAP-5001,GL-6100,Hacer Group,Approved,,Trade Account,G11,19379.73,PO-2026-1137,230713.82,,Matched
+11,1,CC-MEL-01,2026-03-28,Subcontractor,264583.91,SAP-5001,GL-6100,Built Environs,Pending,,Trade Account,G11,26458.39,,0.0,,No PO
+12,1,CC-MEL-01,2026-10-22,Permits & Compliance,11508.7,SAP-5005,GL-6500,DELWP Victoria,On Hold,Mismatch between SAP cost code and VO reference,Manual Entry,G12,0.0,PO-2026-1163,13041.39,,Matched
+13,1,CC-MEL-01,2026-04-23,Subcontractor,1001492.55,SAP-5001,GL-6100,Built Environs,Paid,,Trade Account,G11,100149.26,PO-2026-1176,1101389.5,CTR-CC-MEL-01-01,Matched
+14,1,CC-MEL-01,2026-06-27,Permits & Compliance,13472.43,SAP-5005,GL-6500,EPA Victoria,Approved,,Site System,G12,0.0,,0.0,,No PO
+15,1,CC-MEL-01,2026-05-06,Subcontractor,287056.95,SAP-5001,GL-6100,John Holland Group,Approved,,Trade Account,G11,28705.7,PO-2026-1202,350380.5,CTR-CC-MEL-01-01,Matched
+16,1,CC-MEL-01,2026-07-05,Professional Services,139082.92,SAP-5004,GL-6400,Jacobs Engineering Group,Pending,,Concur Export,G11,13908.29,PO-2026-1215,173303.06,CTR-CC-MEL-01-01,Matched
+17,1,CC-MEL-01,2026-04-08,Subcontractor,296517.62,SAP-5001,GL-6100,Kane Constructions,Approved,,Trade Account,G11,29651.76,PO-2026-1228,360368.92,CTR-CC-MEL-01-01,Matched
+18,1,CC-MEL-01,2026-03-31,Professional Services,230802.21,SAP-5004,GL-6400,GHD Advisory,Pending,,Concur Export,G11,23080.22,PO-2026-1241,240301.86,CTR-CC-MEL-01-01,Matched
+19,1,CC-MEL-01,2026-10-16,Permits & Compliance,39064.69,SAP-5005,GL-6500,EPA Victoria,Paid,,Site System,G12,0.0,PO-2026-1254,39635.85,,Matched
+20,1,CC-MEL-01,2026-10-03,Subcontractor,333859.71,SAP-5001,GL-6100,John Holland Group,Approved,,Trade Account,G11,33385.97,PO-2026-1267,298155.64,CTR-CC-MEL-01-01,Over PO
+21,1,CC-MEL-01,2026-11-18,Subcontractor,1103325.29,SAP-5001,GL-6100,Cockram Constructions,Approved,,Trade Account,G11,110332.53,PO-2026-1280,1175252.64,CTR-CC-MEL-01-01,Matched
+22,1,CC-MEL-01,2026-06-15,Subcontractor,708291.58,SAP-5001,GL-6100,Probuild Constructions,Paid,,Trade Account,G11,70829.16,PO-2026-1293,807982.49,CTR-CC-MEL-01-01,Matched
+23,1,CC-MEL-01,2026-07-13,Subcontractor,1929869.28,SAP-5001,GL-6100,Hacer Group,Approved,,Trade Account,G11,192986.93,PO-2026-1306,2404546.35,CTR-CC-MEL-01-01,Matched
+24,1,CC-MEL-01,2026-03-14,Professional Services,26264.47,SAP-5004,GL-6400,Stantec Consulting,Approved,,Concur Export,G11,2626.45,PO-2026-1319,21818.32,,Over PO
+25,1,CC-MEL-01,2026-01-31,Plant Hire,46067.39,SAP-5003,GL-6300,Tutt Bryant Equipment,Approved,,Trade Account,G11,4606.74,,0.0,,No PO
+26,1,CC-MEL-01,2026-01-09,Subcontractor,916569.74,SAP-5001,GL-6100,Kapitol Group,Approved,,Trade Account,G11,91656.97,PO-2026-1345,721198.63,CTR-CC-MEL-01-01,Over PO
+27,1,CC-MEL-01,2026-01-25,Materials,337274.45,SAP-5002,GL-6200,Boral Construction Materials,Paid,,Trade Account,G11,33727.44,PO-2026-1358,305172.2,CTR-CC-MEL-01-01,Over PO
+28,1,CC-MEL-01,2026-04-05,Subcontractor,732437.38,SAP-5001,GL-6100,Kane Constructions,Paid,Retention clause applies — partial payment released,Trade Account,G11,73243.74,PO-2026-1371,807825.91,CTR-CC-MEL-01-01,Matched
+29,1,CC-MEL-01,2026-09-02,Subcontractor,191328.86,SAP-5001,GL-6100,Watpac Civil & Mining,Approved,,Trade Account,G11,19132.89,PO-2026-1384,229372.0,,Matched
+30,1,CC-MEL-01,2026-05-27,Subcontractor,146626.02,SAP-5001,GL-6100,Hacer Group,Approved,,Trade Account,G11,14662.6,PO-2026-1397,158764.82,,Matched
+31,1,CC-MEL-01,2026-06-30,Materials,210343.18,SAP-5002,GL-6200,Hanson Construction Materials,Paid,,Trade Account,G11,21034.32,PO-2026-1410,230598.99,CTR-CC-MEL-01-01,Matched
+32,1,CC-MEL-01,2026-12-14,Subcontractor,1938271.79,SAP-5001,GL-6100,Built Environs,Approved,,Manual Entry,G11,193827.18,PO-2026-1423,2240232.93,CTR-CC-MEL-01-01,Matched
+33,1,CC-MEL-01,2026-07-30,Permits & Compliance,6639.24,SAP-5005,GL-6500,WorkSafe Victoria,Paid,,Site System,G12,0.0,PO-2026-1436,7268.55,,Matched
+34,1,CC-MEL-01,2026-05-31,Materials,17301.5,SAP-5002,GL-6200,James Hardie Building Products,Approved,,Trade Account,G11,1730.15,PO-2026-1449,19212.39,,Matched
+35,1,CC-MEL-01,2026-11-18,Subcontractor,334693.41,SAP-5001,GL-6100,Watpac Civil & Mining,Approved,,Trade Account,G11,33469.34,PO-2026-1462,353489.85,CTR-CC-MEL-01-01,Matched
+36,1,CC-MEL-01,2026-10-26,Materials,453625.06,SAP-5002,GL-6200,Holcim Australia Pty Ltd,Approved,,Trade Account,G11,45362.51,PO-2026-1475,528026.15,CTR-CC-MEL-01-01,Matched
+37,1,CC-MEL-01,2026-09-27,Professional Services,45658.05,SAP-5004,GL-6400,Arup Pty Ltd,Pending,,Concur Export,G11,4565.81,PO-2026-1488,36709.12,,Over PO
+38,1,CC-MEL-01,2026-09-20,Materials,392579.27,SAP-5002,GL-6200,Rebar Direct Pty Ltd,Pending,,Trade Account,G11,39257.93,PO-2026-1501,360324.64,CTR-CC-MEL-01-01,Over PO
+39,2,CC-MEL-02,2027-04-29,Plant Hire,44021.96,SAP-5003,GL-6300,Adaptalift Hyster,Approved,,Trade Account,G11,4402.2,PO-2026-1521,49966.6,,Matched
+40,2,CC-MEL-02,2027-05-26,Plant Hire,56091.18,SAP-5003,GL-6300,Coates Hire Operations,Pending,,Trade Account,G11,5609.12,PO-2026-1534,64281.61,,Matched
+41,2,CC-MEL-02,2027-03-09,Subcontractor,270852.23,SAP-5001,GL-6100,John Holland Group,Paid,,Trade Account,G11,27085.22,PO-2026-1547,307832.52,CTR-CC-MEL-02-02,Matched
+42,2,CC-MEL-02,2027-03-24,Subcontractor,519188.38,SAP-5001,GL-6100,Buxton Construction,Paid,,Trade Account,G11,51918.84,PO-2026-1560,588516.08,CTR-CC-MEL-02-02,Matched
+43,2,CC-MEL-02,2026-03-26,Subcontractor,337786.63,SAP-5001,GL-6100,Buxton Construction,Approved,,Trade Account,G11,33778.66,PO-2026-1573,412069.29,CTR-CC-MEL-02-02,Matched
+44,2,CC-MEL-02,2026-03-28,Subcontractor,1467413.05,SAP-5001,GL-6100,Watpac Civil & Mining,On Hold,,Trade Account,G11,146741.31,PO-2026-1586,1706511.37,CTR-CC-MEL-02-02,Matched
+45,2,CC-MEL-02,2026-05-31,Professional Services,108676.41,SAP-5004,GL-6400,WSP Australia,Pending,,Concur Export,G11,10867.64,PO-2026-1599,113235.09,CTR-CC-MEL-02-02,Matched
+46,2,CC-MEL-02,2026-03-01,Plant Hire,21887.6,SAP-5003,GL-6300,Kennards Hire,Paid,,Site System,G11,2188.76,PO-2026-1612,27039.23,,Matched
+47,2,CC-MEL-02,2026-06-06,Subcontractor,1351723.93,SAP-5001,GL-6100,Hickory Group,Paid,,Trade Account,G11,135172.39,PO-2026-1625,1575272.49,CTR-CC-MEL-02-02,Matched
+48,2,CC-MEL-02,2027-02-08,Subcontractor,353143.94,SAP-5001,GL-6100,Buxton Construction,Paid,,Trade Account,G11,35314.39,PO-2026-1638,417927.78,CTR-CC-MEL-02-02,Matched
+49,2,CC-MEL-02,2026-11-04,Plant Hire,33448.57,SAP-5003,GL-6300,Sherrin Rentals,Approved,,Site System,G11,3344.86,PO-2026-1651,37218.24,,Matched
+50,2,CC-MEL-02,2026-09-08,Subcontractor,509667.32,SAP-5001,GL-6100,Kapitol Group,Approved,,Trade Account,G11,50966.73,PO-2026-1664,621807.81,CTR-CC-MEL-02-02,Matched
+51,2,CC-MEL-02,2027-06-05,Subcontractor,1145836.4,SAP-5001,GL-6100,Buxton Construction,Paid,,Trade Account,G11,114583.64,,0.0,,No PO
+52,2,CC-MEL-02,2027-01-21,Subcontractor,1080444.76,SAP-5001,GL-6100,Cockram Constructions,Pending,,Trade Account,G11,108044.48,PO-2026-1690,1153622.32,CTR-CC-MEL-02-02,Matched
+53,2,CC-MEL-02,2026-08-18,Subcontractor,1577345.64,SAP-5001,GL-6100,Built Environs,Approved,,Trade Account,G11,157734.56,PO-2026-1703,1784229.06,CTR-CC-MEL-02-02,Matched
+54,2,CC-MEL-02,2026-06-12,Subcontractor,138421.69,SAP-5001,GL-6100,Hacer Group,Approved,,Trade Account,G11,13842.17,PO-2026-1716,142791.65,,Matched
+55,2,CC-MEL-02,2026-10-19,Materials,473237.87,SAP-5002,GL-6200,Rebar Direct Pty Ltd,On Hold,,Site System,G11,47323.79,PO-2026-1729,482002.49,CTR-CC-MEL-02-02,Matched
+56,2,CC-MEL-02,2026-10-15,Subcontractor,324195.07,SAP-5001,GL-6100,Cockram Constructions,Approved,,Trade Account,G11,32419.51,PO-2026-1742,342486.73,CTR-CC-MEL-02-02,Matched
+57,2,CC-MEL-02,2026-04-05,Subcontractor,504853.4,SAP-5001,GL-6100,Cockram Constructions,Pending,,Manual Entry,G11,50485.34,PO-2026-1755,531487.6,CTR-CC-MEL-02-02,Matched
+58,2,CC-MEL-02,2027-05-30,Subcontractor,386164.72,SAP-5001,GL-6100,John Holland Group,Approved,,Trade Account,G11,38616.47,PO-2026-1768,429997.44,CTR-CC-MEL-02-02,Matched
+59,2,CC-MEL-02,2026-08-24,Plant Hire,130816.25,SAP-5003,GL-6300,All Cranes Hire & Sales,Pending,,Trade Account,G11,13081.62,PO-2026-1781,157850.45,,Matched
+60,2,CC-MEL-02,2027-03-22,Permits & Compliance,8932.86,SAP-5005,GL-6500,EPA Victoria,On Hold,,Site System,G12,0.0,,0.0,,No PO
+61,2,CC-MEL-02,2026-02-24,Materials,431191.56,SAP-5002,GL-6200,Boral Construction Materials,On Hold,,Trade Account,G11,43119.16,,0.0,,No PO
+62,2,CC-MEL-02,2027-06-21,Permits & Compliance,20287.79,SAP-5005,GL-6500,City of Melbourne Council,On Hold,,Site System,G12,0.0,PO-2026-1820,20818.32,,Matched
+63,2,CC-MEL-02,2027-05-14,Subcontractor,786663.01,SAP-5001,GL-6100,Buxton Construction,Approved,,Trade Account,G11,78666.3,PO-2026-1833,956761.3,CTR-CC-MEL-02-02,Matched
+64,2,CC-MEL-02,2027-06-28,Materials,46813.78,SAP-5002,GL-6200,Boral Construction Materials,Paid,,Trade Account,G11,4681.38,PO-2026-1846,57670.75,,Matched
+65,2,CC-MEL-02,2026-12-18,Subcontractor,984101.19,SAP-5001,GL-6100,Cockram Constructions,Pending,,Trade Account,G11,98410.12,PO-2026-1859,1208705.03,CTR-CC-MEL-02-02,Matched
+66,2,CC-MEL-02,2027-06-12,Materials,161077.9,SAP-5002,GL-6200,Hanson Construction Materials,On Hold,,Trade Account,G11,16107.79,PO-2026-1872,198201.05,CTR-CC-MEL-02-02,Matched
+67,2,CC-MEL-02,2027-01-17,Professional Services,169449.99,SAP-5004,GL-6400,Stantec Consulting,Paid,,Concur Export,G11,16945.0,PO-2026-1885,182097.56,CTR-CC-MEL-02-02,Matched
+68,2,CC-MEL-02,2027-02-24,Professional Services,57363.53,SAP-5004,GL-6400,Turner & Townsend,Pending,,Concur Export,G11,5736.35,PO-2026-1898,65563.61,CTR-CC-MEL-02-02,Matched
+69,2,CC-MEL-02,2027-03-05,Subcontractor,1700940.0,SAP-5001,GL-6100,Kapitol Group,On Hold,,Trade Account,G11,170094.0,PO-2026-1911,1638543.81,CTR-CC-MEL-02-02,Over PO
+70,3,CC-MEL-03,2026-03-25,Professional Services,188262.38,SAP-5004,GL-6400,Turner & Townsend,Paid,,Concur Export,G11,18826.24,PO-2026-1931,162754.39,CTR-CC-MEL-03-03,Over PO
+71,3,CC-MEL-03,2027-04-03,Materials,498501.73,SAP-5002,GL-6200,CSR Building Products,On Hold,,Site System,G11,49850.17,PO-2026-1944,565926.08,CTR-CC-MEL-03-03,Matched
+72,3,CC-MEL-03,2026-06-20,Travel & Accommodation,1431.75,SAP-5006,GL-6600,Crown Towers Melbourne,Pending,,Concur Export,G11,143.18,,0.0,,No PO
+73,3,CC-MEL-03,2026-09-10,Materials,306766.1,SAP-5002,GL-6200,Adbri Masonry,Approved,Intercompany recharge — allocation pending CFO review,Trade Account,G11,30676.61,PO-2026-1970,344932.96,CTR-CC-MEL-03-03,Matched
+74,3,CC-MEL-03,2026-12-29,Materials,287488.21,SAP-5002,GL-6200,Boral Construction Materials,Paid,,Trade Account,G11,28748.82,PO-2026-1983,329718.19,CTR-CC-MEL-03-03,Matched
+75,3,CC-MEL-03,2027-07-17,Materials,193979.55,SAP-5002,GL-6200,Hanson Construction Materials,Approved,,Trade Account,G11,19397.95,PO-2026-1996,227891.01,CTR-CC-MEL-03-03,Matched
+76,3,CC-MEL-03,2026-04-29,Subcontractor,1717035.69,SAP-5001,GL-6100,Cockram Constructions,Paid,,Trade Account,G11,171703.57,PO-2026-2009,2050029.43,CTR-CC-MEL-03-03,Matched
+77,3,CC-MEL-03,2026-07-28,Subcontractor,1406298.25,SAP-5001,GL-6100,Kane Constructions,Paid,,Trade Account,G11,140629.83,PO-2026-2022,1561280.47,CTR-CC-MEL-03-03,Matched
+78,3,CC-MEL-03,2026-10-01,Subcontractor,639449.39,SAP-5001,GL-6100,Hickory Group,Approved,,Manual Entry,G11,63944.94,PO-2026-2035,785481.56,CTR-CC-MEL-03-03,Matched
+79,3,CC-MEL-03,2026-07-05,Travel & Accommodation,2011.53,SAP-5006,GL-6600,FCm Travel Solutions,Pending,Intercompany recharge — allocation pending CFO review,Manual Entry,G11,201.15,PO-2026-2048,2375.73,,Matched
+80,3,CC-MEL-03,2027-06-18,Subcontractor,565347.09,SAP-5001,GL-6100,Buxton Construction,Approved,,Trade Account,G11,56534.71,PO-2026-2061,655597.58,CTR-CC-MEL-03-03,Matched
+81,3,CC-MEL-03,2026-05-13,Materials,125755.7,SAP-5002,GL-6200,Sika Australia,Paid,,Trade Account,G11,12575.57,PO-2026-2074,129423.87,,Matched
+82,3,CC-MEL-03,2026-07-26,Travel & Accommodation,5470.89,SAP-5006,GL-6600,Crown Towers Melbourne,Approved,,Manual Entry,G11,547.09,PO-2026-2087,6209.72,,Matched
+83,3,CC-MEL-03,2026-12-21,Professional Services,127229.82,SAP-5004,GL-6400,GHD Advisory,Approved,,Concur Export,G11,12722.98,PO-2026-2100,154439.51,CTR-CC-MEL-03-03,Matched
+84,3,CC-MEL-03,2026-07-13,Materials,138663.48,SAP-5002,GL-6200,CSR Building Products,On Hold,,Trade Account,G11,13866.35,PO-2026-2113,160832.06,,Matched
+85,3,CC-MEL-03,2026-10-08,Plant Hire,80998.06,SAP-5003,GL-6300,Kennards Hire,Pending,,Trade Account,G11,8099.81,PO-2026-2126,96967.71,,Matched
+86,3,CC-MEL-03,2026-04-05,Travel & Accommodation,1368.7,SAP-5006,GL-6600,Mantra on Little Bourke,Approved,,Concur Export,G11,136.87,PO-2026-2139,1374.1,,Matched
+87,3,CC-MEL-03,2027-08-17,Subcontractor,954796.66,SAP-5001,GL-6100,Watpac Civil & Mining,Pending,,Trade Account,G11,95479.67,PO-2026-2152,1128388.96,CTR-CC-MEL-03-03,Matched
+88,3,CC-MEL-03,2027-04-25,Materials,223814.95,SAP-5002,GL-6200,Boral Construction Materials,Pending,Retention clause applies — partial payment released,Site System,G11,22381.5,,0.0,,No PO
+89,3,CC-MEL-03,2027-02-05,Subcontractor,944608.83,SAP-5001,GL-6100,Hickory Group,Approved,,Trade Account,G11,94460.88,PO-2026-2178,1046201.35,CTR-CC-MEL-03-03,Matched
+90,3,CC-MEL-03,2027-05-07,Plant Hire,85296.08,SAP-5003,GL-6300,Kennards Hire,Approved,,Trade Account,G11,8529.61,,0.0,,No PO
+91,3,CC-MEL-03,2026-06-11,Subcontractor,1045472.98,SAP-5001,GL-6100,Probuild Constructions,Paid,Possible cost allocation mismatch — verify WBS element,Trade Account,G11,104547.3,PO-2026-2204,1079481.03,CTR-CC-MEL-03-03,Matched
+92,3,CC-MEL-03,2027-05-17,Materials,275761.02,SAP-5002,GL-6200,Holcim Australia Pty Ltd,Paid,,Manual Entry,G11,27576.1,PO-2026-2217,300003.6,CTR-CC-MEL-03-03,Matched
+93,3,CC-MEL-03,2027-09-30,Materials,168049.89,SAP-5002,GL-6200,Adbri Masonry,Approved,,Trade Account,G11,16804.99,PO-2026-2230,203556.95,CTR-CC-MEL-03-03,Matched
+94,3,CC-MEL-03,2027-01-20,Subcontractor,322693.49,SAP-5001,GL-6100,Hickory Group,Paid,,Trade Account,G11,32269.35,PO-2026-2243,292003.88,CTR-CC-MEL-03-03,Over PO
+95,3,CC-MEL-03,2027-02-22,Subcontractor,324372.14,SAP-5001,GL-6100,Built Environs,Approved,,Trade Account,G11,32437.21,PO-2026-2256,372721.74,CTR-CC-MEL-03-03,Matched
+96,3,CC-MEL-03,2027-06-05,Plant Hire,29114.9,SAP-5003,GL-6300,Tutt Bryant Equipment,Pending,,Trade Account,G11,2911.49,PO-2026-2269,29922.04,,Matched
+97,3,CC-MEL-03,2026-05-05,Materials,114990.54,SAP-5002,GL-6200,Hanson Construction Materials,Approved,,Trade Account,G11,11499.05,PO-2026-2282,94393.79,,Over PO
+98,3,CC-MEL-03,2027-03-07,Subcontractor,550356.97,SAP-5001,GL-6100,Buxton Construction,Approved,,Trade Account,G11,55035.7,,0.0,,No PO
+99,3,CC-MEL-03,2026-07-05,Materials,81154.72,SAP-5002,GL-6200,James Hardie Building Products,Pending,,Trade Account,G11,8115.47,PO-2026-2308,90489.48,,Matched
+100,3,CC-MEL-03,2027-08-28,Materials,222874.57,SAP-5002,GL-6200,Holcim Australia Pty Ltd,Approved,,Site System,G11,22287.46,PO-2026-2321,266285.96,CTR-CC-MEL-03-03,Matched
+101,3,CC-MEL-03,2026-08-08,Materials,170440.71,SAP-5002,GL-6200,Adbri Masonry,Approved,Vendor invoice pending project manager approval,Trade Account,G11,17044.07,PO-2026-2334,153646.23,CTR-CC-MEL-03-03,Over PO
+102,3,CC-MEL-03,2027-02-03,Materials,169639.36,SAP-5002,GL-6200,Saint-Gobain Placo,Paid,,Trade Account,G11,16963.94,,0.0,,No PO
+103,3,CC-MEL-03,2027-06-15,Materials,179130.12,SAP-5002,GL-6200,CSR Building Products,Approved,,Trade Account,G11,17913.01,PO-2026-2360,222899.16,CTR-CC-MEL-03-03,Matched
+104,3,CC-MEL-03,2026-04-21,Subcontractor,998614.51,SAP-5001,GL-6100,Cockram Constructions,Pending,,Trade Account,G11,99861.45,PO-2026-2373,1117357.02,CTR-CC-MEL-03-03,Matched
+105,3,CC-MEL-03,2026-09-02,Subcontractor,325477.95,SAP-5001,GL-6100,Hacer Group,Approved,,Manual Entry,G11,32547.8,PO-2026-2386,375097.5,CTR-CC-MEL-03-03,Matched
+106,3,CC-MEL-03,2027-02-15,Subcontractor,236594.26,SAP-5001,GL-6100,Hacer Group,Approved,Retention clause applies — partial payment released,Trade Account,G11,23659.43,PO-2026-2399,286963.18,CTR-CC-MEL-03-03,Matched
+107,4,CC-MEL-04,2026-07-31,Materials,154389.41,SAP-5002,GL-6200,BlueScope Distribution,Approved,,Trade Account,G11,15438.94,PO-2026-2419,179226.55,CTR-CC-MEL-04-04,Matched
+108,4,CC-MEL-04,2026-02-28,Plant Hire,59777.79,SAP-5003,GL-6300,All Cranes Hire & Sales,Paid,,Trade Account,G11,5977.78,PO-2026-2432,62471.72,,Matched
+109,4,CC-MEL-04,2026-03-04,Subcontractor,588694.31,SAP-5001,GL-6100,Probuild Constructions,Pending,,Trade Account,G11,58869.43,PO-2026-2445,686112.8,CTR-CC-MEL-04-04,Matched
+110,4,CC-MEL-04,2026-08-24,Subcontractor,359195.31,SAP-5001,GL-6100,Cockram Constructions,Approved,,Trade Account,G11,35919.53,PO-2026-2458,414026.06,CTR-CC-MEL-04-04,Matched
+111,4,CC-MEL-04,2026-04-21,Materials,472762.19,SAP-5002,GL-6200,Hanson Construction Materials,Approved,,Manual Entry,G11,47276.22,PO-2026-2471,506064.95,CTR-CC-MEL-04-04,Matched
+112,4,CC-MEL-04,2026-05-20,Travel & Accommodation,1875.57,SAP-5006,GL-6600,Marriott Hotels Australia,Approved,,Concur Export,G11,187.56,PO-2026-2484,2209.14,,Matched
+113,4,CC-MEL-04,2026-03-28,Subcontractor,1633492.5,SAP-5001,GL-6100,Probuild Constructions,Paid,Vendor invoice pending project manager approval,Trade Account,G11,163349.25,PO-2026-2497,2013472.23,CTR-CC-MEL-04-04,Matched
+114,4,CC-MEL-04,2026-03-03,Subcontractor,172579.81,SAP-5001,GL-6100,Watpac Civil & Mining,Paid,,Trade Account,G11,17257.98,PO-2026-2510,144019.07,,Over PO
+115,4,CC-MEL-04,2026-02-21,Plant Hire,7485.42,SAP-5003,GL-6300,Sherrin Rentals,Approved,,Trade Account,G11,748.54,PO-2026-2523,8624.85,,Matched
+116,4,CC-MEL-04,2026-09-03,Subcontractor,1521988.01,SAP-5001,GL-6100,Kane Constructions,Approved,,Trade Account,G11,152198.8,PO-2026-2536,1762444.97,CTR-CC-MEL-04-04,Matched
+117,4,CC-MEL-04,2026-08-13,Subcontractor,447466.34,SAP-5001,GL-6100,John Holland Group,Approved,,Trade Account,G11,44746.63,PO-2026-2549,554120.35,CTR-CC-MEL-04-04,Matched
+118,4,CC-MEL-04,2026-07-29,Materials,54023.68,SAP-5002,GL-6200,James Hardie Building Products,On Hold,,Trade Account,G11,5402.37,PO-2026-2562,58680.55,,Matched
+119,4,CC-MEL-04,2026-07-11,Plant Hire,23750.09,SAP-5003,GL-6300,All Cranes Hire & Sales,Pending,,Trade Account,G11,2375.01,PO-2026-2575,26508.8,,Matched
+120,4,CC-MEL-04,2026-01-30,Professional Services,183071.56,SAP-5004,GL-6400,GHD Advisory,Approved,Vendor invoice pending project manager approval,Concur Export,G11,18307.16,PO-2026-2588,197263.08,CTR-CC-MEL-04-04,Matched
+121,4,CC-MEL-04,2026-07-13,Materials,82656.75,SAP-5002,GL-6200,Boral Construction Materials,Paid,Retention clause applies — partial payment released,Trade Account,G11,8265.68,PO-2026-2601,69339.35,,Over PO
+122,4,CC-MEL-04,2026-10-04,Subcontractor,1026257.06,SAP-5001,GL-6100,Probuild Constructions,Approved,Mismatch between SAP cost code and VO reference,Trade Account,G11,102625.71,PO-2026-2614,1237240.45,CTR-CC-MEL-04-04,Matched
+123,4,CC-MEL-04,2026-08-18,Subcontractor,879452.34,SAP-5001,GL-6100,Hickory Group,Approved,,Trade Account,G11,87945.23,PO-2026-2627,1079881.12,CTR-CC-MEL-04-04,Matched
+124,4,CC-MEL-04,2026-07-17,Materials,291836.46,SAP-5002,GL-6200,Boral Construction Materials,Pending,,Trade Account,G11,29183.65,,0.0,,No PO
+125,4,CC-MEL-04,2026-07-16,Subcontractor,1182924.28,SAP-5001,GL-6100,Watpac Civil & Mining,Approved,,Trade Account,G11,118292.43,PO-2026-2653,1463520.88,CTR-CC-MEL-04-04,Matched
+126,4,CC-MEL-04,2026-06-03,Materials,71148.73,SAP-5002,GL-6200,Sika Australia,Approved,Retention clause applies — partial payment released,Trade Account,G11,7114.87,PO-2026-2666,87398.08,,Matched
+127,4,CC-MEL-04,2026-09-20,Plant Hire,59291.15,SAP-5003,GL-6300,Kennards Hire,Approved,Possible cost allocation mismatch — verify WBS element,Trade Account,G11,5929.12,PO-2026-2679,65888.94,,Matched
+128,4,CC-MEL-04,2026-06-14,Materials,171647.8,SAP-5002,GL-6200,Holcim Australia Pty Ltd,Paid,,Site System,G11,17164.78,PO-2026-2692,205706.86,CTR-CC-MEL-04-04,Matched
+129,4,CC-MEL-04,2026-10-22,Professional Services,20552.3,SAP-5004,GL-6400,Jacobs Engineering Group,Pending,,Manual Entry,G11,2055.23,PO-2026-2705,19301.99,,Over PO
+130,4,CC-MEL-04,2026-11-02,Plant Hire,19490.07,SAP-5003,GL-6300,Adaptalift Hyster,Approved,,Trade Account,G11,1949.01,PO-2026-2718,22803.91,,Matched
+131,4,CC-MEL-04,2026-09-26,Materials,62108.25,SAP-5002,GL-6200,BlueScope Distribution,Paid,Possible cost allocation mismatch — verify WBS element,Trade Account,G11,6210.83,PO-2026-2731,64623.12,,Matched
+132,4,CC-MEL-04,2026-10-21,Permits & Compliance,35400.08,SAP-5005,GL-6500,Vic Department of Transport,Approved,,Site System,G12,0.0,,0.0,,No PO
+133,4,CC-MEL-04,2026-10-27,Subcontractor,1000417.17,SAP-5001,GL-6100,Cockram Constructions,Approved,,Trade Account,G11,100041.72,PO-2026-2757,1193253.17,CTR-CC-MEL-04-04,Matched
+134,4,CC-MEL-04,2026-06-09,Materials,209340.52,SAP-5002,GL-6200,Boral Construction Materials,Paid,,Trade Account,G11,20934.05,PO-2026-2770,230593.43,CTR-CC-MEL-04-04,Matched
+135,4,CC-MEL-04,2026-06-21,Materials,292423.37,SAP-5002,GL-6200,Rebar Direct Pty Ltd,Paid,,Manual Entry,G11,29242.34,PO-2026-2783,321571.88,CTR-CC-MEL-04-04,Matched
+136,4,CC-MEL-04,2026-03-25,Subcontractor,639536.42,SAP-5001,GL-6100,Kapitol Group,Approved,,Trade Account,G11,63953.64,PO-2026-2796,679230.89,CTR-CC-MEL-04-04,Matched
+137,4,CC-MEL-04,2026-10-02,Plant Hire,56679.51,SAP-5003,GL-6300,Kennards Hire,Pending,,Trade Account,G11,5667.95,,0.0,,No PO
+138,4,CC-MEL-04,2026-11-13,Subcontractor,543504.31,SAP-5001,GL-6100,Hacer Group,Paid,,Trade Account,G11,54350.43,PO-2026-2822,658614.77,CTR-CC-MEL-04-04,Matched
+139,4,CC-MEL-04,2026-10-26,Plant Hire,14179.89,SAP-5003,GL-6300,Tutt Bryant Equipment,Approved,,Trade Account,G11,1417.99,PO-2026-2835,16889.68,,Matched
+140,5,CC-SYD-05,2026-09-27,Materials,162108.77,SAP-5002,GL-6200,BlueScope Distribution,Pending,,Trade Account,G11,16210.88,PO-2026-2855,178375.86,CTR-CC-SYD-05-05,Matched
+141,5,CC-SYD-05,2026-06-17,Professional Services,188303.92,SAP-5004,GL-6400,Turner & Townsend,Approved,,Concur Export,G11,18830.39,PO-2026-2868,223108.1,CTR-CC-SYD-05-05,Matched
+142,5,CC-SYD-05,2026-04-15,Professional Services,85365.57,SAP-5004,GL-6400,Turner & Townsend,Approved,,Manual Entry,G11,8536.56,PO-2026-2881,102369.43,CTR-CC-SYD-05-05,Matched
+143,5,CC-SYD-05,2027-01-28,Subcontractor,1212764.49,SAP-5001,GL-6100,Kapitol Group,Pending,,Trade Account,G11,121276.45,PO-2026-2894,1090899.6,CTR-CC-SYD-05-05,Over PO
+144,5,CC-SYD-05,2026-06-02,Subcontractor,1560614.15,SAP-5001,GL-6100,Kane Constructions,Approved,,Trade Account,G11,156061.42,PO-2026-2907,1640163.21,CTR-CC-SYD-05-05,Matched
+145,5,CC-SYD-05,2027-01-19,Professional Services,137511.92,SAP-5004,GL-6400,AECOM Australia Pty Ltd,Approved,,Concur Export,G11,13751.19,PO-2026-2920,143465.58,CTR-CC-SYD-05-05,Matched
+146,5,CC-SYD-05,2026-08-20,Plant Hire,134540.83,SAP-5003,GL-6300,All Cranes Hire & Sales,Pending,,Trade Account,G11,13454.08,PO-2026-2933,142104.28,,Matched
+147,5,CC-SYD-05,2027-04-11,Subcontractor,444250.98,SAP-5001,GL-6100,Kapitol Group,Approved,Retention clause applies — partial payment released,Trade Account,G11,44425.1,PO-2026-2946,488068.84,CTR-CC-SYD-05-05,Matched
+148,5,CC-SYD-05,2026-10-01,Subcontractor,358852.04,SAP-5001,GL-6100,John Holland Group,Paid,,Trade Account,G11,35885.2,PO-2026-2959,433130.08,CTR-CC-SYD-05-05,Matched
+149,5,CC-SYD-05,2026-08-09,Subcontractor,778446.88,SAP-5001,GL-6100,Watpac Civil & Mining,Approved,,Trade Account,G11,77844.69,PO-2026-2972,797946.58,CTR-CC-SYD-05-05,Matched
+150,5,CC-SYD-05,2026-06-26,Plant Hire,58644.51,SAP-5003,GL-6300,Kennards Hire,Pending,,Site System,G11,5864.45,PO-2026-2985,61568.76,,Matched
+151,5,CC-SYD-05,2027-04-20,Subcontractor,575581.93,SAP-5001,GL-6100,Watpac Civil & Mining,Paid,,Trade Account,G11,57558.19,PO-2026-2998,545436.72,CTR-CC-SYD-05-05,Over PO
+152,5,CC-SYD-05,2027-04-25,Travel & Accommodation,945.12,SAP-5006,GL-6600,Corporate Travel Management (CTM),On Hold,,Concur Export,G11,94.51,,0.0,,No PO
+153,5,CC-SYD-05,2026-06-14,Subcontractor,1748740.67,SAP-5001,GL-6100,Built Environs,Paid,,Trade Account,G11,174874.07,PO-2026-3024,1418008.18,CTR-CC-SYD-05-05,Over PO
+154,5,CC-SYD-05,2027-04-29,Subcontractor,802925.75,SAP-5001,GL-6100,Hacer Group,Approved,,Trade Account,G11,80292.58,PO-2026-3037,888779.24,CTR-CC-SYD-05-05,Matched
+155,5,CC-SYD-05,2026-08-18,Travel & Accommodation,1728.81,SAP-5006,GL-6600,Corporate Travel Management (CTM),Approved,,Concur Export,G11,172.88,PO-2026-3050,1980.55,,Matched
+156,5,CC-SYD-05,2027-03-24,Subcontractor,258759.39,SAP-5001,GL-6100,Watpac Civil & Mining,Pending,,Trade Account,G11,25875.94,PO-2026-3063,266355.0,CTR-CC-SYD-05-05,Matched
+157,5,CC-SYD-05,2027-02-11,Subcontractor,943938.18,SAP-5001,GL-6100,Probuild Constructions,Approved,,Trade Account,G11,94393.82,PO-2026-3076,1133196.6,CTR-CC-SYD-05-05,Matched
+158,5,CC-SYD-05,2026-10-09,Plant Hire,54915.98,SAP-5003,GL-6300,Coates Hire Operations,Approved,,Trade Account,G11,5491.6,PO-2026-3089,61855.81,,Matched
+159,5,CC-SYD-05,2027-04-09,Subcontractor,1023526.87,SAP-5001,GL-6100,Built Environs,Pending,Awaiting delivery confirmation from site supervisor,Trade Account,G11,102352.69,,0.0,,No PO
+160,5,CC-SYD-05,2027-04-12,Materials,416393.85,SAP-5002,GL-6200,Sika Australia,Approved,,Trade Account,G11,41639.39,PO-2026-3115,423996.11,CTR-CC-SYD-05-05,Matched
+161,5,CC-SYD-05,2026-12-04,Materials,30284.09,SAP-5002,GL-6200,Boral Construction Materials,Approved,,Site System,G11,3028.41,PO-2026-3128,37691.07,,Matched
+162,5,CC-SYD-05,2026-10-17,Travel & Accommodation,6371.05,SAP-5006,GL-6600,Corporate Travel Management (CTM),Approved,,Concur Export,G11,637.11,PO-2026-3141,7411.97,,Matched
+163,5,CC-SYD-05,2026-09-06,Materials,439990.69,SAP-5002,GL-6200,Adbri Masonry,Pending,,Trade Account,G11,43999.07,PO-2026-3154,465253.2,CTR-CC-SYD-05-05,Matched
+164,5,CC-SYD-05,2027-02-15,Subcontractor,1120078.67,SAP-5001,GL-6100,Watpac Civil & Mining,Paid,,Trade Account,G11,112007.87,PO-2026-3167,1148331.73,CTR-CC-SYD-05-05,Matched
+165,5,CC-SYD-05,2026-11-17,Plant Hire,8885.58,SAP-5003,GL-6300,Coates Hire Operations,Approved,,Site System,G11,888.56,,0.0,,No PO
+166,5,CC-SYD-05,2026-09-18,Professional Services,190322.18,SAP-5004,GL-6400,Arcadis Australia Pacific,Approved,,Manual Entry,G11,19032.22,PO-2026-3193,209999.6,CTR-CC-SYD-05-05,Matched
+167,5,CC-SYD-05,2026-05-01,Permits & Compliance,22801.26,SAP-5005,GL-6500,NSW Planning Department,On Hold,,Site System,G12,0.0,PO-2026-3206,24618.15,,Matched
+168,5,CC-SYD-05,2026-09-07,Subcontractor,1648572.48,SAP-5001,GL-6100,Built Environs,Paid,Mismatch between SAP cost code and VO reference,Trade Account,G11,164857.25,PO-2026-3219,2047438.9,CTR-CC-SYD-05-05,Matched
+169,5,CC-SYD-05,2026-11-23,Subcontractor,256780.6,SAP-5001,GL-6100,Kane Constructions,Paid,Retention clause applies — partial payment released,Trade Account,G11,25678.06,,0.0,,No PO
+170,5,CC-SYD-05,2027-04-12,Subcontractor,1351861.95,SAP-5001,GL-6100,Watpac Civil & Mining,Paid,,Trade Account,G11,135186.2,PO-2026-3245,1454329.04,CTR-CC-SYD-05-05,Matched
+171,5,CC-SYD-05,2027-04-02,Subcontractor,1003357.88,SAP-5001,GL-6100,Kapitol Group,Approved,,Trade Account,G11,100335.79,PO-2026-3258,1098842.87,CTR-CC-SYD-05-05,Matched
+172,5,CC-SYD-05,2027-04-11,Subcontractor,1091575.9,SAP-5001,GL-6100,Built Environs,Pending,,Trade Account,G11,109157.59,PO-2026-3271,1204534.95,CTR-CC-SYD-05-05,Matched
+173,5,CC-SYD-05,2027-04-10,Subcontractor,757968.5,SAP-5001,GL-6100,Hickory Group,Pending,,Trade Account,G11,75796.85,PO-2026-3284,915884.17,CTR-CC-SYD-05-05,Matched
+174,5,CC-SYD-05,2026-12-14,Subcontractor,948406.18,SAP-5001,GL-6100,Kapitol Group,Pending,,Trade Account,G11,94840.62,PO-2026-3297,838242.92,CTR-CC-SYD-05-05,Over PO
+175,5,CC-SYD-05,2026-05-15,Travel & Accommodation,6048.18,SAP-5006,GL-6600,Crown Towers Melbourne,On Hold,,Concur Export,G11,604.82,PO-2026-3310,7322.15,,Matched
+176,5,CC-SYD-05,2027-02-16,Materials,225379.52,SAP-5002,GL-6200,CSR Building Products,Paid,,Trade Account,G11,22537.95,PO-2026-3323,248556.34,CTR-CC-SYD-05-05,Matched
+177,6,CC-PER-06,2026-09-24,Travel & Accommodation,3227.66,SAP-5006,GL-6600,Crown Towers Melbourne,Paid,,Concur Export,G11,322.77,,0.0,,No PO
+178,6,CC-PER-06,2026-08-26,Materials,54857.26,SAP-5002,GL-6200,CSR Building Products,On Hold,,Trade Account,G11,5485.73,PO-2026-3356,58971.21,,Matched
+179,6,CC-PER-06,2026-10-17,Plant Hire,18074.25,SAP-5003,GL-6300,Coates Hire Operations,Approved,Vendor invoice pending project manager approval,Trade Account,G11,1807.43,PO-2026-3369,20988.3,,Matched
+180,6,CC-PER-06,2026-12-03,Permits & Compliance,37733.34,SAP-5005,GL-6500,Vic Department of Transport,Pending,Possible cost allocation mismatch — verify WBS element,Site System,G12,0.0,PO-2026-3382,42855.93,,Matched
+181,6,CC-PER-06,2026-09-07,Subcontractor,1529725.39,SAP-5001,GL-6100,Kane Constructions,Paid,,Trade Account,G11,152972.54,PO-2026-3395,1854578.8,CTR-CC-PER-06-06,Matched
+182,6,CC-PER-06,2026-03-28,Subcontractor,1503838.87,SAP-5001,GL-6100,Probuild Constructions,Pending,,Trade Account,G11,150383.89,PO-2026-3408,1819146.76,CTR-CC-PER-06-06,Matched
+183,6,CC-PER-06,2026-07-05,Travel & Accommodation,1176.49,SAP-5006,GL-6600,Corporate Travel Management (CTM),Paid,,Concur Export,G11,117.65,PO-2026-3421,1286.91,,Matched
+184,6,CC-PER-06,2026-03-25,Subcontractor,146242.92,SAP-5001,GL-6100,Cockram Constructions,Approved,,Trade Account,G11,14624.29,PO-2026-3434,173285.26,,Matched
+185,6,CC-PER-06,2026-04-09,Subcontractor,1134896.75,SAP-5001,GL-6100,Hickory Group,Approved,,Trade Account,G11,113489.68,PO-2026-3447,1250668.75,CTR-CC-PER-06-06,Matched
+186,6,CC-PER-06,2026-09-15,Materials,23448.92,SAP-5002,GL-6200,CSR Building Products,Approved,Awaiting delivery confirmation from site supervisor,Site System,G11,2344.89,PO-2026-3460,26801.88,,Matched
+187,6,CC-PER-06,2026-05-12,Subcontractor,280122.91,SAP-5001,GL-6100,Hickory Group,Pending,,Trade Account,G11,28012.29,,0.0,,No PO
+188,6,CC-PER-06,2026-07-21,Materials,18336.11,SAP-5002,GL-6200,Saint-Gobain Placo,Approved,,Site System,G11,1833.61,PO-2026-3486,22288.45,,Matched
+189,6,CC-PER-06,2026-05-29,Travel & Accommodation,1165.99,SAP-5006,GL-6600,Marriott Hotels Australia,Pending,,Concur Export,G11,116.6,PO-2026-3499,1380.2,,Matched
+190,6,CC-PER-06,2026-09-05,Plant Hire,77250.43,SAP-5003,GL-6300,Tutt Bryant Equipment,Approved,,Trade Account,G11,7725.04,PO-2026-3512,80725.29,,Matched
+191,6,CC-PER-06,2026-09-13,Materials,67249.53,SAP-5002,GL-6200,Hanson Construction Materials,Paid,High variance to approved payment schedule,Trade Account,G11,6724.95,PO-2026-3525,79274.36,,Matched
+192,6,CC-PER-06,2026-09-18,Materials,478088.92,SAP-5002,GL-6200,Sika Australia,Pending,,Trade Account,G11,47808.89,PO-2026-3538,542261.12,CTR-CC-PER-06-06,Matched
+193,6,CC-PER-06,2026-03-10,Plant Hire,27029.12,SAP-5003,GL-6300,All Cranes Hire & Sales,Pending,,Trade Account,G11,2702.91,PO-2026-3551,29269.81,,Matched
+194,6,CC-PER-06,2026-06-09,Materials,370087.19,SAP-5002,GL-6200,Sika Australia,Pending,,Site System,G11,37008.72,PO-2026-3564,416391.18,CTR-CC-PER-06-06,Matched
+195,6,CC-PER-06,2026-04-29,Subcontractor,322947.11,SAP-5001,GL-6100,Buxton Construction,Approved,,Trade Account,G11,32294.71,PO-2026-3577,351067.75,CTR-CC-PER-06-06,Matched
+196,6,CC-PER-06,2026-02-27,Subcontractor,1203249.27,SAP-5001,GL-6100,Hickory Group,Paid,,Trade Account,G11,120324.93,PO-2026-3590,1163471.16,CTR-CC-PER-06-06,Over PO
+197,6,CC-PER-06,2026-09-11,Subcontractor,588471.54,SAP-5001,GL-6100,Built Environs,Paid,,Trade Account,G11,58847.15,PO-2026-3603,696954.56,CTR-CC-PER-06-06,Matched
+198,6,CC-PER-06,2026-03-20,Subcontractor,1345191.44,SAP-5001,GL-6100,Kane Constructions,Pending,,Trade Account,G11,134519.14,PO-2026-3616,1411467.1,CTR-CC-PER-06-06,Matched
+199,6,CC-PER-06,2026-12-13,Materials,336169.92,SAP-5002,GL-6200,CSR Building Products,Approved,,Trade Account,G11,33616.99,PO-2026-3629,298442.99,CTR-CC-PER-06-06,Over PO
+200,6,CC-PER-06,2026-04-16,Subcontractor,327218.15,SAP-5001,GL-6100,Probuild Constructions,Approved,,Trade Account,G11,32721.82,PO-2026-3642,338496.32,CTR-CC-PER-06-06,Matched
+201,6,CC-PER-06,2026-04-28,Materials,271133.48,SAP-5002,GL-6200,BlueScope Distribution,Approved,,Trade Account,G11,27113.35,PO-2026-3655,335652.54,CTR-CC-PER-06-06,Matched
+202,6,CC-PER-06,2026-10-01,Materials,162245.94,SAP-5002,GL-6200,Rebar Direct Pty Ltd,Pending,Possible cost allocation mismatch — verify WBS element,Site System,G11,16224.59,PO-2026-3668,163572.1,CTR-CC-PER-06-06,Matched
+203,6,CC-PER-06,2026-11-24,Plant Hire,100118.67,SAP-5003,GL-6300,Adaptalift Hyster,Pending,,Trade Account,G11,10011.87,PO-2026-3681,124920.41,,Matched
+204,6,CC-PER-06,2026-04-09,Plant Hire,65953.28,SAP-5003,GL-6300,Sherrin Rentals,Paid,,Trade Account,G11,6595.33,PO-2026-3694,66484.71,,Matched
+205,6,CC-PER-06,2026-12-14,Materials,118720.32,SAP-5002,GL-6200,Holcim Australia Pty Ltd,Paid,,Trade Account,G11,11872.03,PO-2026-3707,137007.74,,Matched
+206,6,CC-PER-06,2026-07-31,Materials,109735.33,SAP-5002,GL-6200,Sika Australia,On Hold,,Trade Account,G11,10973.53,PO-2026-3720,123847.7,,Matched
+207,6,CC-PER-06,2026-04-21,Travel & Accommodation,6003.18,SAP-5006,GL-6600,Corporate Travel Management (CTM),Paid,Vendor invoice pending project manager approval,Concur Export,G11,600.32,PO-2026-3733,7146.0,,Matched
+208,6,CC-PER-06,2026-03-26,Materials,167708.66,SAP-5002,GL-6200,Hanson Construction Materials,Paid,,Trade Account,G11,16770.87,PO-2026-3746,179373.87,CTR-CC-PER-06-06,Matched
+209,1,CC-MEL-01,2026-04-14,Subcontractor,895000.0,SAP-5001,GL-6100,Hickory Group,Pending,Mismatch to SAP budget code — VO-0044 not yet approved,Trade Account,G11,89500.0,PO-2026-4401,812000.0,CTR-CC-MEL-01-01,Over PO
+210,2,CC-MEL-02,2026-06-09,Materials,312000.0,SAP-5002,GL-6200,Holcim Australia Pty Ltd,On Hold,Delivery docket mismatch — site rejected 40 palettes. No PO raised — procurement breach.,Trade Account,G11,31200.0,,0.0,,No PO
+211,3,CC-MEL-03,2026-09-01,Subcontractor,1250000.0,SAP-5001,GL-6100,John Holland Group,Approved,Accelerated milestone payment — Practical Completion Stage 3,Trade Account,G11,125000.0,PO-2026-5512,1312500.0,CTR-CC-MEL-03-02,Matched
+212,4,CC-MEL-04,2026-08-20,Professional Services,540000.0,SAP-5004,GL-6400,AECOM Australia Pty Ltd,Approved,Additional scope for geotechnical re-assessment — approved by PMO. PO amendment pending.,Manual Entry,G11,54000.0,PO-2026-6203,498000.0,CTR-CC-MEL-04-01,Over PO

@@ -1,0 +1,5 @@
+ar_id,project_id,sap_cost_center,gl_account,claim_number,claim_type,claim_date,description,claim_amount,retention_withheld,net_claim,gst_amount,total_incl_gst,due_date,paid_date,paid_amount,outstanding,status
+1,1,CC-MEL-01,GL-4100,PC-001,Progress Claim,2026-02-28,Progress Claim #1 — Collins Arch Stage 2 Fit-Out (February),18525000.0,926250.0,17598750.0,1759875.0,19358625.0,2026-04-14,2026-04-10,19358625.0,0.0,Paid
+2,1,CC-MEL-01,GL-4100,PC-002,Progress Claim,2026-04-15,Progress Claim #2 — Collins Arch Stage 2 Fit-Out (April),19500000.0,975000.0,18525000.0,1852500.0,20377500.0,2026-05-30,,0.0,20377500.0,Issued
+3,2,CC-MEL-02,GL-4100,PC-001,Progress Claim,2026-03-31,Progress Claim #1 — Victorian Heart Hospital Ext. (March),31200000.0,1560000.0,29640000.0,2964000.0,32604000.0,2026-04-30,2026-04-28,32604000.0,0.0,Paid
+4,2,CC-MEL-02,GL-4100,PC-002,Progress Claim,2026-04-30,Progress Claim #2 — Victorian Heart Hospital Ext. (April),32500000.0,1625000.0,30875000.0,3087500.0,33962500.0,2026-05-30,,0.0,33962500.0,Issued

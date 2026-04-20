@@ -20,12 +20,14 @@ COMPANY = "Lendlease Construction (Pty) Ltd"
 # ── Projects ──────────────────────────────────────────────────────────────────
 # Typical Tier 1 portfolio: CBD towers, hospitals, mixed-use, transport, data centres
 PROJECTS = [
-    (1, "Collins Arch — Stage 2 Fit-Out",   COMPANY, "2026-01-05", "2026-12-18",  185_000_000, "CC-MEL-01", "Commercial",     "VIC", "Melbourne CBD"),
-    (2, "Victorian Heart Hospital Ext.",     COMPANY, "2026-02-03", "2027-06-30",  310_000_000, "CC-MEL-02", "Healthcare",     "VIC", "Clayton"),
-    (3, "Southbank Precinct Tower C",        COMPANY, "2026-03-10", "2027-09-30",  420_000_000, "CC-MEL-03", "Mixed-Use",      "VIC", "Southbank"),
-    (4, "Melbourne Metro — Station Works",   COMPANY, "2026-01-12", "2026-11-28",  560_000_000, "CC-MEL-04", "Infrastructure", "VIC", "Melbourne CBD"),
-    (5, "Sydney Tech Hub — Pyrmont",         COMPANY, "2026-04-07", "2027-04-30",   98_000_000, "CC-SYD-05", "Commercial",     "NSW", "Pyrmont"),
-    (6, "Perth Data Centre — Stage 1",       COMPANY, "2026-02-16", "2026-12-20",  145_000_000, "CC-PER-06", "Industrial",     "WA",  "East Perth"),
+    # (pid, name, client, start, end, budget, cc, sector, state, location,
+    #  contract_value, eac, client_type, dso_days, retention_rate, practical_completion_date)
+    (1, "Collins Arch — Stage 2 Fit-Out",   COMPANY, "2026-01-05", "2026-12-18",  185_000_000, "CC-MEL-01", "Commercial",     "VIC", "Melbourne CBD",  195_000_000, 185_000_000, "Private",     45, 0.05, ""),
+    (2, "Victorian Heart Hospital Ext.",     COMPANY, "2026-02-03", "2027-06-30",  310_000_000, "CC-MEL-02", "Healthcare",     "VIC", "Clayton",        325_000_000, 310_000_000, "Government",  30, 0.05, ""),
+    (3, "Southbank Precinct Tower C",        COMPANY, "2026-03-10", "2027-09-30",  420_000_000, "CC-MEL-03", "Mixed-Use",      "VIC", "Southbank",      441_000_000, 420_000_000, "Private",     45, 0.05, ""),
+    (4, "Melbourne Metro — Station Works",   COMPANY, "2026-01-12", "2026-11-28",  560_000_000, "CC-MEL-04", "Infrastructure", "VIC", "Melbourne CBD",  590_000_000, 560_000_000, "Government",  30, 0.05, ""),
+    (5, "Sydney Tech Hub — Pyrmont",         COMPANY, "2026-04-07", "2027-04-30",   98_000_000, "CC-SYD-05", "Commercial",     "NSW", "Pyrmont",        103_000_000,  98_000_000, "Private",     45, 0.05, ""),
+    (6, "Perth Data Centre — Stage 1",       COMPANY, "2026-02-16", "2026-12-20",  145_000_000, "CC-PER-06", "Industrial",     "WA",  "East Perth",     152_000_000, 145_000_000, "Private",     45, 0.10, "2026-11-30"),
 ]
 
 # ── Vendor panel (approved subcontractors & suppliers) ────────────────────────
@@ -92,6 +94,9 @@ VENDORS = {
 EXPENSE_TYPES  = list(VENDORS.keys())
 EXPENSE_WEIGHT = [0.40, 0.27, 0.12, 0.10, 0.06, 0.05]
 
+# Quick lookup: project_id → sap_cost_center
+PROJ_CC = {proj[0]: proj[6] for proj in PROJECTS}
+
 SAP_COST_CODES = {
     "Subcontractor":          "SAP-5001",
     "Materials":              "SAP-5002",
@@ -108,6 +113,49 @@ GL_ACCOUNTS = {
     "Professional Services":  ("GL-6400", "Professional & Consulting Fees"),
     "Permits & Compliance":   ("GL-6500", "Regulatory Fees & Permit Costs"),
     "Travel & Accommodation": ("GL-6600", "Travel & Accommodation"),
+}
+
+# ATO tax codes per GL account
+# G1  = GST on supplies (output tax → BAS 1A)
+# G11 = Non-capital purchases with GST (input credits → BAS 1B)
+# G12 = GST-free purchases (government charges, exempt)
+# RV  = Revenue GL (progress claims)
+TAX_CODES = {
+    "GL-6100": "G11",
+    "GL-6200": "G11",
+    "GL-6300": "G11",
+    "GL-6400": "G11",
+    "GL-6500": "G12",   # government fees — GST-free
+    "GL-6600": "G11",
+    "GL-4100": "G1",    # progress claims revenue — output tax
+}
+
+# Tax codes for expense (AP invoice) side — mirrors GL mapping
+EXPENSE_TAX_CODES = {
+    "Subcontractor":          "G11",
+    "Materials":              "G11",
+    "Plant Hire":             "G11",
+    "Professional Services":  "G11",
+    "Permits & Compliance":   "G12",   # government charges — GST-free
+    "Travel & Accommodation": "G11",
+}
+
+# AP 3-way match tolerance by expense type (invoice variance % allowed vs PO value)
+# Exceeding tolerance requires re-approval / variation order before payment release
+PO_TOLERANCE = {
+    "Subcontractor":          0.02,   # formal contracts — very tight (2%)
+    "Materials":              0.05,   # delivery qty variances — 5%
+    "Plant Hire":             0.05,   # rate fluctuations — 5%
+    "Professional Services":  0.03,   # scope variations — 3%
+    "Permits & Compliance":   0.00,   # fixed government fees — zero tolerance
+    "Travel & Accommodation": 0.10,   # policy-based — 10%
+}
+
+# Contract threshold — amounts above this require a formal contract reference
+CONTRACT_THRESHOLD = {
+    "Subcontractor":         200_000,
+    "Professional Services":  50_000,
+    "Materials":             150_000,
 }
 
 # Tier 1 invoice ranges — larger floor/ceiling than generic
@@ -179,6 +227,8 @@ def gen_projects():
     headers = [
         "project_id", "project_name", "client", "start_date", "end_date",
         "project_budget", "sap_cost_center", "sector", "state", "location",
+        "contract_value", "eac", "client_type", "dso_days",
+        "retention_rate", "practical_completion_date",
     ]
     write_csv("projects.csv", headers, PROJECTS)
 
@@ -190,7 +240,7 @@ def gen_expenses_and_ledger():
     led_id = 1
 
     for proj in PROJECTS:
-        pid, name, client, start, end, budget, cc, sector, state, location = proj
+        pid, name, client, start, end, budget, cc, sector, state, location, *_ = proj
         start_dt   = datetime.fromisoformat(start)
         end_dt     = datetime.fromisoformat(end)
         total_weeks = max((end_dt - start_dt).days // 7, 1)
@@ -218,13 +268,62 @@ def gen_expenses_and_ledger():
                     "Retention clause applies — partial payment released",
                     "Intercompany recharge — allocation pending CFO review",
                 ])
-            source = random.choices(
-                ["Concur Export", "Site System", "Manual Entry"],
-                weights=[0.78, 0.16, 0.06]
-            )[0]
+            # Source system varies by expense type:
+            # - Subcontractors/Materials/Plant come from trade accounts (not Concur)
+            # - Travel/Professional Services flow through SAP Concur
+            if exp_type in ("Travel & Accommodation", "Professional Services"):
+                source = random.choices(
+                    ["Concur Export", "Manual Entry"],
+                    weights=[0.93, 0.07]
+                )[0]
+            elif exp_type == "Subcontractor":
+                source = random.choices(
+                    ["Trade Account", "Manual Entry"],
+                    weights=[0.93, 0.07]
+                )[0]
+            elif exp_type in ("Materials", "Plant Hire"):
+                source = random.choices(
+                    ["Trade Account", "Site System", "Manual Entry"],
+                    weights=[0.74, 0.20, 0.06]
+                )[0]
+            else:
+                source = random.choices(
+                    ["Site System", "Manual Entry"],
+                    weights=[0.80, 0.20]
+                )[0]
+            exp_tax  = EXPENSE_TAX_CODES.get(exp_type, "G11")
+            exp_gst  = round(amount * 0.10, 2) if exp_tax != "G12" else 0.00
+
+            # ── PO / Contract 3-way match control ─────────────────────────────
+            r_po = random.random()
+            tol  = PO_TOLERANCE.get(exp_type, 0.05)
+            ctr_threshold = CONTRACT_THRESHOLD.get(exp_type, 999_999_999)
+            po_num = f"PO-2026-{(exp_id * 13 + pid * 7) % 8000 + 1000:04d}"
+
+            if r_po < 0.10:
+                # Missing PO — compliance breach (10%)
+                po_ref      = ""
+                po_value    = 0.0
+                po_status   = "No PO"
+                contract_ref = ""
+            elif r_po < 0.20:
+                # Over-PO — invoice exceeds approved PO value (10%)
+                po_ref      = po_num
+                po_value    = round(amount * random.uniform(0.78, 1.0 - tol - 0.01), 2)
+                po_status   = "Over PO"
+                contract_ref = f"CTR-{cc}-{pid:02d}" if amount >= ctr_threshold else ""
+            else:
+                # Compliant — invoice at or under PO value (partial draw) (80%)
+                po_ref      = po_num
+                po_value    = round(amount * random.uniform(1.0, 1.25), 2)
+                po_status   = "Matched"
+                contract_ref = f"CTR-{cc}-{pid:02d}" if amount >= ctr_threshold else ""
+
+            gl_acct, _gl_desc = GL_ACCOUNTS[exp_type]
             expense_rows.append((
-                exp_id, pid, booking, exp_type, amount,
-                cost_code, vendor, status, comment, source,
+                exp_id, pid, cc, booking, exp_type, amount,
+                cost_code, gl_acct, vendor, status, comment, source,
+                exp_tax, exp_gst, po_ref, po_value, contract_ref, po_status,
             ))
 
             # SAP ledger posting — 22% chance of reconciliation gap
@@ -237,37 +336,55 @@ def gen_expenses_and_ledger():
             else:
                 led_amount = amount
                 led_desc   = f"{gl_desc} — {name}"
+            tax_code  = TAX_CODES.get(gl, "G11")
+            gst_amt   = round(led_amount * 0.10, 2) if tax_code != "G12" else 0.00
             ledger_rows.append((
-                led_id, pid, posting, gl, led_amount, "INV", led_desc, vendor,
+                led_id, pid, cc, posting, gl, led_amount, "INV", led_desc, vendor, tax_code, gst_amt,
             ))
 
             exp_id += 1
             led_id += 1
 
     # ── Targeted demo anomalies (treasury-relevant) ────────────────────────
-    # 1. Large subcontract discrepancy — Collins Arch
-    expense_rows.append((exp_id,   1, "2026-04-14", "Subcontractor",    895_000.00,  "SAP-5001", "Hickory Group",               "Pending",   "Mismatch to SAP budget code — VO-0044 not yet approved",         "Concur Export"))
-    ledger_rows.append( (led_id,   1, "2026-04-16", "GL-6100",          832_500.00,  "INV",      "[VARIANCE] Direct Labour & Subcontract — Collins Arch", "Hickory Group"))
+    # 1. Large subcontract discrepancy — Collins Arch — OVER PO (no approved VO yet)
+    expense_rows.append((exp_id,   1, "CC-MEL-01", "2026-04-14", "Subcontractor",    895_000.00,  "SAP-5001", "GL-6100", "Hickory Group",               "Pending",   "Mismatch to SAP budget code — VO-0044 not yet approved",         "Trade Account", "G11",  89500.00, "PO-2026-4401", 812_000.00, "CTR-CC-MEL-01-01", "Over PO"))
+    ledger_rows.append( (led_id,   1, "CC-MEL-01", "2026-04-16", "GL-6100",          832_500.00,  "INV",      "[VARIANCE] Direct Labour & Subcontract — Collins Arch",   "Hickory Group",           "G11",  83250.00))
 
-    # 2. Materials invoice on hold — Heart Hospital
-    expense_rows.append((exp_id+1, 2, "2026-06-09", "Materials",        312_000.00,  "SAP-5002", "Holcim Australia Pty Ltd",    "On Hold",   "Delivery docket mismatch — site rejected 40 palettes",           "Site System"))
-    ledger_rows.append( (led_id+1, 2, "2026-06-12", "GL-6200",          312_000.00,  "INV",      "Raw Materials — Victorian Heart Hospital", "Holcim Australia Pty Ltd"))
+    # 2. Materials invoice on hold — Heart Hospital — NO PO raised (compliance breach)
+    expense_rows.append((exp_id+1, 2, "CC-MEL-02", "2026-06-09", "Materials",        312_000.00,  "SAP-5002", "GL-6200", "Holcim Australia Pty Ltd",    "On Hold",   "Delivery docket mismatch — site rejected 40 palettes. No PO raised — procurement breach.", "Trade Account",   "G11",  31200.00, "",              0.00,       "",                 "No PO"))
+    ledger_rows.append( (led_id+1, 2, "CC-MEL-02", "2026-06-12", "GL-6200",          312_000.00,  "INV",      "Raw Materials — Victorian Heart Hospital",                 "Holcim Australia Pty Ltd","G11",  31200.00))
 
-    # 3. Cash crunch period — Southbank Tower C
-    expense_rows.append((exp_id+2, 3, "2026-09-01", "Subcontractor",  1_250_000.00,  "SAP-5001", "John Holland Group",          "Approved",  "Accelerated milestone payment — Practical Completion Stage 3",   "Concur Export"))
-    ledger_rows.append( (led_id+2, 3, "2026-09-03", "GL-6100",        1_250_000.00,  "INV",      "Direct Labour — Southbank Precinct Tower C", "John Holland Group"))
+    # 3. Cash crunch period — Southbank Tower C — has contract, matched
+    expense_rows.append((exp_id+2, 3, "CC-MEL-03", "2026-09-01", "Subcontractor",  1_250_000.00,  "SAP-5001", "GL-6100", "John Holland Group",          "Approved",  "Accelerated milestone payment — Practical Completion Stage 3",   "Trade Account", "G11", 125000.00, "PO-2026-5512", 1_312_500.00, "CTR-CC-MEL-03-02", "Matched"))
+    ledger_rows.append( (led_id+2, 3, "CC-MEL-03", "2026-09-03", "GL-6100",        1_250_000.00,  "INV",      "Direct Labour — Southbank Precinct Tower C",               "John Holland Group",      "G11", 125000.00))
 
-    # 4. Budget overrun — Metro Station Works
-    expense_rows.append((exp_id+3, 4, "2026-08-20", "Professional Services", 540_000.00, "SAP-5004", "AECOM Australia Pty Ltd", "Approved",  "Additional scope for geotechnical re-assessment — approved by PMO", "Manual Entry"))
-    ledger_rows.append( (led_id+3, 4, "2026-08-22", "GL-6400",          498_000.00,  "INV",      "[VARIANCE] Professional Fees — Melbourne Metro", "AECOM Australia Pty Ltd"))
+    # 4. Budget overrun — Metro Station Works — OVER PO (additional scope, PMO approved but PO not yet updated)
+    expense_rows.append((exp_id+3, 4, "CC-MEL-04", "2026-08-20", "Professional Services", 540_000.00, "SAP-5004", "GL-6400", "AECOM Australia Pty Ltd", "Approved",  "Additional scope for geotechnical re-assessment — approved by PMO. PO amendment pending.",  "Manual Entry",  "G11",  54000.00, "PO-2026-6203",  498_000.00, "CTR-CC-MEL-04-01", "Over PO"))
+    ledger_rows.append( (led_id+3, 4, "CC-MEL-04", "2026-08-22", "GL-6400",          498_000.00,  "INV",      "[VARIANCE] Professional Fees — Melbourne Metro",          "AECOM Australia Pty Ltd", "G11",  49800.00))
+
+    # ── Progress claim revenue entries (G1 output tax) ────────────────────────
+    rev_id = led_id + 10
+    for proj in PROJECTS:
+        rpid, rname, rclient, rstart, rend, rbudget = proj[0], proj[1], proj[2], proj[3], proj[4], proj[5]
+        rcc = proj[6]
+        for claim_pct in [random.uniform(0.08, 0.14), random.uniform(0.06, 0.11)]:
+            claim_amt = round(rbudget * claim_pct, 0)
+            claim_dt  = random_date(rstart, rend)
+            gst_c     = round(claim_amt * 0.10, 2)
+            ledger_rows.append((
+                rev_id, rpid, rcc, claim_dt, "GL-4100", claim_amt, "RV",
+                f"Progress Claim — {rname}", rclient, "G1", gst_c,
+            ))
+            rev_id += 1
 
     exp_headers = [
-        "expense_id", "project_id", "booking_date", "expense_type", "amount",
-        "sap_cost_code", "vendor", "status", "comment", "source_system",
+        "expense_id", "project_id", "sap_cost_center", "booking_date", "expense_type", "amount",
+        "sap_cost_code", "gl_account", "vendor", "status", "comment", "source_system",
+        "tax_code", "gst_amount", "po_reference", "po_value", "contract_ref", "po_status",
     ]
     led_headers = [
-        "ledger_id", "project_id", "posting_date", "gl_account", "amount",
-        "doc_type", "description", "vendor",
+        "ledger_id", "project_id", "sap_cost_center", "posting_date", "gl_account", "amount",
+        "doc_type", "description", "vendor", "tax_code", "gst_amount",
     ]
     write_csv("site_expenses.csv", exp_headers, expense_rows)
     write_csv("sap_ledger.csv",    led_headers, ledger_rows)
@@ -277,7 +394,7 @@ def gen_forecasts():
     rows = []
     fid  = 1
     for proj in PROJECTS:
-        pid, name, client, start, end, budget, cc, sector, state, location = proj
+        pid, name, client, start, end, budget, cc, sector, state, location, *_ = proj
         start_dt    = datetime.fromisoformat(start)
         end_dt      = datetime.fromisoformat(end)
         total_months = max(round((end_dt - start_dt).days / 30), 1)
@@ -323,7 +440,7 @@ def gen_audit():
     rows = []
     aid  = 1
     for proj in PROJECTS:
-        pid, name, *_ = proj
+        pid = proj[0]; name = proj[1]
         start, end = proj[3], proj[4]
         n    = random.randint(3, 5)
         used = random.sample(AUDIT_TEMPLATES, min(n, len(AUDIT_TEMPLATES)))
@@ -379,6 +496,7 @@ def gen_weekly_cashflow():
     """
     Generates a rolling 8-week cash position used by the Executive Pulse view.
     Simulates actual vs forecast with a realistic burn curve.
+    project_id=0 / sap_cost_center="CC-GRP" means group-level (not project-specific).
     """
     rows = []
     base_cash = 48_500_000
@@ -386,13 +504,24 @@ def gen_weekly_cashflow():
     for w in range(-4, 9):   # 4 weeks history + 8 weeks forward
         week_start = (today + timedelta(weeks=w)).date().isoformat()
         is_forecast = w >= 0
-        inflow  = round(random.uniform(8_500_000, 22_000_000), 0)
-        outflow = round(random.uniform(14_000_000, 31_000_000), 0)
-        net     = inflow - outflow
-        base_cash = max(base_cash + net, 5_000_000)
-        rows.append((week_start, round(inflow, 0), round(outflow, 0), round(net, 0), round(base_cash, 0), "Forecast" if is_forecast else "Actual"))
+        if not is_forecast:
+            # Actual weeks: slight negative drift (~-$2M avg net) so balance
+            # drifts naturally from $48.5M down to the $38-45M target range.
+            # Oscillation comes from ±$3M random spread on both sides.
+            inflow  = round(random.uniform(15_000_000, 21_000_000), 0)
+            outflow = round(random.uniform(17_000_000, 23_000_000), 0)
+            floor   = 30_000_000
+        else:
+            # Forecast weeks: wider variation, slight additional stress visible,
+            # but floor prevents covenant breach in the base-case scenario.
+            inflow  = round(random.uniform(13_000_000, 22_000_000), 0)
+            outflow = round(random.uniform(14_000_000, 24_000_000), 0)
+            floor   = 27_000_000
+        net       = inflow - outflow
+        base_cash = max(base_cash + net, floor)
+        rows.append((0, "CC-GRP", week_start, round(inflow, 0), round(outflow, 0), round(net, 0), round(base_cash, 0), "Forecast" if is_forecast else "Actual"))
 
-    headers = ["week_start", "cash_in", "cash_out", "net_movement", "closing_balance", "type"]
+    headers = ["project_id", "sap_cost_center", "week_start", "cash_in", "cash_out", "net_movement", "closing_balance", "type"]
     write_csv("weekly_cashflow.csv", headers, rows)
 
 
@@ -400,44 +529,53 @@ def gen_bank_accounts():
     """
     Daily cash positions across the group's operating bank accounts.
     Covers the last 10 business days — mirrors what Treasury monitors each morning.
+    project_id=0 means group-level account; non-zero means project-specific drawdown.
     """
     from datetime import date
 
+    # min_balance = per-account floor so total across accounts stays consistent
+    # with weekly_cashflow.csv (~$38-42M group total on the latest day).
+    # Group Operating dominates; project drawdowns sized to their active spend.
     ACCOUNTS = [
-        # id, name, bank, bsb, type, opening_base
-        (1, "Group Operating Account",     "ANZ",     "013-003", "Operating",    28_500_000),
-        (2, "Project Drawdown Account",    "NAB",     "082-057", "Project",      12_800_000),
-        (3, "Subcontractor Payment Trust", "Westpac", "033-041", "Trust",         6_200_000),
-        (4, "Payroll & Statutory Account", "CBA",     "062-000", "Payroll",       3_900_000),
+        # id, name, bank, bsb, type, opening_base, project_id, sap_cost_center, min_balance
+        (1, "Group Operating Account",         "ANZ",     "013-003", "Operating", 32_000_000, 0,  "CC-GRP",   25_000_000),
+        (2, "Collins Arch — Project Drawdown", "NAB",     "082-057", "Project",    5_000_000, 1, "CC-MEL-01",  2_000_000),
+        (3, "VHH — Project Drawdown",          "NAB",     "082-058", "Project",    4_500_000, 2, "CC-MEL-02",  2_000_000),
+        (4, "Subcontractor Payment Trust",     "Westpac", "033-041", "Trust",       4_000_000, 0, "CC-GRP",    1_500_000),
+        (5, "Payroll & Statutory Account",     "CBA",     "062-000", "Payroll",     2_500_000, 0, "CC-GRP",    1_500_000),
     ]
+    # Expected last-day total: Group ~$28-32M + Collins ~$3-4M + VHH ~$2-4M
+    # + Trust ~$2-3M + Payroll ~$2M ≈ $37-45M — consistent with weekly_cashflow.
 
     rows = []
     today = date(2026, 4, 18)
 
-    for acct_id, name, bank, bsb, acct_type, opening_base in ACCOUNTS:
+    for acct_id, name, bank, bsb, acct_type, opening_base, project_id, cc, min_bal in ACCOUNTS:
         balance = opening_base
         for d in range(9, -1, -1):   # 10 days back to today
             day = today - timedelta(days=d)
             if day.weekday() >= 5:
                 continue  # skip weekends
 
-            # Simulate daily inflows/outflows per account type
+            # Flows calibrated so each account stays above its min_balance.
+            # Group Operating anchors the group total; project accounts sized
+            # to reflect drawdown-and-replenish patterns for active Tier 1 sites.
             if acct_type == "Operating":
-                receipts = round(random.uniform(2_500_000, 9_500_000), 0)
-                payments = round(random.uniform(4_000_000, 13_000_000), 0)
+                receipts = round(random.uniform(4_500_000, 9_000_000), 0)
+                payments = round(random.uniform(4_000_000, 9_500_000), 0)
             elif acct_type == "Project":
-                receipts = round(random.uniform(1_000_000, 5_000_000), 0)
-                payments = round(random.uniform(2_000_000, 7_500_000), 0)
+                receipts = round(random.uniform(800_000,   2_500_000), 0)
+                payments = round(random.uniform(900_000,   2_800_000), 0)
             elif acct_type == "Trust":
-                receipts = round(random.uniform(500_000, 3_000_000), 0)
-                payments = round(random.uniform(800_000, 4_000_000), 0)
+                receipts = round(random.uniform(400_000,   1_800_000), 0)
+                payments = round(random.uniform(500_000,   2_000_000), 0)
             else:  # Payroll
-                receipts = round(random.uniform(200_000, 800_000), 0)
-                payments = round(random.uniform(300_000, 2_500_000), 0)  # payroll runs
+                receipts = round(random.uniform(200_000,     600_000), 0)
+                payments = round(random.uniform(300_000,     900_000), 0)
 
-            closing = max(balance + receipts - payments, 500_000)
+            closing = max(balance + receipts - payments, min_bal)
             rows.append((
-                acct_id, name, bank, bsb, acct_type,
+                acct_id, name, bank, bsb, acct_type, project_id, cc,
                 day.isoformat(),
                 round(balance, 0),
                 round(receipts, 0),
@@ -448,6 +586,7 @@ def gen_bank_accounts():
 
     headers = [
         "account_id", "account_name", "bank", "bsb", "account_type",
+        "project_id", "sap_cost_center",
         "date", "opening_balance", "receipts", "payments", "closing_balance",
     ]
     write_csv("bank_accounts.csv", headers, rows)
@@ -657,6 +796,173 @@ def gen_statutory_compliance():
     write_csv("statutory_compliance.csv", headers, rows)
 
 
+def gen_accruals():
+    """
+    Month-end accruals journal: work completed but vendor invoice not yet received.
+    Two posted accruals for Collins Arch and Victorian Heart Hospital, sized
+    consistently with actual spend levels (~10-15% of invoiced spend at Q1 stage).
+    Accruals reverse in the following period once the real invoice is processed.
+    """
+    rows = [
+        # Collins Arch — Hickory Group formwork completion Level 12-15
+        # Spend at ~20% completion (~$37M invoiced AP). Accrual $3.5M = ~9.5% of invoiced.
+        (
+            1, 1, "CC-MEL-01", "2026-03-31", "Mar-26", "Subcontractor", "GL-6100",
+            3_500_000.00, "G11", 350_000.00,
+            "Month-end accrual — Hickory Group formwork completion Level 12-15 "
+            "(invoice expected w/c 14-Apr-26)",
+            "Hickory Group", "Posted", "2026-04-14",
+        ),
+        # Victorian Heart Hospital — Holcim concrete supply structural floors B2-G
+        # Spend at ~15% completion (~$46M invoiced AP). Accrual $5.2M = ~11.3% of invoiced.
+        (
+            2, 2, "CC-MEL-02", "2026-03-31", "Mar-26", "Materials", "GL-6200",
+            5_200_000.00, "G11", 520_000.00,
+            "Month-end accrual — Holcim concrete supply structural floors B2-G "
+            "(delivery docket received, tax invoice expected w/c 10-Apr-26)",
+            "Holcim Australia Pty Ltd", "Posted", "2026-04-10",
+        ),
+    ]
+    headers = [
+        "accrual_id", "project_id", "sap_cost_center", "accrual_date", "period",
+        "expense_type", "gl_account", "amount", "tax_code", "gst_amount",
+        "description", "vendor", "status", "reversal_date",
+    ]
+    write_csv("accruals.csv", headers, rows)
+
+
+def gen_ar_invoices():
+    """
+    Accounts Receivable — progress claims raised against the client contract.
+    Two claims per project (one paid, one outstanding), sized at ~9-10% of
+    contract_value per claim with 5% retention withheld per contract terms.
+    DSO: Government = 30 days, Private = 45 days.
+    """
+    rows = [
+        # ── Collins Arch — Stage 2 Fit-Out (contract $195M, Private, 45-day DSO) ──
+        # Claim 1: Feb progress claim — PAID
+        (
+            1, 1, "CC-MEL-01", "GL-4100", "PC-001", "Progress Claim", "2026-02-28",
+            "Progress Claim #1 — Collins Arch Stage 2 Fit-Out (February)",
+            18_525_000.00, 926_250.00, 17_598_750.00,
+            1_759_875.00, 19_358_625.00,
+            "2026-04-14", "2026-04-10", 19_358_625.00, 0.00, "Paid",
+        ),
+        # Claim 2: April progress claim — ISSUED (outstanding)
+        (
+            2, 1, "CC-MEL-01", "GL-4100", "PC-002", "Progress Claim", "2026-04-15",
+            "Progress Claim #2 — Collins Arch Stage 2 Fit-Out (April)",
+            19_500_000.00, 975_000.00, 18_525_000.00,
+            1_852_500.00, 20_377_500.00,
+            "2026-05-30", "", 0.00, 20_377_500.00, "Issued",
+        ),
+        # ── Victorian Heart Hospital Ext. (contract $325M, Government, 30-day DSO) ──
+        # Claim 1: March progress claim — PAID
+        (
+            3, 2, "CC-MEL-02", "GL-4100", "PC-001", "Progress Claim", "2026-03-31",
+            "Progress Claim #1 — Victorian Heart Hospital Ext. (March)",
+            31_200_000.00, 1_560_000.00, 29_640_000.00,
+            2_964_000.00, 32_604_000.00,
+            "2026-04-30", "2026-04-28", 32_604_000.00, 0.00, "Paid",
+        ),
+        # Claim 2: April progress claim — ISSUED (outstanding)
+        (
+            4, 2, "CC-MEL-02", "GL-4100", "PC-002", "Progress Claim", "2026-04-30",
+            "Progress Claim #2 — Victorian Heart Hospital Ext. (April)",
+            32_500_000.00, 1_625_000.00, 30_875_000.00,
+            3_087_500.00, 33_962_500.00,
+            "2026-05-30", "", 0.00, 33_962_500.00, "Issued",
+        ),
+    ]
+    headers = [
+        "ar_id", "project_id", "sap_cost_center", "gl_account",
+        "claim_number", "claim_type", "claim_date",
+        "description", "claim_amount", "retention_withheld", "net_claim",
+        "gst_amount", "total_incl_gst", "due_date", "paid_date",
+        "paid_amount", "outstanding", "status",
+    ]
+    write_csv("ar_invoices.csv", headers, rows)
+
+
+def gen_chart_of_accounts():
+    """
+    Lendlease Construction — Chart of Accounts (SAP S/4HANA structure).
+    Covers Balance Sheet and Income Statement accounts used across all projects.
+    Each account carries: type, group, normal balance, ATO tax code, BAS field,
+    cost-center requirement, and AASB/IFRS standard reference.
+    This is the master reference — every GL posting in site_expenses, sap_ledger,
+    accruals, and ar_invoices should map to an account here.
+    """
+    rows = [
+        # gl_account, account_name, account_type, account_group,
+        # normal_balance, tax_code, bas_field, cost_center_required, active, standard_ref, notes
+
+        # ── BALANCE SHEET — ASSETS ────────────────────────────────────────────
+        ("GL-1100", "Cash & Bank Accounts",                 "Asset",     "Balance Sheet", "Debit",  "N/A", "N/A", "No",  "Yes", "AASB 107",     "Group operating, project drawdown, trust, and payroll accounts"),
+        ("GL-1200", "Trade Receivables (AR)",               "Asset",     "Balance Sheet", "Debit",  "G1",  "1A",  "Yes", "Yes", "AASB 9",       "Progress claims raised and outstanding — per FBL5N customer line items"),
+        ("GL-1210", "Retention Receivable",                 "Asset",     "Balance Sheet", "Debit",  "G1",  "1A",  "Yes", "Yes", "AASB 15",      "Retention withheld by client — released on Practical Completion"),
+        ("GL-1300", "Contract Asset — Underbilled WIP",     "Asset",     "Balance Sheet", "Debit",  "N/A", "N/A", "Yes", "Yes", "AASB 15 §105", "Revenue earned (POC × contract) exceeds billings to date — current asset"),
+        ("GL-1400", "Prepayments & Accrued Revenue",        "Asset",     "Balance Sheet", "Debit",  "G11", "1B",  "Yes", "Yes", "AASB 138",     "Advance payments to suppliers and accrued income not yet invoiced"),
+        ("GL-1500", "Raw Materials Inventory",              "Asset",     "Balance Sheet", "Debit",  "G11", "1B",  "Yes", "Yes", "AASB 102",     "Materials on site — recognised as cost when consumed in construction"),
+        ("GL-1600", "Plant & Equipment (net of depreciation)", "Asset",  "Balance Sheet", "Debit",  "G11", "1B",  "No",  "Yes", "AASB 116",     "Owned plant and equipment at cost less accumulated depreciation"),
+        ("GL-1700", "Bank Guarantee Deposits",              "Asset",     "Balance Sheet", "Debit",  "N/A", "N/A", "No",  "Yes", "AASB 9",       "Cash collateral held as security for performance bonds"),
+
+        # ── BALANCE SHEET — LIABILITIES ───────────────────────────────────────
+        ("GL-2100", "Trade Payables (AP)",                  "Liability", "Balance Sheet", "Credit", "G11", "1B",  "Yes", "Yes", "AASB 9",       "Approved subcontractor and supplier invoices awaiting payment"),
+        ("GL-2200", "Retention Payable (Subcontractors)",   "Liability", "Balance Sheet", "Credit", "G11", "1B",  "Yes", "Yes", "AASB 15",      "5% retention withheld from subcontractor payments — SOP Act 2002 compliance"),
+        ("GL-2300", "Accrued Expenses",                     "Liability", "Balance Sheet", "Credit", "G11", "1B",  "Yes", "Yes", "AASB 137",     "Month-end accruals — work completed, invoice not yet received"),
+        ("GL-2310", "Contract Liability — Overbilled WIP",  "Liability", "Balance Sheet", "Credit", "N/A", "N/A", "Yes", "Yes", "AASB 15 §105", "Billings to date exceed revenue earned (POC × contract) — current liability"),
+        ("GL-2400", "GST Payable / (Receivable) — ATO",     "Liability", "Balance Sheet", "Credit", "N/A", "N/A", "No",  "Yes", "TAA 1953",     "Net BAS position: GST collected (1A) less input credits (1B). Debit = refund due"),
+        ("GL-2500", "PAYG Withholding Payable",             "Liability", "Balance Sheet", "Credit", "N/A", "N/A", "No",  "Yes", "ITAA 1997",    "Employee PAYG withheld — remitted via IAS monthly"),
+        ("GL-2600", "Payroll Tax Payable",                  "Liability", "Balance Sheet", "Credit", "N/A", "N/A", "No",  "Yes", "State PTAs",   "Multi-state payroll tax liability — VIC 4.85%+surcharge, NSW 5.45%, WA 5.50%"),
+        ("GL-2700", "Superannuation SG Payable",            "Liability", "Balance Sheet", "Credit", "N/A", "N/A", "No",  "Yes", "SGAA 1992",    "12.0% SG contributions — remitted quarterly via SuperStream"),
+        ("GL-2800", "Performance Bonds & Bank Guarantees",  "Liability", "Balance Sheet", "Credit", "N/A", "N/A", "No",  "Yes", "AASB 137",     "Contingent liabilities — ANZ/NAB BG lines; disclosed but not recognised until called"),
+        ("GL-2900", "Intercompany Payables",                "Liability", "Balance Sheet", "Credit", "N/A", "N/A", "Yes", "Yes", "AASB 124",     "Recharges from Lendlease Corporate shared services — require WBS allocation"),
+
+        # ── BALANCE SHEET — EQUITY ────────────────────────────────────────────
+        ("GL-3100", "Issued Capital",                       "Equity",    "Balance Sheet", "Credit", "N/A", "N/A", "No",  "Yes", "Corporations Act", "Ordinary shares on issue"),
+        ("GL-3200", "Retained Earnings",                    "Equity",    "Balance Sheet", "Credit", "N/A", "N/A", "No",  "Yes", "AASB 101",     "Accumulated profits less dividends paid"),
+
+        # ── INCOME STATEMENT — REVENUE ────────────────────────────────────────
+        ("GL-4100", "Progress Claim Revenue",               "Revenue",   "Income Statement", "Credit", "G1",  "1A",  "Yes", "Yes", "AASB 15",  "Revenue recognised on % completion basis — POC × contract value per project"),
+        ("GL-4200", "Variation Revenue",                    "Revenue",   "Income Statement", "Credit", "G1",  "1A",  "Yes", "Yes", "AASB 15",  "Approved Variation Orders (VOs) — separate from original contract sum"),
+        ("GL-4300", "Provisional Sum Revenue",              "Revenue",   "Income Statement", "Credit", "G1",  "1A",  "Yes", "Yes", "AASB 15",  "PS items confirmed and instructed by superintendent"),
+        ("GL-4400", "Retention Released Revenue",           "Revenue",   "Income Statement", "Credit", "G1",  "1A",  "Yes", "Yes", "AASB 15",  "Retention released on Practical Completion or DLP expiry"),
+        ("GL-4900", "Other Revenue",                        "Revenue",   "Income Statement", "Credit", "G1",  "1A",  "Yes", "Yes", "AASB 15",  "Miscellaneous project income — dayworks, hire-back of plant, etc."),
+
+        # ── INCOME STATEMENT — DIRECT COSTS ──────────────────────────────────
+        ("GL-5001", "Direct Labour — Own Workforce",        "Expense",   "Income Statement", "Debit", "G11", "1B",  "Yes", "Yes", "AASB 102",  "Directly employed site labour — wages, allowances, super included via payroll"),
+        ("GL-5002", "Subcontract Management Fee",           "Expense",   "Income Statement", "Debit", "G11", "1B",  "Yes", "Yes", "AASB 102",  "Head contractor site supervision cost allocated to project"),
+
+        # ── INCOME STATEMENT — PROJECT COSTS ─────────────────────────────────
+        ("GL-6100", "Subcontract Labour & Services",        "Expense",   "Income Statement", "Debit", "G11", "1B",  "Yes", "Yes", "AASB 102",  "External subcontractors — trade accounts, Security of Payment Act applies"),
+        ("GL-6200", "Raw Materials & Consumables",          "Expense",   "Income Statement", "Debit", "G11", "1B",  "Yes", "Yes", "AASB 102",  "Concrete, steel, formwork, consumables — trade account or site purchase"),
+        ("GL-6300", "Equipment & Plant Hire",               "Expense",   "Income Statement", "Debit", "G11", "1B",  "Yes", "Yes", "AASB 16",   "Hired cranes, excavators, hoists — Coates/Kennards/Tutt Bryant"),
+        ("GL-6400", "Professional & Consulting Fees",       "Expense",   "Income Statement", "Debit", "G11", "1B",  "Yes", "Yes", "AASB 138",  "Engineers, surveyors, architects, project managers — Concur or direct invoice"),
+        ("GL-6500", "Regulatory Fees & Permit Costs",       "Expense",   "Income Statement", "Debit", "G12", "N/A", "Yes", "Yes", "TAA 1953",  "Government charges — GST-free (G12). WorkSafe, EPA, building permits, council fees"),
+        ("GL-6600", "Travel & Accommodation",               "Expense",   "Income Statement", "Debit", "G11", "1B",  "Yes", "Yes", "AASB 102",  "Site travel, flights, accommodation — Concur expense policy applies"),
+        ("GL-6700", "Site Overhead & Preliminaries",        "Expense",   "Income Statement", "Debit", "G11", "1B",  "Yes", "Yes", "AASB 102",  "Site sheds, fencing, security, waste disposal, temporary services"),
+        ("GL-6800", "Insurance & Bonds",                    "Expense",   "Income Statement", "Debit", "G12", "N/A", "Yes", "Yes", "AASB 137",  "Project-specific insurance, PI, public liability — GST-free for input tax"),
+
+        # ── INCOME STATEMENT — OVERHEADS ──────────────────────────────────────
+        ("GL-7100", "Head Office Salaries & Oncosts",       "Expense",   "Income Statement", "Debit", "N/A", "N/A", "No",  "Yes", "AASB 119",  "Corporate and shared services staff — not directly allocable to projects"),
+        ("GL-7200", "IT & Systems",                         "Expense",   "Income Statement", "Debit", "G11", "1B",  "No",  "Yes", "AASB 138",  "SAP licensing, Procore, Concur, O365 — shared services recharge"),
+        ("GL-7300", "Legal & Compliance",                   "Expense",   "Income Statement", "Debit", "G11", "1B",  "No",  "Yes", "AASB 137",  "Contract disputes, regulatory compliance, employment matters"),
+        ("GL-7400", "Finance Costs — Interest & Fees",      "Expense",   "Income Statement", "Debit", "G12", "N/A", "No",  "Yes", "AASB 9",    "RCF interest, bank guarantee fees, facility arrangement costs — financial instrument"),
+
+        # ── TAX ───────────────────────────────────────────────────────────────
+        ("GL-8100", "Income Tax Expense",                   "Expense",   "Income Statement", "Debit", "N/A", "N/A", "No",  "Yes", "AASB 112",  "Current tax — 30% corporate rate on taxable income"),
+        ("GL-8200", "Deferred Tax Asset / (Liability)",     "Asset",     "Balance Sheet",    "Debit", "N/A", "N/A", "No",  "Yes", "AASB 112",  "Temporary differences — construction contract timing, accelerated depreciation"),
+    ]
+
+    headers = [
+        "gl_account", "account_name", "account_type", "account_group",
+        "normal_balance", "tax_code", "bas_field", "cost_center_required",
+        "active", "standard_ref", "notes",
+    ]
+    write_csv("chart_of_accounts.csv", headers, rows)
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
@@ -670,5 +976,8 @@ if __name__ == "__main__":
     gen_bank_accounts()
     gen_sap_legacy_extract()
     gen_statutory_compliance()
+    gen_accruals()
+    gen_ar_invoices()
+    gen_chart_of_accounts()
     print(f"\nDone. Files saved to: {OUTPUT_DIR.resolve()}")
     print("Run `streamlit run app.py` to launch the dashboard.")

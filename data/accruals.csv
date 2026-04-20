@@ -1,0 +1,3 @@
+accrual_id,project_id,sap_cost_center,accrual_date,period,expense_type,gl_account,amount,tax_code,gst_amount,description,vendor,status,reversal_date
+1,1,CC-MEL-01,2026-03-31,Mar-26,Subcontractor,GL-6100,3500000.0,G11,350000.0,Month-end accrual — Hickory Group formwork completion Level 12-15 (invoice expected w/c 14-Apr-26),Hickory Group,Posted,2026-04-14
+2,2,CC-MEL-02,2026-03-31,Mar-26,Materials,GL-6200,5200000.0,G11,520000.0,"Month-end accrual — Holcim concrete supply structural floors B2-G (delivery docket received, tax invoice expected w/c 10-Apr-26)",Holcim Australia Pty Ltd,Posted,2026-04-10
