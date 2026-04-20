@@ -443,10 +443,10 @@ if page == "Daily Cash Position":
         t_close = today_accts["closing_balance"].sum()
     elif not actual_cf.empty:
         latest = actual_cf.iloc[-1]
-        t_open  = latest["opening_balance"]
         t_in    = latest["cash_in"]
         t_out   = latest["cash_out"]
         t_close = latest["closing_balance"]
+        t_open  = t_close - latest["net_movement"]
     else:
         t_open = t_in = t_out = t_close = 0
 
