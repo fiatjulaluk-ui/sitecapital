@@ -781,6 +781,7 @@ elif page == "Reconciliation Control":
         if src_col:
             col_names.insert(col_names.index("Comment"), "Source System")
         disp.columns = col_names
+        disp.index = range(1, len(disp) + 1)
         st.dataframe(style_dollars(disp, ["Amount"]), use_container_width=True)
         st.download_button("Export Exception Lines", to_csv_bytes(flagged), "recon_exceptions.csv", "text/csv")
 
