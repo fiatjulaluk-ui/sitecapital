@@ -2395,6 +2395,62 @@ elif page == "WIP Report":
     ax.legend(handles=legend_els, fontsize=7.5, ncol=4, loc="upper right")
     plt.tight_layout(pad=1.2); st.pyplot(fig, use_container_width=True); plt.close()
 
+    # ── Physical POC Override — QS Monthly Survey ────────────────────────────
+    st.divider()
+    st.markdown("#### Physical POC Override — QS Monthly Survey")
+    st.caption(
+        "Tier 1 standard: QS walks the site ~20th of each month and certifies a physical % complete. "
+        "Enter that figure below. The dashboard calculates the **Required Cost Accrual** — the "
+        "'Subbie Lag' journal Finance must post to GL-2300 before period close so the ledger "
+        "reflects physical reality, not just matched AP invoices."
+    )
+
+    _n  = len(wip_df)
+    _nc = min(_n, 3)
+    _input_cols = st.columns(_nc)
+    _poc_overrides = {}
+    for _i, (_, _row) in enumerate(wip_df.iterrows()):
+        _default = round(float(_row["poc"]) * 100, 2)
+        _entered = _input_cols[_i % _nc].number_input(
+            _row["project_name"].split("—")[0].strip()[:24],
+            min_value=0.0, max_value=100.0,
+            value=_default, step=0.1, format="%.2f",
+            key=f"phys_poc_{int(_row['project_id'])}",
+            help=f"Cost-to-cost POC: {_default:.2f}% — enter QS-surveyed physical % to override",
+        )
+        _poc_overrides[int(_row["project_id"])] = _entered / 100.0
+
+    _adj_rows = []
+    for _, _row in wip_df.iterrows():
+        _phys     = _poc_overrides.get(int(_row["project_id"]), float(_row["poc"]))
+        _rev_p    = _phys * _row["contract_value"]
+        _req_accr = max((_phys * _row["eac"]) - _row["actual_costs"], 0)
+        _wip_p    = _rev_p - _row["billings_to_date"]
+        _adj_rows.append({
+            "Project":            _row["project_name"].split("—")[0].strip(),
+            "Ledger POC":         f"{_row['poc']*100:.2f}%",
+            "Physical POC":       f"{_phys*100:.2f}%",
+            "Ledger Costs":       fmt_m(_row["actual_costs"]),
+            "Revenue (Physical)": fmt_m(_rev_p),
+            "Required Accrual":   fmt_m(_req_accr),
+            "WIP (Physical)":     fmt_m(_wip_p),
+        })
+
+    st.dataframe(pd.DataFrame(_adj_rows).set_index("Project"), use_container_width=True)
+
+    _total_accrual = sum(
+        max((_poc_overrides.get(int(r["project_id"]), float(r["poc"])) * r["eac"]) - r["actual_costs"], 0)
+        for _, r in wip_df.iterrows()
+    )
+    if _total_accrual > 100_000:
+        st.warning(
+            f"**Required month-end accrual: {fmt_m(_total_accrual)}** — work physically performed "
+            f"but not yet invoiced by subcontractors (Subbie Lag). "
+            f"Post to GL-2300 Accrued Expenses / GL-6100 Subcontract Costs before period close."
+        )
+    else:
+        st.success("Ledger costs consistent with physical progress — no material accrual required.")
+
     st.download_button("Export WIP Report", to_csv_bytes(wip_df[[
         "project_name","contract_value","eac","ap_costs","accrual_costs","actual_costs",
         "poc","revenue_earned","billings_to_date","wip","wip_type"
