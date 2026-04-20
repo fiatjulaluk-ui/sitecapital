@@ -224,10 +224,16 @@ with st.sidebar:
     st.divider()
 
     page = st.radio("Navigation", [
-        "Executive Pulse", "Portfolio Health", "Reconciliation",
-        "Cash & Covenant", "Vendor Risk", "Audit Register",
-        "Statutory Compliance", "SAP Transformation"
-    ], index=1)
+        "Daily Cash Position",
+        "Cash Flow & Covenant",
+        "Payments & Vendor Risk",
+        "Reconciliation Control",
+        "Statutory Compliance",
+        "Audit & Controls",
+        "Portfolio Health",
+        "SAP Integration",
+        "Board Summary",
+    ], index=0)
 
     st.divider()
     with st.expander("Upload Data Sources"):
@@ -259,7 +265,7 @@ with st.sidebar:
     dr     = st.date_input("Date Range", value=(mn, mx), min_value=mn, max_value=mx)
     d_from = pd.Timestamp(dr[0] if isinstance(dr, (list,tuple)) and len(dr)==2 else mn)
     d_to   = pd.Timestamp(dr[1] if isinstance(dr, (list,tuple)) and len(dr)==2 else mx)
-    st.caption("As at 18 April 2026 · Confidential · All figures ex-GST")
+    st.caption("Treasury Operations · Confidential · All figures ex-GST")
 
 # ── Filter helpers ────────────────────────────────────────────────────────────
 
@@ -346,12 +352,154 @@ def build_exec_summary(context="pulse"):
     return "  \n".join(s)
 
 
+# ── Smart alerts engine ───────────────────────────────────────────────────────
+
+def generate_alerts(exp, fcast, fac, wcf):
+    alerts = []
+    actual = wcf[wcf["type"] == "Actual"]
+    if not actual.empty:
+        closing = actual.iloc[-1]["closing_balance"]
+        min_cov = fac["covenant_min_cash_aud"].max()
+        if closing < min_cov:
+            alerts.append(("CRITICAL", f"Cash {fmt_m(closing)} is BELOW covenant threshold {fmt_m(min_cov)}"))
+        elif closing < min_cov * 1.25:
+            alerts.append(("WARNING", f"Cash buffer narrowing — only {fmt_m(closing - min_cov)} above covenant floor"))
+
+    fc = fcast.copy()
+    if "expected_cash_in" in fc.columns and "expected_cash_out" in fc.columns:
+        fc["net"] = fc["expected_cash_in"] - fc["expected_cash_out"]
+        neg = fc[fc["net"] < 0]
+        if not neg.empty:
+            alerts.append(("WARNING", f"{len(neg)} forecast period(s) show negative net cash flow"))
+
+    overdue = exp[
+        (exp["status"] == "Pending") &
+        (exp["booking_date"] < pd.Timestamp.today() - pd.Timedelta(days=7))
+    ]
+    if not overdue.empty:
+        alerts.append(("WARNING", f"{len(overdue)} supplier payment(s) pending >7 days — AP review required"))
+
+    return alerts
+
+def show_alerts(alerts):
+    if not alerts:
+        st.success("No active alerts — treasury position stable.")
+        return
+    for level, msg in alerts:
+        if level == "CRITICAL":
+            st.error(f"🚨 {msg}")
+        else:
+            st.warning(f"⚠ {msg}")
+
+
+# ── Scenario simulation engine ────────────────────────────────────────────────
+
+def simulate_spend_scenarios(fcast, wcf, fac, scenarios=(0.0, 0.05, 0.10, 0.20)):
+    actual = wcf[wcf["type"] == "Actual"]
+    if actual.empty or "expected_cash_in" not in fcast.columns:
+        return None
+    start_cash = actual.iloc[-1]["closing_balance"]
+    covenant   = fac["covenant_min_cash_aud"].max()
+    results    = []
+    for scn in scenarios:
+        df = fcast.copy().sort_values("forecast_date")
+        df["adj_out"] = df["expected_cash_out"] * (1 + scn)
+        df["net"]     = df["expected_cash_in"] - df["adj_out"]
+        cash, balances = start_cash, []
+        for _, row in df.iterrows():
+            cash += row["net"]
+            balances.append(cash)
+        df["balance"] = balances
+        breach = next((i + 1 for i, v in enumerate(balances) if v <= covenant), None)
+        results.append({
+            "scenario":    f"+{int(scn * 100)}%",
+            "final_cash":  balances[-1],
+            "breach":      breach is not None,
+            "breach_week": breach or "Safe",
+            "runway":      breach or len(balances),
+            "df":          df,
+        })
+    return results
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 #  PAGE 1 — EXECUTIVE PULSE
 # ══════════════════════════════════════════════════════════════════════════════
 
-if page == "Executive Pulse":
-    page_header("Executive Pulse", "Board & CFO view — consolidated group position · 18 April 2026 · All figures ex-GST")
+if page == "Daily Cash Position":
+    page_header("Daily Cash Position", "Live treasury snapshot · Bank balances · Liquidity monitoring · 18 April 2026")
+
+    show_alerts(generate_alerts(expenses, forecasts, facilities, weekly_cf))
+    st.divider()
+
+    today_str  = "2026-04-18"
+    today_accts = bank_accts[bank_accts["date"].dt.strftime("%Y-%m-%d") == today_str].copy()
+    actual_cf  = weekly_cf[weekly_cf["type"] == "Actual"]
+
+    if not today_accts.empty:
+        t_open  = today_accts["opening_balance"].sum()
+        t_in    = today_accts["receipts"].sum()
+        t_out   = today_accts["payments"].sum()
+        t_close = today_accts["closing_balance"].sum()
+    elif not actual_cf.empty:
+        latest = actual_cf.iloc[-1]
+        t_open  = latest["opening_balance"]
+        t_in    = latest["cash_in"]
+        t_out   = latest["cash_out"]
+        t_close = latest["closing_balance"]
+    else:
+        t_open = t_in = t_out = t_close = 0
+
+    headroom = (facilities["limit_aud"] - facilities["drawn_aud"]).sum()
+    min_cov  = facilities["covenant_min_cash_aud"].max()
+    net_day  = t_in - t_out
+
+    c1, c2, c3, c4, c5 = st.columns(5)
+    c1.metric("Opening Balance",   fmt_m(t_open),  delta="Today's start")
+    c2.metric("Cash In",           fmt_m(t_in),    delta="Receipts today")
+    c3.metric("Cash Out",          fmt_m(t_out),   delta="Payments today",  delta_color="inverse")
+    c4.metric("Closing Balance",   fmt_m(t_close), delta=f"{fmt_m(net_day)} net",
+              delta_color="normal" if net_day >= 0 else "inverse")
+    c5.metric("Facility Headroom", fmt_m(headroom), delta="vs covenant min")
+
+    st.divider()
+    st.markdown("#### Bank Account Positions — 18 April 2026")
+    if not today_accts.empty:
+        disp_b = today_accts[["account_name","bank","account_type",
+                               "opening_balance","receipts","payments","closing_balance"]].copy()
+        disp_b.columns = ["Account","Bank","Type","Opening","Cash In","Cash Out","Closing"]
+        _amt_b = ["Opening","Cash In","Cash Out","Closing"]
+        bank_styled = (
+            disp_b.set_index("Account").style
+            .format({c: "${:,.0f}" for c in _amt_b})
+            .set_properties(subset=_amt_b, **{"text-align": "right"})
+        )
+        st.dataframe(bank_styled, use_container_width=True)
+    else:
+        st.info("No daily account data for today.")
+
+    st.divider()
+    st.markdown("#### 7-Week Cash Balance Trend")
+    trend_df = actual_cf.tail(7)
+    if not trend_df.empty:
+        fig, ax = plt.subplots(figsize=(10, 3.5))
+        ax.fill_between(trend_df["week_start"], trend_df["closing_balance"] / 1e6,
+                        alpha=0.15, color=BLUE)
+        ax.plot(trend_df["week_start"], trend_df["closing_balance"] / 1e6,
+                color=BLUE, lw=2.2, marker="o", ms=5, label="Closing Balance")
+        ax.axhline(min_cov / 1e6, color=RED, lw=1.3, linestyle="--",
+                   label=f"Covenant Floor {fmt_m(min_cov)}")
+        style_ax(ax, ylabel="AUD (M)", yticker=millions_fmt())
+        ax.legend(fontsize=8)
+        ax.xaxis.set_major_formatter(mdates.DateFormatter("%d %b"))
+        plt.xticks(rotation=20, ha="right", fontsize=7.5)
+        plt.tight_layout(pad=1.2)
+        st.pyplot(fig, use_container_width=True)
+        plt.close()
+
+
+elif page == "Board Summary":
+    page_header("Board Summary", "CFO view — consolidated group position · 18 April 2026 · All figures ex-GST")
     exec_summary(build_exec_summary("pulse"))
 
     total_budget = projects["project_budget"].sum()
@@ -494,8 +642,8 @@ elif page == "Portfolio Health":
 #  PAGE 3 — RECONCILIATION
 # ══════════════════════════════════════════════════════════════════════════════
 
-elif page == "Reconciliation":
-    page_header("Reconciliation", "SAP S/4HANA ledger vs site expenses — variances > $5,000 highlighted")
+elif page == "Reconciliation Control":
+    page_header("Reconciliation Control", "SAP S/4HANA ledger vs site expenses — variances > $5,000 highlighted")
     exec_summary(build_exec_summary("recon"))
 
     exp_f = fe(expenses)
@@ -639,8 +787,9 @@ elif page == "Reconciliation":
 #  PAGE 4 — CASH & COVENANT
 # ══════════════════════════════════════════════════════════════════════════════
 
-elif page == "Cash & Covenant":
-    page_header("Cash & Covenant", "Liquidity headroom · Covenant compliance · 16-week runway simulation")
+elif page == "Cash Flow & Covenant":
+    page_header("Cash Flow & Covenant", "Liquidity headroom · Covenant compliance · Scenario stress-testing")
+    show_alerts(generate_alerts(expenses, forecasts, facilities, weekly_cf))
     exec_summary(build_exec_summary("covenant"))
 
     actual_cf = weekly_cf[weekly_cf["type"] == "Actual"]
@@ -765,13 +914,61 @@ elif page == "Cash & Covenant":
     st.pyplot(fig, use_container_width=True)
     plt.close()
 
+    # ── Scenario stress-testing ───────────────────────────────────────────────
+    st.divider()
+    st.markdown("#### Scenario Stress-Testing — Cost Escalation Impact")
+    st.caption("Adjusts forecast outflows by selected %, recalculates cash runway and covenant breach risk.")
+
+    scn_pcts = st.multiselect(
+        "Stress scenarios (spend increase %)",
+        options=[0, 5, 10, 15, 20, 30],
+        default=[0, 10, 20],
+        key="scn_select",
+    )
+    if scn_pcts:
+        scn_results = simulate_spend_scenarios(
+            forecasts, weekly_cf, facilities,
+            scenarios=[p / 100 for p in sorted(scn_pcts)]
+        )
+        if scn_results:
+            summary_rows = [{
+                "Scenario":        r["scenario"],
+                "Final Cash":      r["final_cash"],
+                "Runway (periods)": r["runway"],
+                "Covenant Breach": "⚠ Yes" if r["breach"] else "✅ Safe",
+                "Breach Period":   r["breach_week"],
+            } for r in scn_results]
+            scn_summary = pd.DataFrame(summary_rows)
+            _amt_scn = ["Final Cash"]
+            scn_styled = (
+                scn_summary.set_index("Scenario").style
+                .format({"Final Cash": "${:,.0f}"})
+                .set_properties(subset=["Final Cash"], **{"text-align": "right"})
+            )
+            st.dataframe(scn_styled, use_container_width=True)
+
+            chart_scn = pd.DataFrame()
+            for r in scn_results:
+                tmp = r["df"][["forecast_date","balance"]].rename(columns={"balance": r["scenario"]}).set_index("forecast_date")
+                chart_scn = tmp if chart_scn.empty else chart_scn.join(tmp, how="outer")
+            st.line_chart(chart_scn)
+
+            risky = [r for r in scn_results if r["breach"]]
+            if risky:
+                worst = sorted(risky, key=lambda r: r["runway"])[0]
+                st.error(f"🚨 Highest-risk scenario {worst['scenario']} breaches covenant in period {worst['breach_week']}.")
+            else:
+                st.success("All tested scenarios remain within covenant limits.")
+        else:
+            st.info("Insufficient forecast data for simulation.")
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 #  PAGE 5 — VENDOR RISK
 # ══════════════════════════════════════════════════════════════════════════════
 
-elif page == "Vendor Risk":
-    page_header("Vendor Risk", "Spend concentration · Flagged transactions · Payment status")
+elif page == "Payments & Vendor Risk":
+    page_header("Payments & Vendor Risk", "Spend concentration · Flagged transactions · Payment status")
     exec_summary(build_exec_summary("vendor"))
 
     exp_f = fe(expenses).merge(projects[["project_id","project_name"]], on="project_id")
@@ -846,8 +1043,8 @@ elif page == "Vendor Risk":
 #  PAGE 6 — AUDIT REGISTER
 # ══════════════════════════════════════════════════════════════════════════════
 
-elif page == "Audit Register":
-    page_header("Audit Register", "Open items prioritised by urgency · Filter by module and status")
+elif page == "Audit & Controls":
+    page_header("Audit & Controls", "Open items prioritised by urgency · Filter by module and status")
     exec_summary(build_exec_summary("audit"))
 
     aud_f = fa(audit).merge(projects[["project_id","project_name"]], on="project_id")
@@ -1047,7 +1244,7 @@ elif page == "Statutory Compliance":
 #  PAGE 8 — SAP TRANSFORMATION
 # ══════════════════════════════════════════════════════════════════════════════
 
-elif page == "SAP Transformation":
+elif page == "SAP Integration":
     page_header("SAP Dual-Run Validation", "Automated legacy ↔ S/4HANA comparison · Migration readiness scoring")
 
     st.info("**How to use:** Run `python generate_csv.py` to generate `data/sap_legacy_extract.csv` as a simulated legacy extract, then upload it below — or supply your own real export.")
