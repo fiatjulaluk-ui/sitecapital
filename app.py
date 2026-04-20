@@ -140,6 +140,21 @@ def fmt(v):   return f"${v:,.0f}"
 def fmt_m(v): return f"${v/1e6:,.1f}M"
 def to_csv_bytes(df): return df.to_csv(index=False).encode()
 
+def _dollar(v):
+    if not isinstance(v, (int, float)) or pd.isna(v):
+        return "" if pd.isna(v) else str(v)
+    return f"(${abs(v):,.0f})" if v < 0 else f"${v:,.0f}"
+
+def _neg_red(v):
+    return "color: #C0392B; font-weight:600" if isinstance(v, (int, float)) and v < 0 else ""
+
+def style_dollars(df, cols):
+    return (
+        df.style
+        .format({c: _dollar for c in cols})
+        .applymap(_neg_red, subset=cols)
+    )
+
 def load_csv(name, uploaded=None):
     if uploaded is not None:
         return pd.read_csv(uploaded)
@@ -469,12 +484,7 @@ if page == "Daily Cash Position":
                                "opening_balance","receipts","payments","closing_balance"]].copy()
         disp_b.columns = ["Account","Bank","Type","Opening","Cash In","Cash Out","Closing"]
         _amt_b = ["Opening","Cash In","Cash Out","Closing"]
-        bank_styled = (
-            disp_b.set_index("Account").style
-            .format({c: "${:,.0f}" for c in _amt_b})
-            .set_properties(subset=_amt_b, **{"text-align": "right"})
-        )
-        st.dataframe(bank_styled, use_container_width=True)
+        st.dataframe(style_dollars(disp_b.set_index("Account"), _amt_b), use_container_width=True)
     else:
         st.info("No daily account data for today.")
 
@@ -771,15 +781,7 @@ elif page == "Reconciliation Control":
         if src_col:
             col_names.insert(col_names.index("Comment"), "Source System")
         disp.columns = col_names
-        col_config = {
-            "Booking Date":  st.column_config.TextColumn("Booking Date",  width="small"),
-            "Project ID":    st.column_config.TextColumn("Project ID",    width="small"),
-            "Expense Type":  st.column_config.TextColumn("Expense Type",  width="small"),
-            "Amount":        st.column_config.NumberColumn("Amount",      width="small", format="$%,.0f"),
-            "Status":        st.column_config.TextColumn("Status",        width="small"),
-            "Source System": st.column_config.TextColumn("Source System", width="small"),
-        }
-        st.dataframe(disp, column_config=col_config, use_container_width=True)
+        st.dataframe(style_dollars(disp, ["Amount"]), use_container_width=True)
         st.download_button("Export Exception Lines", to_csv_bytes(flagged), "recon_exceptions.csv", "text/csv")
 
 
@@ -851,21 +853,10 @@ elif page == "Cash Flow & Covenant":
         disp["movement"] = disp["closing_balance"] - disp["opening_balance"]
         disp.columns = ["Account Name","Bank","BSB","Type",
                         "Opening Balance","Receipts","Payments","Closing Balance","Net Movement"]
+        _amt_ba = ["Opening Balance","Receipts","Payments","Closing Balance","Net Movement"]
         st.dataframe(
-            disp,
-            column_config={
-                "Account Name":    st.column_config.TextColumn("Account Name",    width="medium"),
-                "Bank":            st.column_config.TextColumn("Bank",            width="small"),
-                "BSB":             st.column_config.TextColumn("BSB",             width="small"),
-                "Type":            st.column_config.TextColumn("Type",            width="small"),
-                "Opening Balance": st.column_config.NumberColumn("Opening Balance", format="$%,.0f"),
-                "Receipts":        st.column_config.NumberColumn("Receipts",        format="$%,.0f"),
-                "Payments":        st.column_config.NumberColumn("Payments",        format="$%,.0f"),
-                "Closing Balance": st.column_config.NumberColumn("Closing Balance", format="$%,.0f"),
-                "Net Movement":    st.column_config.NumberColumn("Net Movement",    format="$%,.0f"),
-            },
+            style_dollars(disp.set_index("Account Name"), _amt_ba),
             use_container_width=True,
-            hide_index=True,
         )
 
         st.markdown("#### 10-Day Rolling Balance by Account")
@@ -939,13 +930,7 @@ elif page == "Cash Flow & Covenant":
                 "Breach Period":   r["breach_week"],
             } for r in scn_results]
             scn_summary = pd.DataFrame(summary_rows)
-            _amt_scn = ["Final Cash"]
-            scn_styled = (
-                scn_summary.set_index("Scenario").style
-                .format({"Final Cash": "${:,.0f}"})
-                .set_properties(subset=["Final Cash"], **{"text-align": "right"})
-            )
-            st.dataframe(scn_styled, use_container_width=True)
+            st.dataframe(style_dollars(scn_summary.set_index("Scenario"), ["Final Cash"]), use_container_width=True)
 
             chart_scn = pd.DataFrame()
             for r in scn_results:
@@ -1013,12 +998,7 @@ elif page == "Payments & Vendor Risk":
         .groupby(["vendor","status"])["amount"].sum().unstack(fill_value=0).reset_index()
     )
     amt_cols = [c for c in status_df.columns if c != "vendor"]
-    status_styled = (
-        status_df.set_index("vendor").style
-        .format({c: "${:,.0f}" for c in amt_cols})
-        .set_properties(subset=amt_cols, **{"text-align": "right"})
-    )
-    st.dataframe(status_styled, use_container_width=True)
+    st.dataframe(style_dollars(status_df.set_index("vendor"), amt_cols), use_container_width=True)
 
     flagged = exp_f[exp_f["comment"].notna() & (exp_f["comment"] != "")].copy()
     if not flagged.empty:
@@ -1028,14 +1008,7 @@ elif page == "Payments & Vendor Risk":
                 .agg(flags=("comment","count"), value=("amount","sum"))
                 .sort_values("flags", ascending=False).reset_index())
         risk.columns = ["Vendor", "Flag Count", "Flagged Value"]
-        st.dataframe(
-            risk,
-            column_config={
-                "Flag Count":   st.column_config.NumberColumn("Flag Count",   width="small"),
-                "Flagged Value":st.column_config.NumberColumn("Flagged Value",width="small", format="$%,.0f"),
-            },
-            use_container_width=True,
-        )
+        st.dataframe(style_dollars(risk.set_index("Vendor"), ["Flagged Value"]), use_container_width=True)
         st.download_button("Export Flagged Vendors", to_csv_bytes(flagged), "vendor_exceptions.csv", "text/csv")
 
 
@@ -1325,19 +1298,8 @@ elif page == "SAP Integration":
         exc_display.columns = ["Ledger ID","Project ID","GL Account","Legacy GL",
                                 "S/4HANA Amount","Legacy Amount","Variance","Migration Status","Vendor"]
         _amt_exc = ["S/4HANA Amount", "Legacy Amount", "Variance"]
-        exc_styled = (
-            exc_display.set_index("Ledger ID").style
-            .format({c: "${:,.0f}" for c in _amt_exc})
-            .set_properties(subset=_amt_exc, **{"text-align": "right"})
-        )
         st.dataframe(
-            exc_styled,
-            column_config={
-                "Project ID":      st.column_config.TextColumn("Project ID",      width="small"),
-                "GL Account":      st.column_config.TextColumn("GL Account",      width="small"),
-                "Legacy GL":       st.column_config.TextColumn("Legacy GL",       width="small"),
-                "Migration Status":st.column_config.TextColumn("Migration Status",width="small"),
-            },
+            style_dollars(exc_display.set_index("Ledger ID"), _amt_exc),
             use_container_width=True,
         )
         st.download_button("Export Exception Report", to_csv_bytes(exceptions), "migration_exceptions.csv", "text/csv")
