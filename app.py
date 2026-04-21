@@ -151,7 +151,6 @@ div[data-testid="metric-container"] div,
 /* Expanders */
 [data-testid="stExpander"] {{
     background-color: {CARD_BG} !important;
-    border-color: {CHART_SPINE} !important;
 }}
 [data-testid="stExpander"] summary span {{
     color: {TEXT_MAIN} !important;
@@ -2380,7 +2379,7 @@ elif page == "WIP Report":
             wc5.metric("Billings to Date", fmt_m(row["billings_to_date"]))
             wc6.metric("WIP",              fmt_m(wip_val),
                        delta=wip_label,
-                       delta_color="normal" if wip_val >= 0 else "inverse")
+                       delta_color="off")
             st.progress(min(row["poc"], 1.0), text=f"POC: {poc_pct:.1f}%")
 
     st.divider()
