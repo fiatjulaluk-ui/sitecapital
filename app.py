@@ -2551,7 +2551,20 @@ elif page == "Chart of Accounts":
                 disp.columns = ["GL Account","Account Name","Normal Balance",
                                  "Tax Code","BAS Field","CC Required",
                                  "Standard","Notes"]
-                st.dataframe(disp.set_index("GL Account"), use_container_width=True)
+                st.dataframe(
+                    disp.set_index("GL Account"),
+                    use_container_width=True,
+                    column_config={
+                        "GL Account":     st.column_config.TextColumn("GL Account",     width="small"),
+                        "Account Name":   st.column_config.TextColumn("Account Name",   width="large"),
+                        "Normal Balance": st.column_config.TextColumn("Normal Balance", width="small"),
+                        "Tax Code":       st.column_config.TextColumn("Tax Code",       width="small"),
+                        "BAS Field":      st.column_config.TextColumn("BAS Field",      width="small"),
+                        "CC Required":    st.column_config.TextColumn("CC Required",    width="small"),
+                        "Standard":       st.column_config.TextColumn("Standard",       width="small"),
+                        "Notes":          st.column_config.TextColumn("Notes",          width="medium"),
+                    },
+                )
 
     st.divider()
 
