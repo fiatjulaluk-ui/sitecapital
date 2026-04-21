@@ -996,6 +996,7 @@ elif page == "Reconciliation Control":
 
     exp_f = fe(expenses)
     led_f = fl(ledger)
+    led_f = led_f[led_f["gl_account"].isin(["GL-6100","GL-6200","GL-6300","GL-6400","GL-6500","GL-6600"])]
     ea = exp_f.groupby("project_id")["amount"].sum().reset_index(name="exp_total")
     la = led_f.groupby("project_id")["amount"].sum().reset_index(name="led_total")
     rc = ea.merge(la, on="project_id", how="outer").fillna(0)
@@ -1073,6 +1074,7 @@ elif page == "Reconciliation Control":
 
     # Compare actual GL variance against threshold
     led_f_gl  = fl(ledger)
+    led_f_gl = led_f_gl[led_f_gl["gl_account"].isin(["GL-6100","GL-6200","GL-6300","GL-6400","GL-6500","GL-6600"])]
     exp_f_gl  = fe(expenses)
 
     # Map expense SAP cost codes → GL accounts for comparison
