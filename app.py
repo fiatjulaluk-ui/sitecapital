@@ -315,6 +315,7 @@ with st.sidebar:
     st.divider()
 
     page = st.radio("Navigation", [
+        "Board Summary",
         "Daily Cash Position",
         "Cash Flow & Covenant",
         "Payments & Vendor Risk",
@@ -322,12 +323,11 @@ with st.sidebar:
         "Statutory Compliance",
         "Audit & Controls",
         "Portfolio Health",
-        "SAP Integration",
-        "Board Summary",
         "Revenue & POC",
+        "WIP Report",
         "AR & Collections",
         "Retention Register",
-        "WIP Report",
+        "SAP Integration",
         "Chart of Accounts",
         "Data Management",
     ], index=0)
