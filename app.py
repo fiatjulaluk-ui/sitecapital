@@ -365,16 +365,21 @@ with st.sidebar:
     mn, mx      = all_dates.min().date(), all_dates.max().date()
     _today      = datetime.date.today()
     _default_to = min(mx, _today)
-    d_from = pd.Timestamp(st.date_input(
-        "From", value=mn, min_value=mn, max_value=mx,
-        format="DD/MM/YYYY", key="d_from",
-    ))
-    d_to   = pd.Timestamp(st.date_input(
-        "To", value=_default_to, min_value=mn, max_value=mx,
-        format="DD/MM/YYYY", key="d_to",
-    ))
+
+    def _parse_date(s, fallback):
+        for fmt in ("%d/%m/%Y", "%d-%m-%Y", "%Y-%m-%d"):
+            try:
+                return datetime.datetime.strptime(s.strip(), fmt).date()
+            except ValueError:
+                pass
+        return fallback
+
+    _from_str = st.text_input("From (DD/MM/YYYY)", value=mn.strftime("%d/%m/%Y"), key="d_from")
+    _to_str   = st.text_input("To (DD/MM/YYYY)",   value=_default_to.strftime("%d/%m/%Y"), key="d_to")
+    d_from    = pd.Timestamp(_parse_date(_from_str, mn))
+    d_to      = pd.Timestamp(_parse_date(_to_str, _default_to))
     if d_to < d_from:
-        st.warning("'To' date is before 'From' — adjusting.")
+        st.warning("'To' date is before 'From'.")
     st.caption("Treasury Operations · Confidential · Spend figures ex-GST · GST captured via ATO tax codes")
 
 # ── Data templates (realistic system-export formats) ─────────────────────────
