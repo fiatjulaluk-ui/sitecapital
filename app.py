@@ -361,13 +361,20 @@ with st.sidebar:
     pnames   = ["All Projects"] + projects["project_name"].tolist()
     selected = st.selectbox("Filter Project", pnames)
 
-    all_dates = pd.concat([expenses["booking_date"], ledger["posting_date"]])
-    mn, mx    = all_dates.min().date(), all_dates.max().date()
-    _today    = datetime.date.today()
-    _default_to = min(mx, _today)   # cap default at today, not 2027
-    dr     = st.date_input("Date Range", value=(mn, _default_to), min_value=mn, max_value=mx)
-    d_from = pd.Timestamp(dr[0] if isinstance(dr, (list,tuple)) and len(dr)==2 else mn)
-    d_to   = pd.Timestamp(dr[1] if isinstance(dr, (list,tuple)) and len(dr)==2 else mx)
+    all_dates   = pd.concat([expenses["booking_date"], ledger["posting_date"]])
+    mn, mx      = all_dates.min().date(), all_dates.max().date()
+    _today      = datetime.date.today()
+    _default_to = min(mx, _today)
+    d_from = pd.Timestamp(st.date_input(
+        "From", value=mn, min_value=mn, max_value=mx,
+        format="DD/MM/YYYY", key="d_from",
+    ))
+    d_to   = pd.Timestamp(st.date_input(
+        "To", value=_default_to, min_value=mn, max_value=mx,
+        format="DD/MM/YYYY", key="d_to",
+    ))
+    if d_to < d_from:
+        st.warning("'To' date is before 'From' — adjusting.")
     st.caption("Treasury Operations · Confidential · Spend figures ex-GST · GST captured via ATO tax codes")
 
 # ── Data templates (realistic system-export formats) ─────────────────────────
