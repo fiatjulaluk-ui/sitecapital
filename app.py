@@ -2198,12 +2198,12 @@ elif page == "Retention Register":
         if _c not in ret_f.columns: ret_f[_c] = 0.0
 
     if ret_f.empty:
-        st.info("No retention data for the selected project. Retention exists for Collins Arch and Victorian Heart Hospital only.")
+        st.info("No retention data for the selected date range.")
         st.stop()
 
     _grp_keys = ["project_id","project_name","retention_rate",
                  "practical_completion_date","contract_value","end_date","client_type"]
-    ret_by_proj = ret_f.groupby(_grp_keys).agg(
+    ret_by_proj = ret_f.groupby(_grp_keys, dropna=False).agg(
         total_claimed   = ("claim_amount", "sum"),
         total_retention = ("retention_withheld", "sum"),
     ).reset_index()
@@ -2265,7 +2265,7 @@ elif page == "Retention Register":
                        delta_color="normal" if pc_done else "off")
             rc5.metric("Currently Held",      fmt_m(row["held"]),
                        delta="DLP applies after PC" if pc_done else "Until PC",
-                       delta_color="inverse" if row["held"] > 0 and not pc_done else "normal")
+                       delta_color="off")
             if pc_done:
                 st.success(f"Practical Completion achieved {pc} — retention release initiated. DLP 12 months to {pc[:4]}.")
             else:
