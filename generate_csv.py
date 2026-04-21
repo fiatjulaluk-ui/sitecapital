@@ -160,8 +160,8 @@ CONTRACT_THRESHOLD = {
 
 # Tier 1 invoice ranges — larger floor/ceiling than generic
 AMOUNT_RANGE = {
-    "Subcontractor":          (300_000,  1_200_000),
-    "Materials":              (300_000,  1_200_000),
+    "Subcontractor":          (500_000,  1_500_000),
+    "Materials":              (300_000,    900_000),
     "Plant Hire":             (50_000,     300_000),
     "Professional Services":  (50_000,     300_000),
     "Permits & Compliance":   (2_500,       55_000),
@@ -244,7 +244,7 @@ def gen_expenses_and_ledger():
         start_dt   = datetime.fromisoformat(start)
         end_dt     = datetime.fromisoformat(end)
         total_weeks = max((end_dt - start_dt).days // 7, 1)
-        n_expenses  = 40
+        n_expenses  = 60
 
         for i in range(n_expenses):
             week     = random.randint(0, total_weeks)

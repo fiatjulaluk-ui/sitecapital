@@ -1,18 +1,18 @@
 obligation_id,obligation_type,period_label,period_start,period_end,due_date,lodged_date,amount_aud,status,state,notes,authority
-1,BAS,Q1 FY2026 (Jul–Sep 2025),2025-07-01,2025-09-30,2025-10-28,2025-10-24,3910121.0,Lodged,National,"GST: $2,883,643 · PAYG Withholding: $1,026,478 · Lodged via ATO Business Portal",ATO
-2,BAS,Q2 FY2026 (Oct–Dec 2025),2025-10-01,2025-12-31,2026-02-28,2026-02-24,3546079.0,Lodged,National,"GST: $2,646,971 · PAYG Withholding: $899,108 · Lodged via ATO Business Portal",ATO
-3,BAS,Q3 FY2026 (Jan–Mar 2026),2026-01-01,2026-03-31,2026-04-28,,3770791.0,Pending,National,"GST: $2,418,403 · PAYG Withholding: $1,352,388 · Lodged via ATO Business Portal",ATO
-4,BAS,Q4 FY2026 (Apr–Jun 2026),2026-04-01,2026-06-30,2026-07-28,,3486492.0,Scheduled,National,"GST: $2,370,039 · PAYG Withholding: $1,116,453 · Lodged via ATO Business Portal",ATO
-5,IAS,January 2026,2026-01-01,2026-01-31,2026-02-21,2026-02-16,488125.0,Lodged,National,PAYG Withholding instalment — monthly lodger (annual withholding > $1M),ATO
-6,IAS,February 2026,2026-02-01,2026-02-28,2026-03-21,,477044.0,Overdue,National,PAYG Withholding instalment — monthly lodger (annual withholding > $1M) · ⚠ Lodgement overdue — ATO late lodgement penalty may apply,ATO
-7,IAS,March 2026,2026-03-01,2026-03-31,2026-04-21,,403665.0,Pending,National,PAYG Withholding instalment — monthly lodger (annual withholding > $1M),ATO
-8,IAS,April 2026,2026-04-01,2026-04-30,2026-05-21,,318153.0,Scheduled,National,PAYG Withholding instalment — monthly lodger (annual withholding > $1M),ATO
-9,IAS,May 2026,2026-05-01,2026-05-31,2026-06-21,,354670.0,Scheduled,National,PAYG Withholding instalment — monthly lodger (annual withholding > $1M),ATO
-10,Payroll Tax,March 2026,2026-03-01,2026-03-31,2026-04-07,2026-04-02,1835688.0,Lodged,VIC,"Wages base (est.): $27,041,667 · Deduction: nil (wages > $5M annual threshold) · Base rate: 4.85% · 2% combined surcharge (national payroll >$100M) · Derived from payroll register extract",SRO Victoria
-11,Payroll Tax,March 2026,2026-03-01,2026-03-31,2026-04-07,2026-04-03,92468.0,Lodged,NSW,"Wages base (est.): $1,796,667 · Monthly threshold: $100,000 · Rate: 5.45% · Derived from payroll register extract",Revenue NSW
-12,Payroll Tax,March 2026,2026-03-01,2026-03-31,2026-04-07,2026-04-05,141625.0,Lodged,WA,"Wages base (est.): $2,658,333 · Monthly threshold: $83,333 · Rate: 5.5% · Derived from payroll register extract",Revenue WA
+1,BAS,Q1 FY2026 (Jul–Sep 2025),2025-07-01,2025-09-30,2025-10-28,2025-10-26,3221376.0,Lodged,National,"GST: $1,930,083 · PAYG Withholding: $1,291,293 · Lodged via ATO Business Portal",ATO
+2,BAS,Q2 FY2026 (Oct–Dec 2025),2025-10-01,2025-12-31,2026-02-28,2026-02-24,2956883.0,Lodged,National,"GST: $1,936,168 · PAYG Withholding: $1,020,715 · Lodged via ATO Business Portal",ATO
+3,BAS,Q3 FY2026 (Jan–Mar 2026),2026-01-01,2026-03-31,2026-04-28,,3973757.0,Pending,National,"GST: $2,702,186 · PAYG Withholding: $1,271,571 · Lodged via ATO Business Portal",ATO
+4,BAS,Q4 FY2026 (Apr–Jun 2026),2026-04-01,2026-06-30,2026-07-28,,3829861.0,Scheduled,National,"GST: $2,458,764 · PAYG Withholding: $1,371,097 · Lodged via ATO Business Portal",ATO
+5,IAS,January 2026,2026-01-01,2026-01-31,2026-02-21,2026-02-19,486663.0,Lodged,National,PAYG Withholding instalment — monthly lodger (annual withholding > $1M),ATO
+6,IAS,February 2026,2026-02-01,2026-02-28,2026-03-21,,428066.0,Overdue,National,PAYG Withholding instalment — monthly lodger (annual withholding > $1M) · ⚠ Lodgement overdue — ATO late lodgement penalty may apply,ATO
+7,IAS,March 2026,2026-03-01,2026-03-31,2026-04-21,,499087.0,Pending,National,PAYG Withholding instalment — monthly lodger (annual withholding > $1M),ATO
+8,IAS,April 2026,2026-04-01,2026-04-30,2026-05-21,,374098.0,Scheduled,National,PAYG Withholding instalment — monthly lodger (annual withholding > $1M),ATO
+9,IAS,May 2026,2026-05-01,2026-05-31,2026-06-21,,447908.0,Scheduled,National,PAYG Withholding instalment — monthly lodger (annual withholding > $1M),ATO
+10,Payroll Tax,March 2026,2026-03-01,2026-03-31,2026-04-07,2026-04-04,1835688.0,Lodged,VIC,"Wages base (est.): $27,041,667 · Deduction: nil (wages > $5M annual threshold) · Base rate: 4.85% · 2% combined surcharge (national payroll >$100M) · Derived from payroll register extract",SRO Victoria
+11,Payroll Tax,March 2026,2026-03-01,2026-03-31,2026-04-07,2026-04-04,92468.0,Lodged,NSW,"Wages base (est.): $1,796,667 · Monthly threshold: $100,000 · Rate: 5.45% · Derived from payroll register extract",Revenue NSW
+12,Payroll Tax,March 2026,2026-03-01,2026-03-31,2026-04-07,2026-04-03,141625.0,Lodged,WA,"Wages base (est.): $2,658,333 · Monthly threshold: $83,333 · Rate: 5.5% · Derived from payroll register extract",Revenue WA
 13,Payroll Tax,April 2026,2026-04-01,2026-04-30,2026-05-07,,1835688.0,Scheduled,VIC,"Wages base (est.): $27,041,667 · Deduction: nil (wages > $5M annual threshold) · Base rate: 4.85% · 2% combined surcharge (national payroll >$100M) · Derived from payroll register extract",SRO Victoria
 14,Payroll Tax,April 2026,2026-04-01,2026-04-30,2026-05-07,,92468.0,Scheduled,NSW,"Wages base (est.): $1,796,667 · Monthly threshold: $100,000 · Rate: 5.45% · Derived from payroll register extract",Revenue NSW
 15,Payroll Tax,April 2026,2026-04-01,2026-04-30,2026-05-07,,141625.0,Scheduled,WA,"Wages base (est.): $2,658,333 · Monthly threshold: $83,333 · Rate: 5.5% · Derived from payroll register extract",Revenue WA
-16,Superannuation SG,Q3 FY2026 (Jan–Mar),2026-01-01,2026-03-31,2026-04-28,,11784101.0,Pending,National,SG rate: 12.0% (FY25-26) · Paid via SuperStream · Funds: REST / AustralianSuper / Hostplus · Derived from payroll register extract,ATO / SuperStream
-17,Superannuation SG,Q4 FY2026 (Apr–Jun),2026-04-01,2026-06-30,2026-07-28,,11377353.0,Scheduled,National,SG rate: 12.0% (FY25-26) · Paid via SuperStream · Funds: REST / AustralianSuper / Hostplus · Derived from payroll register extract,ATO / SuperStream
+16,Superannuation SG,Q3 FY2026 (Jan–Mar),2026-01-01,2026-03-31,2026-04-28,,11318968.0,Pending,National,SG rate: 12.0% (FY25-26) · Paid via SuperStream · Funds: REST / AustralianSuper / Hostplus · Derived from payroll register extract,ATO / SuperStream
+17,Superannuation SG,Q4 FY2026 (Apr–Jun),2026-04-01,2026-06-30,2026-07-28,,10648847.0,Scheduled,National,SG rate: 12.0% (FY25-26) · Paid via SuperStream · Funds: REST / AustralianSuper / Hostplus · Derived from payroll register extract,ATO / SuperStream

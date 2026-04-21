@@ -1,5 +1,13 @@
 ar_id,project_id,sap_cost_center,gl_account,claim_number,claim_type,claim_date,description,claim_amount,retention_withheld,net_claim,gst_amount,total_incl_gst,due_date,paid_date,paid_amount,outstanding,status
-1,1,CC-MEL-01,GL-4100,PC-001,Progress Claim,2026-02-28,Progress Claim #1 — Collins Arch Stage 2 Fit-Out (February),18525000.0,926250.0,17598750.0,1759875.0,19358625.0,2026-04-14,2026-04-10,19358625.0,0.0,Paid
-2,1,CC-MEL-01,GL-4100,PC-002,Progress Claim,2026-04-15,Progress Claim #2 — Collins Arch Stage 2 Fit-Out (April),19500000.0,975000.0,18525000.0,1852500.0,20377500.0,2026-05-30,,0.0,20377500.0,Issued
-3,2,CC-MEL-02,GL-4100,PC-001,Progress Claim,2026-03-31,Progress Claim #1 — Victorian Heart Hospital Ext. (March),31200000.0,1560000.0,29640000.0,2964000.0,32604000.0,2026-04-30,2026-04-28,32604000.0,0.0,Paid
-4,2,CC-MEL-02,GL-4100,PC-002,Progress Claim,2026-04-30,Progress Claim #2 — Victorian Heart Hospital Ext. (April),32500000.0,1625000.0,30875000.0,3087500.0,33962500.0,2026-05-30,,0.0,33962500.0,Issued
+1,1,CC-MEL-01,GL-4100,PC-001,Progress Claim,2026-02-28,Progress Claim #1 — Collins Arch Stage 2 Fit-Out (February),7531543.0,376577.0,7154966.0,715496.6,7870462.6,2026-04-14,2026-04-14,7870462.6,0.0,Paid
+2,1,CC-MEL-01,GL-4100,PC-002,Progress Claim,2026-04-15,Progress Claim #2 — Collins Arch Stage 2 Fit-Out (April),6794193.0,339710.0,6454483.0,645448.3,7099931.3,2026-05-30,,0.0,7099931.3,Issued
+3,2,CC-MEL-02,GL-4100,PC-001,Progress Claim,2026-03-31,Progress Claim #1 — Victorian Heart Hospital Ext. (March),10949371.0,547469.0,10401902.0,1040190.2,11442092.2,2026-04-30,,0.0,11442092.2,Issued
+4,2,CC-MEL-02,GL-4100,PC-002,Progress Claim,2026-04-30,Progress Claim #2 — Victorian Heart Hospital Ext. (April),9516387.0,475819.0,9040568.0,904056.8,9944624.8,2026-05-30,,0.0,9944624.8,Issued
+5,3,CC-MEL-03,GL-4100,PC-001,Progress Claim,2026-04-10,Progress Claim #1 — Southbank Precinct Tower C (April),14312802.0,715640.0,13597162.0,1359716.2,14956878.2,2026-05-25,,0.0,14956878.2,Issued
+6,3,CC-MEL-03,GL-4100,PC-002,Progress Claim,2026-05-15,Progress Claim #2 — Southbank Precinct Tower C (May),12838235.0,641912.0,12196323.0,1219632.3,13415955.3,2026-06-29,,0.0,13415955.3,Issued
+7,4,CC-MEL-04,GL-4100,PC-001,Progress Claim,2026-03-15,Progress Claim #1 — Melbourne Metro Station Works (March),18906010.0,945300.0,17960710.0,1796071.0,19756781.0,2026-04-14,2026-04-14,19756781.0,0.0,Paid
+8,4,CC-MEL-04,GL-4100,PC-002,Progress Claim,2026-04-15,Progress Claim #2 — Melbourne Metro Station Works (April),16736621.0,836831.0,15899790.0,1589979.0,17489769.0,2026-05-15,,0.0,17489769.0,Issued
+9,5,CC-SYD-05,GL-4100,PC-001,Progress Claim,2026-04-30,Progress Claim #1 — Sydney Tech Hub Pyrmont (April),4084712.0,204236.0,3880476.0,388047.6,4268523.6,2026-06-14,,0.0,4268523.6,Issued
+10,5,CC-SYD-05,GL-4100,PC-002,Progress Claim,2026-05-31,Progress Claim #2 — Sydney Tech Hub Pyrmont (May),3543405.0,177170.0,3366235.0,336623.5,3702858.5,2026-07-15,,0.0,3702858.5,Issued
+11,6,CC-PER-06,GL-4100,PC-001,Progress Claim,2026-03-31,Progress Claim #1 — Perth Data Centre Stage 1 (March),5863139.0,586314.0,5276825.0,527682.5,5804507.5,2026-05-15,,0.0,5804507.5,Issued
+12,6,CC-PER-06,GL-4100,PC-002,Progress Claim,2026-04-30,Progress Claim #2 — Perth Data Centre Stage 1 (April),5110752.0,511075.0,4599677.0,459967.7,5059644.7,2026-06-14,,0.0,5059644.7,Issued

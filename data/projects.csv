@@ -1,7 +1,7 @@
 project_id,project_name,client,start_date,end_date,project_budget,sap_cost_center,sector,state,location,contract_value,eac,client_type,dso_days,retention_rate,practical_completion_date
-1,Collins Arch — Stage 2 Fit-Out,Lendlease Construction (Pty) Ltd,2026-01-05,2026-12-18,185000000,CC-MEL-01,Commercial,VIC,Melbourne CBD,195000000,185000000,Private,45,0.05,
-2,Victorian Heart Hospital Ext.,Lendlease Construction (Pty) Ltd,2026-02-03,2027-06-30,310000000,CC-MEL-02,Healthcare,VIC,Clayton,325000000,310000000,Government,30,0.05,
-3,Southbank Precinct Tower C,Lendlease Construction (Pty) Ltd,2026-03-10,2027-09-30,420000000,CC-MEL-03,Mixed-Use,VIC,Southbank,441000000,420000000,Private,45,0.05,
-4,Melbourne Metro — Station Works,Lendlease Construction (Pty) Ltd,2026-01-12,2026-11-28,560000000,CC-MEL-04,Infrastructure,VIC,Melbourne CBD,590000000,560000000,Government,30,0.05,
-5,Sydney Tech Hub — Pyrmont,Lendlease Construction (Pty) Ltd,2026-04-07,2027-04-30,98000000,CC-SYD-05,Commercial,NSW,Pyrmont,103000000,98000000,Private,45,0.05,
-6,Perth Data Centre — Stage 1,Lendlease Construction (Pty) Ltd,2026-02-16,2026-12-20,145000000,CC-PER-06,Industrial,WA,East Perth,152000000,145000000,Private,45,0.1,2026-11-30
+1,Collins Arch — Stage 2 Fit-Out,Lendlease Construction (Pty) Ltd,2026-01-05,2026-12-18,80000000,CC-MEL-01,Commercial,VIC,Melbourne CBD,85000000,79000000,Private,45,0.05,
+2,Victorian Heart Hospital Ext.,Lendlease Construction (Pty) Ltd,2026-02-03,2027-06-30,114000000,CC-MEL-02,Healthcare,VIC,Clayton,120000000,112000000,Government,30,0.05,
+3,Southbank Precinct Tower C,Lendlease Construction (Pty) Ltd,2026-03-10,2027-09-30,152000000,CC-MEL-03,Mixed-Use,VIC,Southbank,160000000,150000000,Private,45,0.05,
+4,Melbourne Metro — Station Works,Lendlease Construction (Pty) Ltd,2026-01-12,2026-11-28,199000000,CC-MEL-04,Infrastructure,VIC,Melbourne CBD,210000000,197000000,Government,30,0.05,
+5,Sydney Tech Hub — Pyrmont,Lendlease Construction (Pty) Ltd,2026-04-07,2027-04-30,43000000,CC-SYD-05,Commercial,NSW,Pyrmont,45000000,42000000,Private,45,0.05,
+6,Perth Data Centre — Stage 1,Lendlease Construction (Pty) Ltd,2026-02-16,2026-12-20,61000000,CC-PER-06,Industrial,WA,East Perth,65000000,61000000,Private,45,0.1,2026-11-30

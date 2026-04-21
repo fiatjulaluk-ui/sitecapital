@@ -235,7 +235,7 @@ def millions_fmt():
 
 # ── Data loading ──────────────────────────────────────────────────────────────
 
-@st.cache_data
+@st.cache_data(ttl=0)
 def load_all(p=None, e=None, l=None, f=None, a=None, fac=None, wcf=None, ba=None, sc=None, acc=None, ar=None, coa=None):
     projects   = load_csv("projects.csv",             p)
     expenses   = load_csv("site_expenses.csv",        e)
@@ -2358,7 +2358,8 @@ elif page == "WIP Report":
         "Billings use gross claim_amount — retention is a payment timing difference, not a revenue reduction (AASB 15).  \n"
         "**Underbilled (positive WIP)** → revenue recognised exceeds invoices raised — Contract Asset on balance sheet.  \n"
         "**Overbilled (negative WIP)** → invoices raised exceed revenue earned — Contract Liability on balance sheet.  \n"
-        "Retention withheld is tracked separately as a non-current receivable (GL-1210) until Practical Completion."
+        "Retention withheld is tracked separately as a non-current receivable (GL-1210) until Practical Completion.  \n"
+        "Early-stage overbilling is normal in Tier 1 construction — mobilisation payments and front-loaded schedules create contract liabilities that reverse as POC catches up to billings."
     )
 
     st.divider()
