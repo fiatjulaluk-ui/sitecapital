@@ -22,12 +22,12 @@ COMPANY = "Lendlease Construction (Pty) Ltd"
 PROJECTS = [
     # (pid, name, client, start, end, budget, cc, sector, state, location,
     #  contract_value, eac, client_type, dso_days, retention_rate, practical_completion_date)
-    (1, "Collins Arch — Stage 2 Fit-Out",   COMPANY, "2026-01-05", "2026-12-18",  185_000_000, "CC-MEL-01", "Commercial",     "VIC", "Melbourne CBD",  195_000_000, 185_000_000, "Private",     45, 0.05, ""),
-    (2, "Victorian Heart Hospital Ext.",     COMPANY, "2026-02-03", "2027-06-30",  310_000_000, "CC-MEL-02", "Healthcare",     "VIC", "Clayton",        325_000_000, 310_000_000, "Government",  30, 0.05, ""),
-    (3, "Southbank Precinct Tower C",        COMPANY, "2026-03-10", "2027-09-30",  420_000_000, "CC-MEL-03", "Mixed-Use",      "VIC", "Southbank",      441_000_000, 420_000_000, "Private",     45, 0.05, ""),
-    (4, "Melbourne Metro — Station Works",   COMPANY, "2026-01-12", "2026-11-28",  560_000_000, "CC-MEL-04", "Infrastructure", "VIC", "Melbourne CBD",  590_000_000, 560_000_000, "Government",  30, 0.05, ""),
-    (5, "Sydney Tech Hub — Pyrmont",         COMPANY, "2026-04-07", "2027-04-30",   98_000_000, "CC-SYD-05", "Commercial",     "NSW", "Pyrmont",        103_000_000,  98_000_000, "Private",     45, 0.05, ""),
-    (6, "Perth Data Centre — Stage 1",       COMPANY, "2026-02-16", "2026-12-20",  145_000_000, "CC-PER-06", "Industrial",     "WA",  "East Perth",     152_000_000, 145_000_000, "Private",     45, 0.10, "2026-11-30"),
+    (1, "Collins Arch — Stage 2 Fit-Out",   COMPANY, "2026-01-05", "2026-12-18",   80_000_000, "CC-MEL-01", "Commercial",     "VIC", "Melbourne CBD",   85_000_000,  79_000_000, "Private",     45, 0.05, ""),
+    (2, "Victorian Heart Hospital Ext.",     COMPANY, "2026-02-03", "2027-06-30",  114_000_000, "CC-MEL-02", "Healthcare",     "VIC", "Clayton",        120_000_000, 112_000_000, "Government",  30, 0.05, ""),
+    (3, "Southbank Precinct Tower C",        COMPANY, "2026-03-10", "2027-09-30",  152_000_000, "CC-MEL-03", "Mixed-Use",      "VIC", "Southbank",      160_000_000, 150_000_000, "Private",     45, 0.05, ""),
+    (4, "Melbourne Metro — Station Works",   COMPANY, "2026-01-12", "2026-11-28",  199_000_000, "CC-MEL-04", "Infrastructure", "VIC", "Melbourne CBD",  210_000_000, 197_000_000, "Government",  30, 0.05, ""),
+    (5, "Sydney Tech Hub — Pyrmont",         COMPANY, "2026-04-07", "2027-04-30",   43_000_000, "CC-SYD-05", "Commercial",     "NSW", "Pyrmont",         45_000_000,  42_000_000, "Private",     45, 0.05, ""),
+    (6, "Perth Data Centre — Stage 1",       COMPANY, "2026-02-16", "2026-12-20",   61_000_000, "CC-PER-06", "Industrial",     "WA",  "East Perth",      65_000_000,  61_000_000, "Private",     45, 0.10, "2026-11-30"),
 ]
 
 # ── Vendor panel (approved subcontractors & suppliers) ────────────────────────
@@ -160,12 +160,12 @@ CONTRACT_THRESHOLD = {
 
 # Tier 1 invoice ranges — larger floor/ceiling than generic
 AMOUNT_RANGE = {
-    "Subcontractor":          (120_000,  1_800_000),
-    "Materials":              (25_000,    480_000),
-    "Plant Hire":             (8_500,     145_000),
-    "Professional Services":  (12_000,    220_000),
-    "Permits & Compliance":   (2_500,      55_000),
-    "Travel & Accommodation": (800,          6_500),
+    "Subcontractor":          (300_000,  1_200_000),
+    "Materials":              (300_000,  1_200_000),
+    "Plant Hire":             (50_000,     300_000),
+    "Professional Services":  (50_000,     300_000),
+    "Permits & Compliance":   (2_500,       55_000),
+    "Travel & Accommodation": (800,           6_500),
 }
 
 # ── Audit templates (Tier 1 / Treasury-relevant issues) ──────────────────────
@@ -244,7 +244,7 @@ def gen_expenses_and_ledger():
         start_dt   = datetime.fromisoformat(start)
         end_dt     = datetime.fromisoformat(end)
         total_weeks = max((end_dt - start_dt).days // 7, 1)
-        n_expenses  = random.randint(28, 42)   # Tier 1: more transactions
+        n_expenses  = 40
 
         for i in range(n_expenses):
             week     = random.randint(0, total_weeks)
@@ -362,42 +362,6 @@ def gen_expenses_and_ledger():
     expense_rows.append((exp_id+3, 4, "CC-MEL-04", "2026-08-20", "Professional Services", 540_000.00, "SAP-5004", "GL-6400", "AECOM Australia Pty Ltd", "Approved",  "Additional scope for geotechnical re-assessment — approved by PMO. PO amendment pending.",  "Manual Entry",  "G11",  54000.00, "PO-2026-6203",  498_000.00, "CTR-CC-MEL-04-01", "Over PO"))
     ledger_rows.append( (led_id+3, 4, "CC-MEL-04", "2026-08-22", "GL-6400",          498_000.00,  "INV",      "[VARIANCE] Professional Fees — Melbourne Metro",          "AECOM Australia Pty Ltd", "G11",  49800.00))
 
-    # ── Progress claim revenue entries — cost-driven (AASB 15 POC basis) ─────
-    # Sum approved/paid AP costs per project from already-generated expense rows.
-    # Revenue = POC × Contract Value, where POC = costs_to_date / EAC.
-    # Ledger entries split across two recognition dates to simulate monthly billing.
-    # Accrual basis: include Approved + Paid + Pending (work performed, invoice received).
-    # On Hold excluded — disputed, performance not confirmed.
-    _ap_costs = {}
-    for _row in expense_rows:
-        if _row[9] in ("Approved", "Paid", "Pending"):   # index 9 = status
-            _pid = _row[1]                                # index 1 = project_id
-            _ap_costs[_pid] = _ap_costs.get(_pid, 0) + float(_row[5])  # index 5 = amount
-
-    rev_id = led_id + 10
-    for proj in PROJECTS:
-        rpid, rname, rclient, rstart, rend, rbudget = proj[0], proj[1], proj[2], proj[3], proj[4], proj[5]
-        rcc            = proj[6]
-        contract_value = proj[10]
-        eac            = proj[11]
-        costs_to_date  = _ap_costs.get(rpid, 0)
-        if costs_to_date == 0:
-            continue
-        poc            = min(costs_to_date / eac, 1.0)
-        revenue_earned = poc * contract_value
-        # Split total earned revenue across two ledger postings
-        split1 = random.uniform(0.42, 0.55)
-        for split_pct in [split1, 1.0 - split1]:
-            claim_amt = round(revenue_earned * split_pct, 0)
-            if claim_amt <= 0:
-                continue
-            claim_dt = random_date(rstart, min(rend, "2026-04-18"))
-            gst_c    = round(claim_amt * 0.10, 2)
-            ledger_rows.append((
-                rev_id, rpid, rcc, claim_dt, "GL-4100", claim_amt, "RV",
-                f"Progress Claim — {rname}", rclient, "G1", gst_c,
-            ))
-            rev_id += 1
 
     exp_headers = [
         "expense_id", "project_id", "sap_cost_center", "booking_date", "expense_type", "amount",
@@ -879,40 +843,40 @@ def gen_ar_invoices():
         )
 
     rows = [
-        # ── 1. Collins Arch — Stage 2 Fit-Out ($195M, Private, 45-day DSO, 5% ret) ──
-        _claim(1,  1, "CC-MEL-01", "PC-001", "2026-02-28", 18_525_000, 45, 0.05,
+        # ── 1. Collins Arch — Stage 2 Fit-Out ($85M, Private, 45-day DSO, 5% ret) ──
+        _claim(1,  1, "CC-MEL-01", "PC-001", "2026-02-28",  7_650_000, 45, 0.05,
                "Progress Claim #1 — Collins Arch Stage 2 Fit-Out (February)"),
-        _claim(2,  1, "CC-MEL-01", "PC-002", "2026-04-15", 19_500_000, 45, 0.05,
+        _claim(2,  1, "CC-MEL-01", "PC-002", "2026-04-15",  6_800_000, 45, 0.05,
                "Progress Claim #2 — Collins Arch Stage 2 Fit-Out (April)"),
 
-        # ── 2. Victorian Heart Hospital Ext. ($325M, Government, 30-day DSO, 5% ret) ──
-        _claim(3,  2, "CC-MEL-02", "PC-001", "2026-03-31", 31_200_000, 30, 0.05,
+        # ── 2. Victorian Heart Hospital Ext. ($120M, Government, 30-day DSO, 5% ret) ──
+        _claim(3,  2, "CC-MEL-02", "PC-001", "2026-03-31", 10_800_000, 30, 0.05,
                "Progress Claim #1 — Victorian Heart Hospital Ext. (March)"),
-        _claim(4,  2, "CC-MEL-02", "PC-002", "2026-04-30", 29_900_000, 30, 0.05,
+        _claim(4,  2, "CC-MEL-02", "PC-002", "2026-04-30",  9_600_000, 30, 0.05,
                "Progress Claim #2 — Victorian Heart Hospital Ext. (April)"),
 
-        # ── 3. Southbank Precinct Tower C ($441M, Private, 45-day DSO, 5% ret) ──
-        _claim(5,  3, "CC-MEL-03", "PC-001", "2026-04-10", 39_690_000, 45, 0.05,
+        # ── 3. Southbank Precinct Tower C ($160M, Private, 45-day DSO, 5% ret) ──
+        _claim(5,  3, "CC-MEL-03", "PC-001", "2026-04-10", 14_400_000, 45, 0.05,
                "Progress Claim #1 — Southbank Precinct Tower C (April)"),
-        _claim(6,  3, "CC-MEL-03", "PC-002", "2026-05-15", 35_280_000, 45, 0.05,
+        _claim(6,  3, "CC-MEL-03", "PC-002", "2026-05-15", 12_800_000, 45, 0.05,
                "Progress Claim #2 — Southbank Precinct Tower C (May)"),
 
-        # ── 4. Melbourne Metro — Station Works ($590M, Government, 30-day DSO, 5% ret) ──
-        _claim(7,  4, "CC-MEL-04", "PC-001", "2026-03-15", 59_000_000, 30, 0.05,
+        # ── 4. Melbourne Metro — Station Works ($210M, Government, 30-day DSO, 5% ret) ──
+        _claim(7,  4, "CC-MEL-04", "PC-001", "2026-03-15", 18_900_000, 30, 0.05,
                "Progress Claim #1 — Melbourne Metro Station Works (March)"),
-        _claim(8,  4, "CC-MEL-04", "PC-002", "2026-04-15", 53_100_000, 30, 0.05,
+        _claim(8,  4, "CC-MEL-04", "PC-002", "2026-04-15", 16_800_000, 30, 0.05,
                "Progress Claim #2 — Melbourne Metro Station Works (April)"),
 
-        # ── 5. Sydney Tech Hub — Pyrmont ($103M, Private, 45-day DSO, 5% ret) ──
-        _claim(9,  5, "CC-SYD-05", "PC-001", "2026-04-30",  9_270_000, 45, 0.05,
+        # ── 5. Sydney Tech Hub — Pyrmont ($45M, Private, 45-day DSO, 5% ret) ──
+        _claim(9,  5, "CC-SYD-05", "PC-001", "2026-04-30",  4_050_000, 45, 0.05,
                "Progress Claim #1 — Sydney Tech Hub Pyrmont (April)"),
-        _claim(10, 5, "CC-SYD-05", "PC-002", "2026-05-31",  8_240_000, 45, 0.05,
+        _claim(10, 5, "CC-SYD-05", "PC-002", "2026-05-31",  3_600_000, 45, 0.05,
                "Progress Claim #2 — Sydney Tech Hub Pyrmont (May)"),
 
-        # ── 6. Perth Data Centre — Stage 1 ($152M, Private, 45-day DSO, 10% ret) ──
-        _claim(11, 6, "CC-PER-06", "PC-001", "2026-03-31", 15_200_000, 45, 0.10,
+        # ── 6. Perth Data Centre — Stage 1 ($65M, Private, 45-day DSO, 10% ret) ──
+        _claim(11, 6, "CC-PER-06", "PC-001", "2026-03-31",  5_850_000, 45, 0.10,
                "Progress Claim #1 — Perth Data Centre Stage 1 (March)"),
-        _claim(12, 6, "CC-PER-06", "PC-002", "2026-04-30", 13_680_000, 45, 0.10,
+        _claim(12, 6, "CC-PER-06", "PC-002", "2026-04-30",  5_200_000, 45, 0.10,
                "Progress Claim #2 — Perth Data Centre Stage 1 (April)"),
     ]
 

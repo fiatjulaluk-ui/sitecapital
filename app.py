@@ -621,8 +621,9 @@ def build_exec_summary(context="pulse"):
         s.append(f"**{open_audits} open audit item(s)** require action across the portfolio.{cov}")
 
     elif context == "recon":
+        _COST_GL = ["GL-6100","GL-6200","GL-6300","GL-6400","GL-6500","GL-6600"]
         exp_t = exp_f["amount"].sum()
-        led_t = fl(ledger)["amount"].sum()
+        led_t = fl(ledger)[fl(ledger)["gl_account"].isin(_COST_GL)]["amount"].sum()
         var   = abs(exp_t - led_t)
         vp    = var / max(exp_t, 1) * 100
         s.append(f"Site expenses total {fmt_m(exp_t)} against SAP ledger postings of {fmt_m(led_t)} — "
@@ -1977,23 +1978,33 @@ elif page == "Revenue & POC":
     st.divider()
     st.markdown("#### Monthly Revenue Recognition Curve — AASB 15 Over-Time Recognition")
     st.caption(
-        "Revenue recognised each period = POC (site_progress_pct) × Contract Value. "
-        "Each data point represents the earned revenue at that forecast snapshot. "
-        "AASB 15 requires over-time recognition — this curve shows the build period by period."
+        "Incremental revenue recognised per period = (POC_this − POC_last) × Contract Value. "
+        "Each bar represents new revenue earned in that month only — not cumulative. "
+        "X-axis capped at each project's end date."
     )
     _fcst_f = forecasts[forecasts["project_id"].isin(proj_ids)].copy()
     if not _fcst_f.empty and "site_progress_pct" in _fcst_f.columns:
-        _fcst_f = _fcst_f.merge(poc_df[["project_id","contract_value"]], on="project_id", how="left")
-        _fcst_f["revenue_period"] = (_fcst_f["site_progress_pct"] / 100) * _fcst_f["contract_value"]
+        _fcst_f = _fcst_f.merge(
+            poc_df[["project_id","contract_value","end_date"]], on="project_id", how="left"
+        )
+        if "end_date" in _fcst_f.columns:
+            _fcst_f["end_date"] = pd.to_datetime(_fcst_f["end_date"], errors="coerce")
+            _fcst_f = _fcst_f[_fcst_f["forecast_date"] <= _fcst_f["end_date"]]
+
         fig, ax = plt.subplots(figsize=(11, 4))
         _colors = [BLUE, AMBER, GREEN, RED, CHARCOAL, GREY]
         for i, (pid, grp) in enumerate(_fcst_f.groupby("project_id")):
-            grp = grp.sort_values("forecast_date")
+            grp = grp.sort_values("forecast_date").reset_index(drop=True)
+            cv  = grp["contract_value"].iloc[0]
+            # Incremental revenue = delta POC × contract value, capped at contract value
+            poc_pct = (grp["site_progress_pct"] / 100).clip(0, 1)
+            prev    = poc_pct.shift(1, fill_value=0)
+            grp["rev_incremental"] = ((poc_pct - prev) * cv).clip(lower=0)
             _pname = poc_df.loc[poc_df["project_id"] == pid, "project_name"].iloc[0].split("—")[0].strip()[:22]
-            ax.plot(grp["forecast_date"], grp["revenue_period"] / 1e6,
-                    lw=1.8, marker="o", ms=3.5, color=_colors[i % len(_colors)], label=_pname)
+            ax.bar(grp["forecast_date"], grp["rev_incremental"] / 1e6,
+                   width=20, color=_colors[i % len(_colors)], alpha=0.75, label=_pname)
         style_ax(ax, ylabel="AUD (M)", yticker=millions_fmt())
-        ax.legend(fontsize=7.5, ncol=2, loc="upper left")
+        ax.legend(fontsize=7.5, ncol=2, loc="upper right")
         ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %y"))
         plt.xticks(rotation=20, ha="right", fontsize=7.5)
         plt.tight_layout(pad=1.2); st.pyplot(fig, use_container_width=True); plt.close()
@@ -2353,7 +2364,7 @@ elif page == "WIP Report":
     st.divider()
     st.markdown("#### WIP by Project")
 
-    for _, row in wip_df.sort_values("wip", ascending=False).iterrows():
+    for _, row in wip_df.dropna(subset=["wip","revenue_earned","billings_to_date","poc"]).sort_values("wip", ascending=False).iterrows():
         poc_pct   = row["poc"] * 100
         wip_val   = row["wip"]
         icon      = "🟢" if wip_val >= 0 else "🔴"
