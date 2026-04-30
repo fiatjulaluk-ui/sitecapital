@@ -324,6 +324,7 @@ with st.sidebar:
         "Audit & Controls",
         "Portfolio Health",
         "Revenue & POC",
+        "AASB 15 Revenue Engine",
         "WIP Report",
         "AR & Collections",
         "Retention Register",
@@ -1922,8 +1923,9 @@ elif page == "Revenue & POC":
     tot_costs     = poc_df["actual_costs"].sum()
     tot_margin    = poc_df["margin"].sum()
     avg_poc       = poc_df["poc"].mean() * 100
+    tot_rpo       = tot_contract - tot_earned   # AASB 15 §120 RPO disclosure
 
-    c1, c2, c3, c4, c5 = st.columns(5)
+    c1, c2, c3, c4, c5, c6 = st.columns(6)
     c1.metric("Total Contract Value",  fmt_m(tot_contract),  delta=f"{len(poc_df)} projects")
     c2.metric("Total EAC",             fmt_m(tot_eac),       delta=f"{fmt_m(tot_eac - poc_df['project_budget'].sum())} vs budget")
     c3.metric("Revenue Earned (POC)",  fmt_m(tot_earned),    delta=f"Avg POC {avg_poc:.1f}%")
@@ -1931,6 +1933,8 @@ elif page == "Revenue & POC":
     c5.metric("Gross Margin (Contract − EAC)", fmt_m(tot_margin),
               delta=f"{tot_margin / max(tot_contract, 1) * 100:.1f}% of contract",
               delta_color="normal" if tot_margin >= 0 else "inverse")
+    c6.metric("RPO — Work Remaining",  fmt_m(tot_rpo),
+              delta=f"{tot_rpo / max(tot_contract, 1) * 100:.1f}% of contracted revenue")
 
     st.divider()
     st.markdown("#### POC by Project")
@@ -2010,10 +2014,548 @@ elif page == "Revenue & POC":
     else:
         st.info("No forecast data available to build revenue curve.")
 
+    # ── Variable Consideration — AASB 15 §56–58 ─────────────────────────────
+    st.divider()
+    st.markdown("#### Variable Consideration — AASB 15 §56–58 Constraint Analysis")
+    st.caption(
+        "Variable consideration (performance bonuses, liquidated damages, rise & fall) must be constrained "
+        "at the amount that is 'highly probable' not to result in a significant revenue reversal (AASB 15 §56). "
+        "Enter known variable amounts below. Toggle 'Release constraint' when the outcome becomes highly probable."
+    )
+
+    _vc_total_released = 0.0
+    _vc_rows = []
+    for _, _vrow in poc_df.iterrows():
+        _pshort = _vrow["project_name"].split("—")[0].strip()
+        with st.expander(f"**{_pshort}** — Variable Consideration"):
+            _vc1, _vc2, _vc3 = st.columns(3)
+            _bonus   = _vc1.number_input(
+                "Performance Bonus ($)", min_value=0.0, value=0.0, step=50000.0, format="%.0f",
+                key=f"vc_bonus_{int(_vrow['project_id'])}",
+                help="Early completion or KPI bonus. Constrained at $0 until highly probable."
+            )
+            _ld_risk = _vc2.number_input(
+                "Liquidated Damages Risk ($)", min_value=0.0, value=0.0, step=50000.0, format="%.0f",
+                key=f"vc_ld_{int(_vrow['project_id'])}",
+                help="Potential LD deduction from contract value. Reduces revenue when probable."
+            )
+            _rf_adj  = _vc3.number_input(
+                "Rise & Fall Adjustment ($)", min_value=-5000000.0, value=0.0, step=50000.0, format="%.0f",
+                key=f"vc_rf_{int(_vrow['project_id'])}",
+                help="CPI/PPI escalation clause adjustment. Positive = increase, negative = decrease."
+            )
+            _rel1, _rel2, _rel3 = st.columns(3)
+            _bonus_rel = _rel1.checkbox("Release bonus constraint", key=f"vc_br_{int(_vrow['project_id'])}")
+            _ld_rel    = _rel2.checkbox("LD risk is probable (deduct)", key=f"vc_lr_{int(_vrow['project_id'])}")
+            _rf_rel    = _rel3.checkbox("Rise & fall confirmed", key=f"vc_rr_{int(_vrow['project_id'])}")
+
+            _net_vc = (
+                (_bonus  if _bonus_rel  else 0.0)
+                - (_ld_risk if _ld_rel  else 0.0)
+                + (_rf_adj  if _rf_rel  else 0.0)
+            )
+            _adj_cv      = _vrow["contract_value"] + _net_vc
+            _adj_earned  = _vrow["poc"] * _adj_cv
+            _delta_earned= _adj_earned - _vrow["revenue_earned"]
+            _vc_total_released += _net_vc
+
+            _r1, _r2, _r3 = st.columns(3)
+            _r1.metric("Net Variable Consideration", f"${_net_vc:,.0f}",
+                       delta="Released" if _net_vc != 0 else "Constrained at $0")
+            _r2.metric("Adjusted Contract Value", fmt_m(_adj_cv),
+                       delta=f"{fmt_m(_net_vc)} vs base")
+            _r3.metric("Adjusted Revenue Earned", fmt_m(_adj_earned),
+                       delta=f"{fmt_m(_delta_earned)} vs base",
+                       delta_color="normal" if _delta_earned >= 0 else "inverse")
+            if _net_vc != 0:
+                _vc_rows.append({"Project": _pshort, "Bonus": _bonus if _bonus_rel else 0,
+                                 "LD Risk": -_ld_risk if _ld_rel else 0,
+                                 "Rise & Fall": _rf_adj if _rf_rel else 0,
+                                 "Net VC": _net_vc, "Adj Revenue": _adj_earned})
+
+    if _vc_rows:
+        st.info(
+            f"**Variable consideration released: {fmt_m(_vc_total_released)}** across {len(_vc_rows)} project(s). "
+            f"Ensure CFO sign-off and audit support documentation before posting to GL-4100 / GL-4200."
+        )
+
+    st.divider()
+    st.info(
+        "**Full AASB 15 analysis →** Navigate to **AASB 15 Revenue Engine** (sidebar) for the 5-step model breakdown, "
+        "contract modifications (Variation Orders), 36-month revenue waterfall, and journal entry generator."
+    )
+
     st.download_button("Export POC Summary", to_csv_bytes(poc_df[[
         "project_name","contract_value","eac","project_budget","eac_vs_budget",
         "ap_costs","accrual_costs","actual_costs","poc","revenue_earned","margin","margin_pct"
     ]]), "revenue_poc.csv", "text/csv")
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  PAGE — AASB 15 REVENUE ENGINE
+# ══════════════════════════════════════════════════════════════════════════════
+
+elif page == "AASB 15 Revenue Engine":
+    page_header(
+        "AASB 15 Revenue Engine",
+        "5-Step Model · Variable Consideration · Contract Modifications · Revenue Waterfall · Journal Entries · AUD"
+    )
+
+    st.caption(
+        "Technical accounting analysis per AASB 15 / IFRS 15 / ASC 606. "
+        "← Return to **Revenue & POC** (sidebar) for the operational dashboard view."
+    )
+
+    if "contract_value" not in projects.columns or "eac" not in projects.columns:
+        st.warning("Projects data missing contract_value / EAC. Run `python generate_csv.py` then restart.")
+        st.stop()
+
+    # ── Recompute POC base (same logic as Revenue & POC page) ────────────────
+    _re_proj = projects[projects["project_id"].isin(proj_ids)].copy()
+    _re_exp  = fe(expenses)
+    _re_ap   = (
+        _re_exp[_re_exp["status"].isin(["Approved", "Paid", "Pending"])]
+        .groupby("project_id")["amount"].sum().reset_index(name="ap_costs")
+    )
+    _re_today = pd.Timestamp.today().normalize()
+    _re_acc   = accruals[accruals["status"].eq("Posted") & accruals["project_id"].isin(proj_ids)].copy()
+    if "reversal_date" in _re_acc.columns:
+        _re_acc["_rv"] = pd.to_datetime(_re_acc["reversal_date"], errors="coerce")
+        _re_acc = _re_acc[_re_acc["_rv"].isna() | (_re_acc["_rv"] > _re_today)]
+    _re_accp = _re_acc.groupby("project_id")["amount"].sum().reset_index(name="accrual_costs")
+    _re_bill = (
+        ar_inv[ar_inv["project_id"].isin(proj_ids)]
+        .groupby("project_id")["claim_amount"].sum().reset_index(name="billings")
+    )
+    _re_ret  = (
+        ar_inv[ar_inv["project_id"].isin(proj_ids)]
+        .groupby("project_id")["retention_withheld"].sum().reset_index(name="retention_held")
+    )
+
+    re_df = _re_proj.merge(_re_ap,   on="project_id", how="left")
+    re_df = re_df.merge(_re_accp,    on="project_id", how="left")
+    re_df = re_df.merge(_re_bill,    on="project_id", how="left")
+    re_df = re_df.merge(_re_ret,     on="project_id", how="left")
+    re_df[["ap_costs", "accrual_costs", "billings", "retention_held"]] = \
+        re_df[["ap_costs", "accrual_costs", "billings", "retention_held"]].fillna(0)
+    re_df["actual_costs"]   = re_df["ap_costs"] + re_df["accrual_costs"]
+    re_df["poc"]            = (re_df["actual_costs"] / re_df["eac"].replace(0, 1)).clip(0, 1)
+    re_df["revenue_earned"] = re_df["poc"] * re_df["contract_value"]
+    re_df["rpo"]            = re_df["contract_value"] - re_df["revenue_earned"]
+    re_df["wip"]            = re_df["revenue_earned"] - re_df["billings"]
+    re_df["margin"]         = re_df["contract_value"] - re_df["eac"]
+
+    tab1, tab2, tab3, tab4 = st.tabs([
+        "① 5-Step AASB 15",
+        "② Contract Modifications",
+        "③ Revenue Waterfall & RPO",
+        "④ Journal Entry Generator",
+    ])
+
+    # ── TAB 1: 5-STEP AASB 15 ────────────────────────────────────────────────
+    with tab1:
+        st.markdown("### 5-Step AASB 15 Model — Per Contract")
+        st.caption(
+            "AASB 15 (≡ IFRS 15 ≡ ASC 606) requires five steps to determine when and how much revenue to recognise. "
+            "All Tier 1 construction contracts satisfy the over-time criteria (AASB 15 §35(a)–(c)). "
+            "Revenue is recognised using the cost-to-cost input method (§98)."
+        )
+
+        for _, _r15 in re_df.iterrows():
+            _poc15  = _r15["poc"] * 100
+            _remain = 100 - _poc15
+            with st.expander(
+                f"**{_r15['project_name']}** — {fmt_m(_r15['contract_value'])} · POC {_poc15:.1f}%",
+                expanded=False
+            ):
+                _s1, _s2, _s3, _s4, _s5 = st.columns(5)
+                with _s1:
+                    st.markdown("**Step 1**  \nIdentify the Contract")
+                    st.markdown(
+                        f"- Client: {_r15.get('client', 'N/A')}  \n"
+                        f"- Type: {_r15.get('client_type', 'N/A')}  \n"
+                        f"- Start: {str(_r15.get('start_date','N/A'))[:10]}  \n"
+                        f"- End: {str(_r15.get('end_date','N/A'))[:10]}  \n"
+                        f"- Signed: ✅ Executed"
+                    )
+                with _s2:
+                    st.markdown("**Step 2**  \nPerformance Obligations")
+                    st.markdown(
+                        f"- PO 1: Base scope (over-time)  \n"
+                        f"- PO 2: Approved VOs → Tab ②  \n"
+                        f"- PO 3: Provisional sums  \n"
+                        f"- Recognition: **Over time** (§35)  \n"
+                        f"- Method: Cost-to-cost (§98)"
+                    )
+                with _s3:
+                    st.markdown("**Step 3**  \nTransaction Price")
+                    st.markdown(
+                        f"- Base: {fmt_m(_r15['contract_value'])}  \n"
+                        f"- Variable consid.: → Tab ② / Rev & POC  \n"
+                        f"- Constraint: ✅ Applied (§56)  \n"
+                        f"- Financing component: None  \n"
+                        f"- Non-cash consideration: None"
+                    )
+                with _s4:
+                    st.markdown("**Step 4**  \nAllocate to POs")
+                    st.markdown(
+                        f"- Base scope: {fmt_m(_r15['contract_value'])} (100%)  \n"
+                        f"- VOs: allocated at SSP (agreed rate)  \n"
+                        f"- Prov. sums: $0 until confirmed  \n"
+                        f"- Variable: constrained at $0  \n"
+                        f"- EAC (budget): {fmt_m(_r15['eac'])}"
+                    )
+                with _s5:
+                    st.markdown("**Step 5**  \nRecognise Revenue")
+                    _wip_sign = "+" if _r15["wip"] >= 0 else ""
+                    st.markdown(
+                        f"- Recognised: {fmt_m(_r15['revenue_earned'])} ({_poc15:.1f}%)  \n"
+                        f"- RPO: {fmt_m(_r15['rpo'])} ({_remain:.1f}% remaining)  \n"
+                        f"- Margin: {fmt_m(_r15['margin'])} ({_r15['margin']/max(_r15['contract_value'],1)*100:.1f}%)  \n"
+                        f"- WIP: {_wip_sign}{fmt_m(_r15['wip'])}  \n"
+                        f"- Type: {'Underbilled Asset' if _r15['wip']>=0 else 'Overbilled Liability'}"
+                    )
+
+        st.divider()
+        st.markdown("#### Portfolio RPO — Remaining Performance Obligations (AASB 15 §120)")
+        st.caption(
+            "RPO = Contract Value − Revenue Recognised to date. "
+            "Represents future contracted revenue yet to be earned as work is performed. "
+            "AASB 15 §120 mandates RPO disclosure for contracts with an original expected duration > 1 year."
+        )
+
+        _rpo_tbl = re_df[["project_name", "contract_value", "revenue_earned", "rpo", "poc"]].copy()
+        _rpo_tbl["Project"]        = _rpo_tbl["project_name"].str.split("—").str[0].str.strip()
+        _rpo_tbl["POC"]            = _rpo_tbl["poc"].apply(lambda x: f"{x*100:.1f}%")
+        _rpo_tbl["Contract Value"] = _rpo_tbl["contract_value"].apply(fmt_m)
+        _rpo_tbl["Earned to Date"] = _rpo_tbl["revenue_earned"].apply(fmt_m)
+        _rpo_tbl["RPO Remaining"]  = _rpo_tbl["rpo"].apply(fmt_m)
+        _rpo_tbl["RPO %"]          = _rpo_tbl.apply(
+            lambda r: f"{r['rpo']/max(r['contract_value'],1)*100:.1f}%", axis=1
+        )
+        st.dataframe(
+            _rpo_tbl[["Project", "Contract Value", "Earned to Date", "RPO Remaining", "RPO %", "POC"]]
+            .set_index("Project"),
+            use_container_width=True
+        )
+
+        _tot_rpo15 = re_df["rpo"].sum()
+        _tot_cv15  = re_df["contract_value"].sum()
+        st.info(
+            f"**Total RPO: {fmt_m(_tot_rpo15)}** ({_tot_rpo15/_tot_cv15*100:.1f}% of portfolio) — "
+            f"contracted revenue pipeline not yet recognised. "
+            f"Disclose in notes to financial statements per AASB 15 §120."
+        )
+
+    # ── TAB 2: CONTRACT MODIFICATIONS ─────────────────────────────────────────
+    with tab2:
+        st.markdown("### Contract Modifications — Variation Orders (VOs)")
+        st.caption(
+            "AASB 15 §18–21: A modification is treated as a **separate contract** if the new scope is distinct "
+            "and priced at its standalone selling price (SSP). Otherwise treated as a **prospective modification** — "
+            "remaining consideration is spread over the remaining performance obligation."
+        )
+
+        if "vo_log" not in st.session_state:
+            st.session_state.vo_log = []
+
+        with st.form("vo_form", clear_on_submit=True):
+            st.markdown("**Add Variation Order**")
+            _fv1, _fv2, _fv3 = st.columns(3)
+            _vo_proj   = _fv1.selectbox("Project", re_df["project_name"].tolist(), key="vo_proj_sel")
+            _vo_ref    = _fv2.text_input("VO Reference", value="VO-001")
+            _vo_desc   = _fv3.text_input("Description", value="Additional scope")
+            _fv4, _fv5, _fv6 = st.columns(3)
+            _vo_amount = _fv4.number_input("VO Amount ($)", min_value=0.0, value=500000.0,
+                                           step=10000.0, format="%.0f")
+            _vo_type   = _fv5.selectbox("AASB 15 Treatment", [
+                "Separate contract (new PO at SSP)",
+                "Prospective modification (adjust existing)",
+            ])
+            _vo_month  = _fv6.number_input("Effective Month", min_value=1, max_value=36, value=6, step=1)
+            if st.form_submit_button("Add VO to Register"):
+                st.session_state.vo_log.append({
+                    "Project":         _vo_proj.split("—")[0].strip(),
+                    "VO Ref":          _vo_ref,
+                    "Description":     _vo_desc,
+                    "Amount ($)":      _vo_amount,
+                    "Treatment":       _vo_type.split(" (")[0],
+                    "Effective Month": int(_vo_month),
+                })
+                st.rerun()
+
+        if st.session_state.vo_log:
+            _vo_df = pd.DataFrame(st.session_state.vo_log)
+            st.dataframe(_vo_df.set_index("VO Ref"), use_container_width=True)
+
+            _tot_sep  = _vo_df[_vo_df["Treatment"] == "Separate contract"]["Amount ($)"].sum()
+            _tot_pros = _vo_df[_vo_df["Treatment"] == "Prospective modification"]["Amount ($)"].sum()
+            _vm1, _vm2, _vm3 = st.columns(3)
+            _vm1.metric("Total VO Value",         f"${_vo_df['Amount ($)'].sum():,.0f}")
+            _vm2.metric("Separate Contracts",     f"${_tot_sep:,.0f}",  delta="New PO at SSP — no reallocation")
+            _vm3.metric("Prospective Mods",       f"${_tot_pros:,.0f}", delta="Catch-up entry required")
+
+            st.divider()
+            st.markdown("#### Revenue Impact per VO")
+            for _, _vr in _vo_df.iterrows():
+                _match = re_df[re_df["project_name"].str.startswith(_vr["Project"])]
+                if _match.empty:
+                    continue
+                _pr = _match.iloc[0]
+                if _vr["Treatment"] == "Separate contract":
+                    st.info(
+                        f"**{_vr['VO Ref']} — {_vr['Project']}** (AASB 15 §18 — Separate Contract)  \n"
+                        f"VO of ${_vr['Amount ($)']:,.0f} added as a new distinct PO at SSP. "
+                        f"No reallocation of existing contract TCV. "
+                        f"Revenue recognised as new scope is performed from Month {_vr['Effective Month']}."
+                    )
+                else:
+                    _rem_poc  = max(1 - float(_pr["poc"]), 0.001)
+                    _catchup  = _vr["Amount ($)"] * float(_pr["poc"])
+                    _fwd_rev  = _vr["Amount ($)"] * _rem_poc
+                    st.warning(
+                        f"**{_vr['VO Ref']} — {_vr['Project']}** (AASB 15 §21 — Prospective Modification)  \n"
+                        f"VO ${_vr['Amount ($)']:,.0f} — catch-up at Month {_vr['Effective Month']}: "
+                        f"recognise **{fmt_m(_catchup)}** immediately (portion attributable to completed "
+                        f"work at POC {float(_pr['poc'])*100:.1f}%). "
+                        f"Forward recognition: **{fmt_m(_fwd_rev)}** spread over remaining {_rem_poc*100:.1f}% of work."
+                    )
+
+            if st.button("Clear All VOs"):
+                st.session_state.vo_log = []
+                st.rerun()
+        else:
+            st.info("No VOs logged. Use the form above to add variation orders to the register.")
+
+    # ── TAB 3: REVENUE WATERFALL & RPO ───────────────────────────────────────
+    with tab3:
+        st.markdown("### Revenue Waterfall — Cumulative Revenue · RPO · Contract Asset/Liability")
+        st.caption(
+            "Month-by-month view of cumulative revenue recognised, RPO balance declining as work is performed, "
+            "and the contract asset (underbilled) / contract liability (overbilled) position. "
+            "Source: cash_forecasts.csv site_progress_pct field."
+        )
+
+        _wf_fcst = forecasts[forecasts["project_id"].isin(proj_ids)].copy()
+        if _wf_fcst.empty or "site_progress_pct" not in _wf_fcst.columns:
+            st.info("No forecast data available. Run `python generate_csv.py` to populate the waterfall.")
+        else:
+            _wf_fcst = _wf_fcst.merge(
+                re_df[["project_id", "contract_value", "billings", "end_date"]],
+                on="project_id", how="left"
+            )
+            _wf_fcst["end_date"] = pd.to_datetime(_wf_fcst["end_date"], errors="coerce")
+            _wf_fcst = _wf_fcst[_wf_fcst["forecast_date"] <= _wf_fcst["end_date"]]
+
+            _wf_rows = []
+            for _pid, _grp in _wf_fcst.groupby("project_id"):
+                _grp    = _grp.sort_values("forecast_date").reset_index(drop=True)
+                _cv     = float(_grp["contract_value"].iloc[0])
+                _bill   = float(_grp["billings"].iloc[0])
+                _n      = max(len(_grp), 1)
+                _poc_s  = (_grp["site_progress_pct"] / 100).clip(0, 1)
+                _cum_r  = _poc_s * _cv
+                _prev_r = _cum_r.shift(1, fill_value=0)
+                _incr_r = (_cum_r - _prev_r).clip(lower=0)
+                _rpo_s  = _cv - _cum_r
+                _cum_b  = pd.Series([_bill / _n * (i + 1) for i in range(_n)])
+                _c_liab = (_cum_b - _cum_r).clip(lower=0)
+                _c_asset= (_cum_r - _cum_b).clip(lower=0)
+
+                _pname  = re_df.loc[re_df["project_id"] == _pid, "project_name"].iloc[0]\
+                               .split("—")[0].strip()[:22]
+                for _i, _frow in _grp.iterrows():
+                    _idx = list(_grp.index).index(_i)
+                    _wf_rows.append({
+                        "Project":          _pname,
+                        "Month":            _frow["forecast_date"],
+                        "Incr Revenue":     _incr_r.iloc[_idx],
+                        "Cum Revenue":      _cum_r.iloc[_idx],
+                        "RPO":              _rpo_s.iloc[_idx],
+                        "Contract Liability": _c_liab.iloc[_idx],
+                        "Contract Asset":   _c_asset.iloc[_idx],
+                    })
+
+            _wf_df   = pd.DataFrame(_wf_rows)
+            _port_wf = (
+                _wf_df.groupby("Month")[["Incr Revenue", "Cum Revenue", "RPO",
+                                         "Contract Liability", "Contract Asset"]]
+                .sum().reset_index().sort_values("Month")
+            )
+
+            # Chart 1: Cumulative Revenue fill + RPO declining line
+            _fig1, _ax1 = plt.subplots(figsize=(11, 4))
+            _ax2 = _ax1.twinx()
+            _ax1.fill_between(_port_wf["Month"], _port_wf["Cum Revenue"] / 1e6,
+                               alpha=0.30, color=BLUE)
+            _ax1.plot(_port_wf["Month"], _port_wf["Cum Revenue"] / 1e6,
+                      color=BLUE, lw=2, label="Cumulative Revenue")
+            _ax2.plot(_port_wf["Month"], _port_wf["RPO"] / 1e6,
+                      color=AMBER, lw=2, linestyle="--", label="RPO Remaining")
+            _ax1.set_ylabel("Cumul. Revenue (AUD M)", color=BLUE, fontsize=9)
+            _ax2.set_ylabel("RPO Balance (AUD M)", color=AMBER, fontsize=9)
+            _ax1.xaxis.set_major_formatter(mdates.DateFormatter("%b %y"))
+            plt.xticks(rotation=20, ha="right", fontsize=7.5)
+            _l1, _lb1 = _ax1.get_legend_handles_labels()
+            _l2, _lb2 = _ax2.get_legend_handles_labels()
+            _ax1.legend(_l1 + _l2, _lb1 + _lb2, fontsize=8, loc="lower right")
+            plt.tight_layout(pad=1.2)
+            st.pyplot(_fig1, use_container_width=True)
+            plt.close()
+
+            # Chart 2: Contract Asset vs Liability bars
+            st.markdown("**Contract Asset (Underbilled) vs Contract Liability (Overbilled) — Monthly**")
+            _fig2, _ax3 = plt.subplots(figsize=(11, 3.5))
+            _ax3.bar(_port_wf["Month"], _port_wf["Contract Asset"] / 1e6,
+                     width=20, color=GREEN, alpha=0.80, label="Contract Asset (Underbilled GL-1300)")
+            _ax3.bar(_port_wf["Month"], -_port_wf["Contract Liability"] / 1e6,
+                     width=20, color=RED, alpha=0.80, label="Contract Liability (Overbilled GL-2310)")
+            style_ax(_ax3, ylabel="AUD (M)", yticker=millions_fmt())
+            _ax3.axhline(0, color=CHARCOAL, lw=0.8, linestyle="--")
+            _ax3.xaxis.set_major_formatter(mdates.DateFormatter("%b %y"))
+            plt.xticks(rotation=20, ha="right", fontsize=7.5)
+            _ax3.legend(fontsize=8, ncol=2)
+            plt.tight_layout(pad=1.2)
+            st.pyplot(_fig2, use_container_width=True)
+            plt.close()
+
+            st.divider()
+            st.markdown("#### Waterfall Table — Portfolio Monthly Summary")
+            _wf_disp = _port_wf.copy()
+            _wf_disp["Month"] = _wf_disp["Month"].dt.strftime("%b %Y")
+            for _col in ["Incr Revenue", "Cum Revenue", "RPO", "Contract Liability", "Contract Asset"]:
+                _wf_disp[_col] = _wf_disp[_col].apply(fmt_m)
+            _wf_disp = _wf_disp.rename(columns={
+                "Incr Revenue":     "Rev This Month",
+                "Cum Revenue":      "Cumul. Revenue",
+                "RPO":              "RPO Balance",
+                "Contract Liability": "Contract Liab. (GL-2310)",
+                "Contract Asset":   "Contract Asset (GL-1300)",
+            })
+            st.dataframe(_wf_disp.set_index("Month"), use_container_width=True)
+            st.download_button(
+                "Export Waterfall CSV",
+                to_csv_bytes(_port_wf),
+                "revenue_waterfall.csv", "text/csv"
+            )
+
+    # ── TAB 4: JOURNAL ENTRY GENERATOR ───────────────────────────────────────
+    with tab4:
+        st.markdown("### Month-End Journal Entry Generator")
+        st.caption(
+            "Auto-generates AASB 15 compliant month-end Dr/Cr journal entries per project. "
+            "Covers revenue recognition, WIP contract asset/liability, retention reclassification, "
+            "and Subbie Lag accrual. Post via SAP FB50. All figures ex-GST."
+        )
+
+        _period_lbl = pd.Timestamp.today().strftime("%B %Y")
+        st.markdown(f"**Period: {_period_lbl}**")
+
+        for _, _jr in re_df.iterrows():
+            _poc_je   = _jr["poc"] * 100
+            _wip_je   = _jr["wip"]
+            _rev_je   = _jr["revenue_earned"]
+            _bill_je  = _jr["billings"]
+            _ret_je   = _jr["retention_held"]
+            _acc_je   = _jr["accrual_costs"]
+            _net_ar   = max(_bill_je - _ret_je, 0)
+            _pname_je = _jr["project_name"].split("—")[0].strip()
+            _cc       = _jr.get("sap_cost_center", "N/A")
+
+            with st.expander(
+                f"**{_pname_je}** · {_period_lbl} · Rev {fmt_m(_rev_je)} · POC {_poc_je:.1f}% · "
+                f"{'Underbilled' if _wip_je >= 0 else 'Overbilled'} {fmt_m(abs(_wip_je))}"
+            ):
+                _je_rows = []
+
+                # Entry 1: Revenue recognition + WIP position
+                _je_rows.append({
+                    "Jnl": "JE-1", "GL Account": "— Revenue Recognition (AASB 15 §38) —",
+                    "Dr ($)": "", "Cr ($)": "", "Narration": ""
+                })
+                if _wip_je >= 0:
+                    # Underbilled: Dr AR (net) + Dr Retention Rec + Dr Contract Asset = Cr Revenue
+                    _je_rows.append({"Jnl": "JE-1a",
+                        "GL Account": "GL-1200  Accounts Receivable",
+                        "Dr ($)": f"{_net_ar:,.0f}", "Cr ($)": "",
+                        "Narration": "Net progress claims raised (gross less retention)"})
+                    _je_rows.append({"Jnl": "JE-1b",
+                        "GL Account": "GL-1210  Retention Receivable",
+                        "Dr ($)": f"{_ret_je:,.0f}", "Cr ($)": "",
+                        "Narration": "Retention withheld — non-current asset until Practical Completion"})
+                    _je_rows.append({"Jnl": "JE-1c",
+                        "GL Account": "GL-1300  Contract Asset — Underbilled WIP",
+                        "Dr ($)": f"{_wip_je:,.0f}", "Cr ($)": "",
+                        "Narration": f"Underbilled: Revenue {fmt_m(_rev_je)} > Billings {fmt_m(_bill_je)}"})
+                    _je_rows.append({"Jnl": "JE-1d",
+                        "GL Account": "GL-4100  Progress Claim Revenue",
+                        "Dr ($)": "", "Cr ($)": f"{_rev_je:,.0f}",
+                        "Narration": f"POC {_poc_je:.1f}% × Contract {fmt_m(_jr['contract_value'])}"})
+                else:
+                    # Overbilled: Dr AR (net) + Dr Retention Rec + Cr Revenue + Cr Contract Liability
+                    _je_rows.append({"Jnl": "JE-1a",
+                        "GL Account": "GL-1200  Accounts Receivable",
+                        "Dr ($)": f"{_net_ar:,.0f}", "Cr ($)": "",
+                        "Narration": "Net progress claims raised (gross less retention)"})
+                    _je_rows.append({"Jnl": "JE-1b",
+                        "GL Account": "GL-1210  Retention Receivable",
+                        "Dr ($)": f"{_ret_je:,.0f}", "Cr ($)": "",
+                        "Narration": "Retention withheld — non-current asset until Practical Completion"})
+                    _je_rows.append({"Jnl": "JE-1c",
+                        "GL Account": "GL-4100  Progress Claim Revenue",
+                        "Dr ($)": "", "Cr ($)": f"{_rev_je:,.0f}",
+                        "Narration": f"POC {_poc_je:.1f}% × Contract {fmt_m(_jr['contract_value'])}"})
+                    _je_rows.append({"Jnl": "JE-1d",
+                        "GL Account": "GL-2310  Contract Liability — Overbilled WIP",
+                        "Dr ($)": "", "Cr ($)": f"{abs(_wip_je):,.0f}",
+                        "Narration": f"Overbilled: Billings {fmt_m(_bill_je)} > Revenue {fmt_m(_rev_je)}"})
+
+                # Entry 2: Subbie Lag accrual (if accruals exist)
+                if _acc_je > 0:
+                    _je_rows.append({
+                        "Jnl": "JE-2", "GL Account": "— Subbie Lag Accrual (AASB 15 §98) —",
+                        "Dr ($)": "", "Cr ($)": "", "Narration": ""
+                    })
+                    _je_rows.append({"Jnl": "JE-2a",
+                        "GL Account": "GL-6100  Subcontract Costs",
+                        "Dr ($)": f"{_acc_je:,.0f}", "Cr ($)": "",
+                        "Narration": "Work performed — subcontractor invoice not yet received (Subbie Lag)"})
+                    _je_rows.append({"Jnl": "JE-2b",
+                        "GL Account": "GL-2300  Accrued Expenses",
+                        "Dr ($)": "", "Cr ($)": f"{_acc_je:,.0f}",
+                        "Narration": "Accrued liability — reverses on receipt of actual invoice"})
+
+                st.dataframe(
+                    pd.DataFrame(_je_rows).set_index("Jnl"),
+                    use_container_width=True
+                )
+
+                # Balancing check (exclude header rows)
+                def _parse_num(s):
+                    try:
+                        return float(str(s).replace(",", "")) if s else 0.0
+                    except ValueError:
+                        return 0.0
+
+                _dr_tot = sum(_parse_num(r["Dr ($)"]) for r in _je_rows)
+                _cr_tot = sum(_parse_num(r["Cr ($)"]) for r in _je_rows)
+
+                if abs(_dr_tot - _cr_tot) < 1.0:
+                    st.success(
+                        f"Journal balances ✓ — Dr ${_dr_tot:,.0f} = Cr ${_cr_tot:,.0f}  ·  "
+                        f"Post via SAP FB50 · Cost Centre: {_cc} · Period: {_period_lbl}"
+                    )
+                else:
+                    st.error(
+                        f"Out of balance — Dr ${_dr_tot:,.0f} ≠ Cr ${_cr_tot:,.0f} "
+                        f"(diff ${abs(_dr_tot - _cr_tot):,.0f})"
+                    )
+
+                st.caption(
+                    f"Reverse accrual (JE-2) on receipt of subcontractor invoice.  "
+                    f"GL-1210 retention released to GL-1200 AR on Practical Completion sign-off.  "
+                    f"AASB 15 §105: Contract Asset (GL-1300) reclassified to AR when right to payment is unconditional."
+                )
 
 
 # ══════════════════════════════════════════════════════════════════════════════
