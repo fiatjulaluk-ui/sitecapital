@@ -155,6 +155,59 @@ div[data-testid="metric-container"] div,
 [data-testid="stExpander"] summary span {{
     color: {TEXT_MAIN} !important;
 }}
+/* ── Tab bar ───────────────────────────────────────────────────────────── */
+[data-baseweb="tab-list"] {{
+    gap: 4px !important;
+    background-color: transparent !important;
+    border-bottom: 3px solid #1A5C3A !important;
+    padding-bottom: 0 !important;
+}}
+/* Inactive tab */
+button[data-baseweb="tab"] {{
+    background-color: {CARD_BG} !important;
+    border-radius: 8px 8px 0 0 !important;
+    padding: 10px 22px !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    color: #555555 !important;
+    border: 1px solid #D8D8D8 !important;
+    border-bottom: none !important;
+    margin-bottom: -1px !important;
+    transition: background 0.15s ease, color 0.15s ease !important;
+}}
+button[data-baseweb="tab"] p {{
+    color: #555555 !important;
+    font-weight: 600 !important;
+    font-size: 13.5px !important;
+}}
+/* Hover */
+button[data-baseweb="tab"]:hover {{
+    background-color: #D4EDDA !important;
+    color: #1A5C3A !important;
+    border-color: #1A5C3A !important;
+}}
+button[data-baseweb="tab"]:hover p {{
+    color: #1A5C3A !important;
+}}
+/* Active tab */
+button[data-baseweb="tab"][aria-selected="true"] {{
+    background-color: #1A5C3A !important;
+    color: #FFFFFF !important;
+    border-color: #1A5C3A !important;
+    border-bottom-color: #1A5C3A !important;
+}}
+button[data-baseweb="tab"][aria-selected="true"] p,
+button[data-baseweb="tab"][aria-selected="true"] span {{
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+}}
+/* Hide the default thin underline highlight (replaced by active bg) */
+[data-baseweb="tab-highlight"] {{
+    display: none !important;
+}}
+[data-baseweb="tab-border"] {{
+    display: none !important;
+}}
 </style>
 """, unsafe_allow_html=True)
 
