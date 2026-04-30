@@ -2473,23 +2473,87 @@ elif page == "AASB 15 Revenue Engine":
             plt.close()
 
             st.divider()
-            st.markdown("#### Waterfall Table — Portfolio Monthly Summary")
-            _wf_disp = _port_wf.copy()
-            _wf_disp["Month"] = _wf_disp["Month"].dt.strftime("%b %Y")
-            for _col in ["Incr Revenue", "Cum Revenue", "RPO", "Contract Liability", "Contract Asset"]:
-                _wf_disp[_col] = _wf_disp[_col].apply(fmt_m)
-            _wf_disp = _wf_disp.rename(columns={
-                "Incr Revenue":     "Rev This Month",
-                "Cum Revenue":      "Cumul. Revenue",
-                "RPO":              "RPO Balance",
-                "Contract Liability": "Contract Liab. (GL-2310)",
-                "Contract Asset":   "Contract Asset (GL-1300)",
-            })
-            st.dataframe(_wf_disp.set_index("Month"), use_container_width=True)
+
+            # ── View toggle: portfolio vs individual project ──────────────────
+            _proj_options = ["All Projects (Portfolio)"] + sorted(_wf_df["Project"].unique().tolist())
+            _wf_view = st.selectbox(
+                "View waterfall for:",
+                _proj_options,
+                key="wf_view_sel"
+            )
+
+            def _format_wf_table(df_raw):
+                """Format a raw waterfall dataframe for display."""
+                _d = df_raw.copy()
+                _d["Month"] = pd.to_datetime(_d["Month"]).dt.strftime("%b %Y")
+                _rename = {
+                    "Incr Revenue":       "Rev This Month",
+                    "Cum Revenue":        "Cumul. Revenue",
+                    "RPO":                "RPO Balance",
+                    "Contract Liability": "Contract Liab. (GL-2310)",
+                    "Contract Asset":     "Contract Asset (GL-1300)",
+                }
+                for _col in ["Incr Revenue", "Cum Revenue", "RPO", "Contract Liability", "Contract Asset"]:
+                    if _col in _d.columns:
+                        _d[_col] = _d[_col].apply(fmt_m)
+                _d = _d.rename(columns=_rename)
+                return _d
+
+            if _wf_view == "All Projects (Portfolio)":
+                st.markdown("#### Waterfall Table — Portfolio Monthly Summary")
+                st.caption("All projects aggregated. Select a specific project above to see its individual monthly detail.")
+                _disp_df = _format_wf_table(_port_wf)
+                _disp_idx = "Month"
+            else:
+                st.markdown(f"#### Waterfall Table — {_wf_view}")
+                st.caption("Month-by-month revenue recognition, RPO, and contract asset/liability for this project only.")
+                _proj_raw = (
+                    _wf_df[_wf_df["Project"] == _wf_view]
+                    .groupby("Month")[["Incr Revenue", "Cum Revenue", "RPO", "Contract Liability", "Contract Asset"]]
+                    .sum().reset_index().sort_values("Month")
+                )
+                _disp_df  = _format_wf_table(_proj_raw)
+                _disp_idx = "Month"
+
+            st.dataframe(_disp_df.set_index(_disp_idx), use_container_width=True)
+
+            # ── Excel download — Portfolio sheet + one sheet per project ─────
+            st.divider()
+            st.markdown("**Download Excel — multi-sheet workbook**")
+            st.caption("Portfolio summary on Sheet 1 · one tab per project with full monthly detail")
+
+            import io as _io
+            import openpyxl  # noqa: F401  (ensures import at runtime)
+
+            def _build_excel_waterfall(port_df, detail_df):
+                _buf = _io.BytesIO()
+                with pd.ExcelWriter(_buf, engine="openpyxl") as _writer:
+                    # Sheet 1: Portfolio
+                    _p = port_df.copy()
+                    _p["Month"] = pd.to_datetime(_p["Month"]).dt.strftime("%b %Y")
+                    _p.to_excel(_writer, sheet_name="Portfolio Summary", index=False)
+
+                    # One sheet per project
+                    for _pname, _grp in detail_df.groupby("Project"):
+                        _sheet = (
+                            _grp.groupby("Month")[["Incr Revenue","Cum Revenue","RPO",
+                                                    "Contract Liability","Contract Asset"]]
+                            .sum().reset_index().sort_values("Month")
+                        )
+                        _sheet["Month"] = pd.to_datetime(_sheet["Month"]).dt.strftime("%b %Y")
+                        # Sheet names max 31 chars, no special chars
+                        _sname = str(_pname)[:31].replace("/","_").replace("\\","_").replace("?","").replace("*","").replace("[","").replace("]","").replace(":","")
+                        _sheet.to_excel(_writer, sheet_name=_sname, index=False)
+
+                _buf.seek(0)
+                return _buf.read()
+
+            _excel_bytes = _build_excel_waterfall(_port_wf, _wf_df)
             st.download_button(
-                "Export Waterfall CSV",
-                to_csv_bytes(_port_wf),
-                "revenue_waterfall.csv", "text/csv"
+                "⬇ Download Revenue Waterfall.xlsx",
+                _excel_bytes,
+                "revenue_waterfall.xlsx",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
             )
 
     # ── TAB 4: JOURNAL ENTRY GENERATOR ───────────────────────────────────────
